@@ -6,7 +6,7 @@ import SingleCar from "./pages/single car/SingleCar";
 
 function App() {
     return (
-        <div className="px-10 py-6 text-main">
+        <div className="px-[95px] py-6 text-main">
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout />}>

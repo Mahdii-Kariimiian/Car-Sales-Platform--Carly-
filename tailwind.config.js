@@ -4,10 +4,13 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                poppins: "poppins-black"
+                poppins: "poppins-black",
             },
             fontSize: {
                 main: "12px",
+            },
+            colors: {
+                "dark-blue": "#050B20",
             },
         },
     },
