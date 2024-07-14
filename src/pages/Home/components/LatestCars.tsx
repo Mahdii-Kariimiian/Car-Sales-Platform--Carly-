@@ -3,8 +3,8 @@ import LatestCar from "./LatestCar"
 
 const LatestCars = () => {
   return (
-    <div className="text-center">
-      <h2 className="text-[48.7px] font-bold pb-[47px]">Latest Cars</h2>
+    <div className="text-center pb-9">
+      <h2 className="text-5xl font-bold pb-12">Latest Cars</h2>
       <LatestCar cars = {cars} />
     </div>
   )

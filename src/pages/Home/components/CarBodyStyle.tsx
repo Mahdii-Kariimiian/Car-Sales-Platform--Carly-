@@ -8,13 +8,13 @@ const CarBodyStyle: React.FC<CarBodyStyleProps> = ({ CarStyles }) => {
         <div className="flex justify-between w-full">
             {CarStyles.map((style) => {
                 return (
-                    <div className="px-[20.7px] pb-[44.55px]" key={style.id}>
+                    <div className="px-5 pb-11" key={style.id}>
                         <img
-                            className="w-[243.49px] gap-[36.52px]"
+                            className="w-60 gap-9"
                             src={style.src}
                             alt={style.title}
                         />
-                        <h2 className="text-[21.91px]">{style.title}</h2>
+                        <h2 className="text-xl">{style.title}</h2>
                     </div>
                 );
             })}

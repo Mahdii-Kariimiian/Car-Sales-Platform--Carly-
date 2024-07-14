@@ -11,18 +11,21 @@ type LatestCarProps = {
 
 const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
     return (
-        <div className="grid grid-cols-4 text-[#050B20] px-[109.69px] gap-[35.68px]">
+        <div className="grid grid-cols-4 text-[#050B20] px-28 gap-9">
             {cars.slice(10, 14).map((car) => {
                 return (
                     <div
-                        className=" relative pb-[48px] border border-[#E9E9E9]  overflow-hidden rounded-[19.48px]"
+                        className=" relative pb-12 border border-[#E9E9E9] overflow-hidden rounded-lg"
                         id={car.id.toString()}
                     >
-                        <div className="">
-                            <div className="">
-                                <img className="h-[266.19px] object-cover" src={car.Image} alt={car.Model} />
-                            </div>
-                            <div className="absolute top-[23.35px] right-[23.35px] bg-white rounded-full">
+                        <div>
+                            <img
+                                className="h-64 object-cover"
+                                src={car.Image}
+                                alt={car.Model}
+                            />
+
+                            <div className="absolute top-6 right-6 bg-white rounded-full">
                                 <img
                                     className=""
                                     src={favoriteIcon}
@@ -31,15 +34,15 @@ const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
                                 />
                             </div>
                         </div>
-                        <div className="px-[37.74px]">
-                            <p className="text-[21.91px] text-left pt-[20.94px] pb-[32.14px]">
+                        <div className="px-9">
+                            <p className="text-xl text-left pt-5 pb-8">
                                 {car.Model}
                             </p>
 
-                            <div className="grid grid-cols-3 items-end border-t border-b pb-[11.44px] border-[#E9E9E9] justify-between pt-[21.52px]">
+                            <div className="grid grid-cols-3 items-end border-t text-xl border-b pb-3 border-[#E9E9E9] justify-between pt-5">
                                 <div className="text-center">
                                     <img
-                                        className="pb-[14.48px] m-auto"
+                                        className="pb-3.5 m-auto"
                                         src={maxSpeedIcon}
                                         alt="max Speed"
                                     />
@@ -47,7 +50,7 @@ const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
                                 </div>
                                 <div className="text-center">
                                     <img
-                                        className="pb-[14.48px] m-auto"
+                                        className="pb-3 m-auto"
                                         src={fuelIcon}
                                         alt="fuel type"
                                     />
@@ -55,7 +58,7 @@ const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
                                 </div>
                                 <div className="text-center">
                                     <img
-                                        className="pb-[14.48px] m-auto"
+                                        className="pb-3.5 m-auto"
                                         src={transmissionIcon}
                                         alt="transmission type "
                                     />
@@ -63,10 +66,19 @@ const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
                                 </div>
                             </div>
 
-                            <div className="flex pt-[19.48px] items-center">
-                                <p className="text-[24.65px] font-bold"> $ {car.Price.toLocaleString()}</p>
-                                <p className="ml-auto mr-[11.61px] text-[18.26px] text-[#405FF2]">View Details</p>
-                                <img className="w-[17.4px]" src={arrowIcon} alt="arrow Icon" />
+                            <div className="flex pt-5 items-center">
+                                <p className="text-xl font-bold">
+                                    {" "}
+                                    $ {car.Price.toLocaleString()}
+                                </p>
+                                <p className="ml-auto mr-12 text-lg text-[#405FF2]">
+                                    View Details
+                                </p>
+                                <img
+                                    className="w-4"
+                                    src={arrowIcon}
+                                    alt="arrow Icon"
+                                />
                             </div>
                         </div>
                     </div>

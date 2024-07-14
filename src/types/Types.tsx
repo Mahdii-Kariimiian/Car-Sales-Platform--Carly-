@@ -19,3 +19,20 @@ export type CarsInfo = {
     Description: string;
     Image: string;
 };
+
+export type BuyOrSell = {
+    id: number;
+    title: string;
+    description: string;
+    buttonText: string;
+    icon: string;
+    color: string;
+    buttonColor: string;
+};
+
+export type FooterData = [
+    Company: string[],
+    QuickLinks: string[],
+    OurBrands: string[],
+    VehicleTypes: string[]
+];

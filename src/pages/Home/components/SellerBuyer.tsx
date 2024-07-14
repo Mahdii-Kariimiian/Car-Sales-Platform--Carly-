@@ -1,11 +1,13 @@
-import React from 'react'
+import {sellOrBuy} from "../../../db/data";
+import SellerBuyerMaker from "./SellerBuyerMaker";
+
 
 const SellerBuyer = () => {
-  return (
-    <div>
-      Seller and buyer 
-    </div>
-  )
-}
+    return (
+        <div>
+            <SellerBuyerMaker sellOrBuy={sellOrBuy} />
+        </div>
+    );
+};
 
-export default SellerBuyer
+export default SellerBuyer;

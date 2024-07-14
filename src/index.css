@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply font-dm-sans
+* {
+    font-size: 80%;
+    @apply font-dm-sans;
 }

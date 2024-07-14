@@ -4,6 +4,8 @@ import Truck from "../assets/car-styles/Truck.jpg";
 import SUV from "../assets/car-styles/SUV.jpg";
 import Hatchback from "../assets/car-styles/Hatchback.jpg";
 import Convertible from "../assets/car-styles/Convertible.jpg";
+import buyCarIcon from "../assets/Icons/buy-car-icon.png";
+import sellCarIcon from "../assets/Icons/sell-car-icon.png";
 
 export const CarStyles = [
     {
@@ -360,3 +362,59 @@ export const cars = [
         Image: "https://upload.wikimedia.org/wikipedia/commons/c/c8/1993_190E_2.3.jpg",
     },
 ];
+
+export const sellOrBuy = [
+    {
+        id: 0,
+        title: "Are You Looking For a Car?",
+        description:
+            "We are committed to providing our customers with exceptional service.",
+        buttonText: "See All Cars",
+        icon: buyCarIcon,
+        color: "bg-[#CEE1F2]",
+        buttonColor: "bg-[#405FF2]",
+    },
+    {
+        id: 1,
+        title: "Do You Want to Sell a Car ?",
+        description:
+            "We are committed to providing our customers with exceptional service.",
+        buttonText: "Get Started",
+        icon: sellCarIcon,
+        color: "bg-[#FFE9F3]",
+        buttonColor: "bg-[#050B20]",
+    },
+];
+
+export const footerData = {
+    Company: [
+        "About Us",
+        "Blog",
+        "Services",
+        "FAQs",
+        "Terms",
+        "Contact Us",
+        "",
+    ],
+    QuickLinks: ["Get in Touch", "Help Center", "Live chat", "How it Works"],
+    OurBrands: [
+        "Toyota",
+        "Porsche",
+        "Audi",
+        "BMW",
+        "Ford",
+        "Nissan",
+        "Peugeot",
+        "Volkswagen",
+    ],
+    VehicleTypes: [
+        "Sedan",
+        "Hatchback",
+        "SUV",
+        "Hybrid",
+        "Electric",
+        "Coupe",
+        "Truck",
+        "Convertible",
+    ],
+};
