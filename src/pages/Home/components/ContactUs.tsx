@@ -1,7 +1,7 @@
 import image from "../../../assets/Images/contact-us-image.png";
-import mobileIcon from "../../../assets/Icons/mobileIcon.png";
-import emailIcon from "../../../assets/Icons/email-icon.png";
-import Button from "../../../components/Button";
+import mobileIcon from "../../../assets/Icons/mobile-icon.svg";
+import emailIcon from "../../../assets/Icons/email-icon.svg";
+import Button from "../../../components/generals/Button";
 
 const ContactUs = () => {
     return (
@@ -16,16 +16,16 @@ const ContactUs = () => {
                     <p>Melbourne VIC3051, Australia.</p>
                 </div>
                 <div className="flex gap-6 text-lg">
-                    <div className="flex gap-4 border border-[#050B20] rounded-full px-10 py-3">
-                        <img src={mobileIcon} alt="mobile icon" />
+                    <div className="flex gap-4 border border-dark rounded-full px-10 py-3">
+                        <img className="w-4" src={mobileIcon} alt="mobile icon" />
                         <p>+76 956 039 999</p>
                     </div>
-                    <div className="flex gap-4 border border-[#050B20] rounded-full px-10 py-3" >
-                        <img src={emailIcon} alt="email icon" />{" "}
+                    <div className="flex gap-4 border border-dark rounded-full px-10 py-3" >
+                        <img className="w-5" src={emailIcon} alt="email icon" />{" "}
                         <p>ali@boxcars.com</p>
                     </div>
                 </div>
-                <Button color="bg-[#050B20]" text="Contact Us" />
+                <Button color="bg-dark" text="Contact Us" />
             </div>
         </div>
     );

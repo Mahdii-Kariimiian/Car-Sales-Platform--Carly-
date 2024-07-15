@@ -1,14 +1,14 @@
-import facebook from "../assets/Icons/facebook-icon.png";
-import twitter from "../assets/Icons/twitter-icon.png";
-import instagram from "../assets/Icons/instagram-icon.png";
-import linkedin from "../assets/Icons/linkedin-icon.png";
-import Link from "./Link";
-import { footerData } from "../db/data";
+import facebook from "../../assets/Icons/facebook-icon.svg";
+import twitter from "../../assets/Icons/twitter-icon.svg";
+import instagram from "../../assets/Icons/instagram-icon.svg";
+import linkedin from "../../assets/Icons/linkedin-icon.svg";
+import Link from "./UlList";
+import { footerData } from "../../db/data";
 
 const Footer = () => {
     return (
         <footer className="bg-white py-14 px-28  ">
-            <div className="grid grid-cols-5 gap-10 text-[#050B20] text-lg">
+            <div className="grid grid-cols-5 gap-10 text-dark text-lg">
                 <div>
                     <h2 className="font-bold  mb-4">Company</h2>
                     <Link links={footerData.Company} />

@@ -1,9 +1,9 @@
-import { CarsInfo } from "../../../types/Types";
-import favoriteIcon from "../../../assets/Icons/favorite-icon.png";
-import fuelIcon from "../../../assets/Icons/fuel-icon.png";
-import transmissionIcon from "../../../assets/Icons/Transmission-icon.png";
-import arrowIcon from "../../../assets/Icons/arrow-icon.png";
-import maxSpeedIcon from "../../../assets/Icons/maxspeed-icon.png";
+import { CarsInfo } from "../../types/Types";
+import favoriteIcon from "../../assets/Icons/favorite-icon.svg";
+import fuelIcon from "../../assets/Icons/fuel-icon.svg";
+import transmissionIcon from "../../assets/Icons/Transmission-icon.svg";
+import arrowIcon from "../../assets/Icons/arrow-icon.svg";
+import maxSpeedIcon from "../../assets/Icons/maxspeed-icon.svg";
 
 type LatestCarProps = {
     cars: CarsInfo[];
@@ -39,7 +39,7 @@ const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
                                 {car.Model}
                             </p>
 
-                            <div className="grid grid-cols-3 items-end border-t text-xl border-b pb-3 border-[#E9E9E9] justify-between pt-5">
+                            <div className="grid grid-cols-3 items-end border-t text-xl border-b pb-3 border-gray-200 justify-between pt-5">
                                 <div className="text-center">
                                     <img
                                         className="pb-3.5 m-auto"
@@ -68,10 +68,9 @@ const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
 
                             <div className="flex pt-5 items-center">
                                 <p className="text-xl font-bold">
-                                    {" "}
                                     $ {car.Price.toLocaleString()}
                                 </p>
-                                <p className="ml-auto mr-12 text-lg text-[#405FF2]">
+                                <p className="ml-auto mr-4 text-lg text-primary">
                                     View Details
                                 </p>
                                 <img

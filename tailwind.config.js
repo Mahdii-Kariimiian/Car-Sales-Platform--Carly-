@@ -14,7 +14,12 @@ export default {
                 main: "12px",
             },
             colors: {
-                "dark-blue": "#050B20",
+                dark: "#050B20",
+                light: "FFFFFF",
+                primary: "#405FF2",
+                secondary: "#FF5CF4",
+                cyan: "#CEE1F2",
+                pink: "#FFE9F3",
             },
         },
     },

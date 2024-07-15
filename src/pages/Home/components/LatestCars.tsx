@@ -1,5 +1,5 @@
 import {cars} from "../../../db/data"
-import LatestCar from "./LatestCar"
+import LatestCar from "../../../components/car/CarCard"
 
 const LatestCars = () => {
   return (

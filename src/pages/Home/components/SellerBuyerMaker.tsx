@@ -1,5 +1,5 @@
 import { BuyOrSell } from "../../../types/Types";
-import Button from "../../../components/Button";
+import Button from "../../../components/generals/Button";
 
 type SellerBuyerMakerProps = {
     sellOrBuy: BuyOrSell[];
