@@ -11,7 +11,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Index />} />
-                        <Route path="/singlecar" element={<SingleCar />} />
+                        <Route path="/singlecar/:id" element={<SingleCar />} >
+
+                        </Route>
                     </Route>
                 </Routes>
             </BrowserRouter>

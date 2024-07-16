@@ -1,5 +1,6 @@
 import { BuyOrSell } from "../../../types/Types";
 import Button from "../../../components/generals/Button";
+import arrow from "../../../assets/Icons/white-arrow-icon.svg";
 
 type SellerBuyerMakerProps = {
     sellOrBuy: BuyOrSell[];
@@ -23,8 +24,9 @@ const sellerBuyerMaker: React.FC<SellerBuyerMakerProps> = ({ sellOrBuy }) => {
                                 {card.description}
                             </p>
                             <Button
-                                color={card.buttonColor}
-                                text={card.buttonText}
+                                classes={`${card.buttonColor} text-white`}
+                                text={`${card.buttonText}`}
+                                icon={arrow}
                             />
                         </div>
                         <img

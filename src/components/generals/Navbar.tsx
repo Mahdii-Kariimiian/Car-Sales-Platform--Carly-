@@ -11,13 +11,13 @@ const Navbar = () => {
             </Link>
 
             <ul className="flex text-lg items-center gap-6 font-poppins-bold ">
-                <li className="hover:bg-dark hover:text-white px-3 py-1 hover:rounded-md ml-5 cursor-pointer">
+                <li className="hover:bg-dark hover:text-white px-3 py-1 hover:rounded-md ml-5 cursor-pointer transition-all">
                     Cars
                 </li>
-                <li className="hover:bg-dark hover:text-white px-3 py-1 hover:rounded-md cursor-pointer">
+                <li className="hover:bg-dark hover:text-white px-3 py-1 hover:rounded-md cursor-pointer transition-all">
                     About
                 </li>
-                <li className="hover:bg-dark hover:text-white px-3 py-1 hover:rounded-md cursor-pointer">
+                <li className="hover:bg-dark hover:text-white px-3 py-1 hover:rounded-md cursor-pointer transition-all">
                     Contact
                 </li>
             </ul>
@@ -29,7 +29,7 @@ const Navbar = () => {
                 <img src={profileIcon} alt="profile icon" />
                 <p className="mr-9">Sign in</p>
             </div>
-            <button className="px-6 py-3 border border-dark-blue rounded-lg hover:text-white hover:bg-dark">
+            <button className="px-6 py-3 border border-dark-blue rounded-lg hover:text-white hover:bg-dark transition-all">
                 Submit Listing
             </button>
         </div>
