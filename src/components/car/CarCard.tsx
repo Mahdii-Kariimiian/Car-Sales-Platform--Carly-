@@ -1,21 +1,43 @@
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { CarsInfo } from "../../types/Types";
 import favoriteIcon from "../../assets/Icons/favorite-icon.svg";
 import fuelIcon from "../../assets/Icons/fuel-icon.svg";
 import transmissionIcon from "../../assets/Icons/Transmission-icon.svg";
 import arrowIcon from "../../assets/Icons/arrow-icon.svg";
 import maxSpeedIcon from "../../assets/Icons/maxspeed-icon.svg";
-import { NavLink, Params } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { fetchCars } from "../../axios/axios";
 
 type LatestCarProps = {
-    cars: CarsInfo[];
+    firstNumber?: number;
+    lastNumber?: number;
+    setCarsLength?: Dispatch<SetStateAction<number>>;
 };
 
-const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
+const CarCard: React.FC<LatestCarProps> = ({
+    lastNumber,
+    firstNumber,
+    setCarsLength,
+}) => {
+    const [ListedCars, setListedCars] = useState<CarsInfo[]>([]);
+
+    useEffect(() => {
+        fetchCars("cars.json").then((res) => {
+            setCarsLength && setCarsLength(res.data.length);
+            setListedCars(
+                lastNumber ? res.data.slice(firstNumber, lastNumber) : res.data
+            );
+        });
+    }, [lastNumber]);
+
     return (
-        <div className="grid grid-cols-4 text-dark px-28 gap-9">
-            {cars.slice(8, 12).map((car) => {
+        <div className="grid grid-cols-4 text-dark  gap-9">
+            {ListedCars.map((car, index) => {
                 return (
-                    <div className=" relative pb-12 border border-gray-200 overflow-hidden rounded-lg">
+                    <div
+                        id={index.toString()}
+                        className=" relative pb-12 border border-gray-200 overflow-hidden rounded-lg"
+                    >
                         <div>
                             <img
                                 className="h-64 object-cover w-full"
@@ -78,17 +100,18 @@ const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
                                         $ {car.Price.toLocaleString()}
                                     </p>
                                 )}
-                                <NavLink className="ml-auto"
+                                <NavLink
+                                    className="ml-auto"
                                     id={car.id.toString()}
-                                    to={`singlecar/${car.id}`}
+                                    to={`/listingcars/singlecar/${car.id}`}
                                 >
                                     <p className=" text-lg text-primary flex gap-2">
                                         View Details
-                                    <img
-                                        className="w-3"
-                                        src={arrowIcon}
-                                        alt="arrow Icon"
-                                    />
+                                        <img
+                                            className="w-3"
+                                            src={arrowIcon}
+                                            alt="arrow Icon"
+                                        />
                                     </p>
                                 </NavLink>
                             </div>
@@ -100,4 +123,4 @@ const LatestCar: React.FC<LatestCarProps> = ({ cars }) => {
     );
 };
 
-export default LatestCar;
+export default CarCard;

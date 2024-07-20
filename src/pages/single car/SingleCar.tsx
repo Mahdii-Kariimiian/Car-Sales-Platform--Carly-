@@ -64,7 +64,7 @@ const SingleCar = () => {
     ];
 
     return (
-        <div className=" px-28 text-xl ">
+        <div className=" px-28 pt-28 text-xl ">
             <div className="flex justify-between gap-10 items-end">
                 <div>
                     <p className="pb-4">
@@ -73,16 +73,18 @@ const SingleCar = () => {
                         </span>
                         /
                         <span className="text-xl text-primary  ">
-                            <Link to="/">{"  "}Listings{"  "}</Link>
+                            <Link to="/listingcars">
+                                {"  "}Listings{"  "}
+                            </Link>
                         </span>
                         /
                         <span className="text-xl pb-7">
-                        {"  "} {singleCar?.Model} - {singleCar?.Year}
+                            {"  "} {singleCar?.Model} - {singleCar?.Year}
                         </span>
                     </p>
                     <div className=" flex gap-3 items-center pb-8">
                         <h1 className="text-5xl font-semibold">
-                        {singleCar?.Model} - {singleCar?.Year}
+                            {singleCar?.Model} - {singleCar?.Year}
                         </h1>
                         <img src={remove} alt="remove" />
                         <img src={edit} alt="edit" />
@@ -114,9 +116,9 @@ const SingleCar = () => {
                     <div className="">
                         <h2 className="text-3xl pb-7">Car Overview</h2>
                         <div className="grid grid-cols-2 grid-rows-4 border-b border-gay-200 pb-12">
-                            {carOverviewInfo.map((car) => {
+                            {carOverviewInfo.map((car, index) => {
                                 return (
-                                    <div className="">
+                                    <div id={index.toString()} className="">
                                         <OverviewItem
                                             icon={car.icon}
                                             text={car.text}

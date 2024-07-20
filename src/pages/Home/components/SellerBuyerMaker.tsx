@@ -9,12 +9,11 @@ type SellerBuyerMakerProps = {
 const sellerBuyerMaker: React.FC<SellerBuyerMakerProps> = ({ sellOrBuy }) => {
     return (
         <div className="flex gap-9 px-28 py-14 ">
-            {sellOrBuy.map((card) => {
-                console.log(card.color);
+            {sellOrBuy.map((card, index) => {
                 return (
                     <div
                         className={`${card.color} flex gap-20 items-end justify-between rounded-lg w-full p-24`}
-                        id={card.id.toLocaleString()}
+                        id={index.toString()}
                     >
                         <div className="space-y-4">
                             <h2 className="text-4xl text-[#050B20] font-bold pb-4">

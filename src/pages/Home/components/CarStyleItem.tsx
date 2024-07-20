@@ -6,9 +6,13 @@ type CarBodyStyleProps = {
 const CarBodyStyle: React.FC<CarBodyStyleProps> = ({ CarStyles }) => {
     return (
         <div className="flex justify-between w-full">
-            {CarStyles.map((style) => {
+            {CarStyles.map((style, index) => {
                 return (
-                    <div className="px-5 pb-11" key={style.id}>
+                    <div
+                        id={index.toString()}
+                        className="px-5 pb-11"
+                        key={style.id}
+                    >
                         <img
                             className="w-60 gap-9"
                             src={style.src}
