@@ -1,7 +1,7 @@
 import image from "../../../assets/Images/contact-us-image.png";
 import mobileIcon from "../../../assets/Icons/mobile-icon.svg";
 import emailIcon from "../../../assets/Icons/email-icon.svg";
-import Button from "../../../components/generals/Button";
+import Button from "../../../Components/General/Button";
 
 const ContactUs = () => {
     return (

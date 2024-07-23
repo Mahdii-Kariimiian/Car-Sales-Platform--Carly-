@@ -3,7 +3,7 @@ import twitter from "../../assets/Icons/twitter-icon.svg";
 import instagram from "../../assets/Icons/instagram-icon.svg";
 import linkedin from "../../assets/Icons/linkedin-icon.svg";
 import Link from "./UlList";
-import { footerData } from "../../db/data";
+import { footerData } from "../../db/Data";
 
 const Footer = () => {
     return (

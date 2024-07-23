@@ -1,4 +1,4 @@
-import { CarStyles } from "../../../db/data";
+import { CarStyles } from "../../../db/Data";
 import CarBodyStyle from "./CarStyleItem";
 
 const CarBodyStyles = () => {

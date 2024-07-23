@@ -11,13 +11,13 @@ const Navbar = () => {
             </Link>
 
             <ul className="flex text-lg items-center gap-6 font-poppins-bold ">
-                <li className="hover:bg-dark hover:text-white px-3 py-1 hover:rounded-md ml-5 cursor-pointer transition-all">
+                <li className="hover:bg-gray-600 hover:text-white px-3 py-1 hover:rounded-md ml-5 cursor-pointer transition-all">
                     <Link className="text-base" to="/listingcars">Cars</Link>
                 </li>
-                <li className="hover:bg-dark hover:text-white px-3 py-1 hover:rounded-md cursor-pointer transition-all">
+                <li className="hover:bg-gray-600 hover:text-white px-3 py-1 hover:rounded-md cursor-pointer transition-all">
                     About
                 </li>
-                <li className="hover:bg-dark hover:text-white px-3 py-1 hover:rounded-md cursor-pointer transition-all">
+                <li className="hover:bg-gray-600 hover:text-white px-3 py-1 hover:rounded-md cursor-pointer transition-all">
                     Contact
                 </li>
             </ul>

@@ -8,7 +8,7 @@ const Link: React.FC<LinkProps> = ({ links }) => {
         <div>
             {links.map((link, index) => {
                 return (
-                    <ul className="space-y-2 text-lg" id={index.toString()}>
+                    <ul className="space-y-2 text-lg" key={index.toString()}>
                         <li>{link}</li>
                     </ul>
                 );

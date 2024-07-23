@@ -37,7 +37,7 @@ export type FooterData = [
     VehicleTypes: string[]
 ];
 
-export type carOverviewInfo = {
+export type CarOverviewInfo = {
     icon: string;
     text: string;
     description: number | string | undefined;

@@ -1,7 +1,7 @@
-import { cars } from "../../db/data";
+import { cars } from "../../db/Data";
 import { useParams, Link } from "react-router-dom";
-import { CarsInfo } from "../../types/Types";
-import Button from "../../components/generals/Button";
+import { CarsInfo } from "../../Types/Types";
+import Button from "../../Components/General/Button";
 import steeringWheel from "../../assets/Icons/steering wheel-icon.svg";
 import offer from "../../assets/Icons/offer-icon.svg";
 import carBody from "../../assets/Icons/car-icon.svg";
@@ -15,9 +15,9 @@ import remove from "../../assets/Icons/remove-icon.svg";
 import edit from "../../assets/Icons/edit-icon.svg";
 import favorite from "../../assets/Icons/favorite-icon.svg";
 import share from "../../assets/Icons/share-icon.svg";
-import { carOverviewInfo } from "../../types/Types";
+import { CarOverviewInfo } from "../../Types/Types";
 
-import OverviewItem from "./OverviewItem";
+import OverviewItem from "../SingleCar/Components/OverviewItem";
 
 const SingleCar = () => {
     const { id } = useParams<{ id: string }>();
@@ -25,7 +25,7 @@ const SingleCar = () => {
         return car.id.toLocaleString() === id;
     });
 
-    const carOverviewInfo: carOverviewInfo[] = [
+    const carOverviewInfo: CarOverviewInfo[] = [
         {
             icon: carBody,
             text: "Body",
@@ -67,7 +67,7 @@ const SingleCar = () => {
         <div className=" px-28 pt-28 text-xl ">
             <div className="flex justify-between gap-10 items-end">
                 <div>
-                    <p className="pb-4">
+                    <div className="pb-4">
                         <span className="text-xl text-primary ">
                             <Link to="/">Home{"  "}</Link>
                         </span>
@@ -78,12 +78,12 @@ const SingleCar = () => {
                             </Link>
                         </span>
                         /
-                        <span className="text-xl pb-7">
+                        <span className="text-lg pb-7">
                             {"  "} {singleCar?.Model} - {singleCar?.Year}
                         </span>
-                    </p>
-                    <div className=" flex gap-3 items-center pb-8">
-                        <h1 className="text-5xl font-semibold">
+                    </div>
+                    <div className=" flex gap-4 items-center pb-8">
+                        <h1 className="text-5xl font-semibold mr-3">
                             {singleCar?.Model} - {singleCar?.Year}
                         </h1>
                         <img src={remove} alt="remove" />
@@ -91,18 +91,18 @@ const SingleCar = () => {
                     </div>
                 </div>
                 <div className="flex gap-5 pb-8 text-2xl">
-                    <p className="flex gap-2 items-end">
+                    <div className="flex gap-2 items-end">
                         <p>Share</p>
                         <span className="size-9 border border-gray-200 rounded-full flex items-center justify-center">
                             <img className="size-5" src={favorite} alt="save" />
                         </span>
-                    </p>
-                    <p className="flex gap-2 items-end">
+                    </div>
+                    <div className="flex gap-2 items-end">
                         <p>Save</p>{" "}
                         <span className="size-9 border border-gray-200 rounded-full flex items-center justify-center">
                             <img className="size-5" src={share} alt="share" />
                         </span>
-                    </p>
+                    </div>
                 </div>
             </div>
             <div className="flex items-start gap-20">
@@ -118,7 +118,7 @@ const SingleCar = () => {
                         <div className="grid grid-cols-2 grid-rows-4 border-b border-gay-200 pb-12">
                             {carOverviewInfo.map((car, index) => {
                                 return (
-                                    <div id={index.toString()} className="">
+                                    <div key={index.toString()} className="">
                                         <OverviewItem
                                             icon={car.icon}
                                             text={car.text}

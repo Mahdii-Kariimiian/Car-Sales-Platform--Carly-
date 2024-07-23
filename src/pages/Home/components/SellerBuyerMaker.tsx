@@ -1,5 +1,5 @@
-import { BuyOrSell } from "../../../types/Types";
-import Button from "../../../components/generals/Button";
+import { BuyOrSell } from "../../../Types/Types";
+import Button from "../../../Components/General/Button";
 import arrow from "../../../assets/Icons/white-arrow-icon.svg";
 
 type SellerBuyerMakerProps = {
@@ -13,7 +13,7 @@ const sellerBuyerMaker: React.FC<SellerBuyerMakerProps> = ({ sellOrBuy }) => {
                 return (
                     <div
                         className={`${card.color} flex gap-20 items-end justify-between rounded-lg w-full p-24`}
-                        id={index.toString()}
+                        key={index.toString()}
                     >
                         <div className="space-y-4">
                             <h2 className="text-4xl text-[#050B20] font-bold pb-4">
@@ -23,7 +23,7 @@ const sellerBuyerMaker: React.FC<SellerBuyerMakerProps> = ({ sellOrBuy }) => {
                                 {card.description}
                             </p>
                             <Button
-                                classes={`${card.buttonColor} text-white`}
+                                classes={`${card.buttonColor} text-white flex-row-reverse`}
                                 text={`${card.buttonText}`}
                                 icon={arrow}
                             />

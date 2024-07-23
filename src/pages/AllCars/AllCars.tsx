@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import CarCard from "../../components/car/CarCard";
-import Button from "../../components/generals/Button";
+import CarCard from "../../Components/Car/CarCard";
+import Button from "../../Components/General/Button";
 
 const AllCars = () => {
     const [lastNumber, setLastNumber] = useState<number>(8);
     const [carsLength, setCarsLength] = useState<number>(0);
+    const [param, setParam] = useState<string | undefined>(undefined);
     const quantity = 8;
 
     const loadMoreCars = () => {
@@ -19,11 +20,28 @@ const AllCars = () => {
                     <span className="text-xl text-primary ">
                         <Link to="/">Home{"  "}</Link>
                     </span>
-                    /<span className="text-xl ">{"  "}Listings</span>
+
+                    {param ? (
+                        <span className="text-lg ">
+                            <Link to="/listingcars"> / {"  "} Listings</Link>
+                        </span>
+                    ) : (
+                        <span className="text-lg ">/{"  "}Listings</span>
+                    )}
+                    {param && (
+                        <span className="text-lg ">
+                            / {"  "}
+                            {param}
+                        </span>
+                    )}
                 </div>
                 <div className="flex gap-5 items-center text-xl">
                     <p className="text-xl text-gray-600">Sort by</p>
-                    <select className="p-3 rounded-xl bg-white border border-gray-200" name="sort" id="sort">
+                    <select
+                        className="p-3 rounded-xl bg-white border border-gray-200"
+                        name="sort"
+                        id="sort"
+                    >
                         <option value="Default">Default</option>
                         <option value="Decreasing">Decreasing Price</option>
                         <option value="Increasing">Increasing Price</option>
@@ -41,7 +59,11 @@ const AllCars = () => {
                 </span>
             </p>
 
-            <CarCard lastNumber={lastNumber} setCarsLength={setCarsLength} />
+            <CarCard
+                lastNumber={lastNumber}
+                setCarsLength={setCarsLength}
+                setParam={setParam}
+            />
 
             <div
                 className="w-full"

@@ -1,4 +1,4 @@
-import {sellOrBuy} from "../../../db/data";
+import {sellOrBuy} from "../../../db/Data";
 import SellerBuyerMaker from "./SellerBuyerMaker";
 
 

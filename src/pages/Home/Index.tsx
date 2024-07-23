@@ -1,8 +1,8 @@
-import Hero from "./components/Hero";
-import CarStyleList from "./components/CarStyleList";
-import SellerBuyer from "./components/SellerBuyer";
-import LatestCars from "./components/LatestCars";
-import ContactUs from "./components/ContactUs";
+import Hero from "../Home/Components/Hero";
+import CarStyleList from "../Home/Components/CarStyleList";
+import SellerBuyer from "../Home/Components/SellerBuyer";
+import LatestCars from "../Home/Components/LatestCars";
+import ContactUs from "../Home/Components/ContactUs";
 
 const Index = () => {
     return (
