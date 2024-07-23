@@ -2,15 +2,41 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import CarCard from "../../Components/Car/CarCard";
 import Button from "../../Components/General/Button";
+import { CarsInfo } from "../../Types/Types";
 
 const AllCars = () => {
     const [lastNumber, setLastNumber] = useState<number>(8);
     const [carsLength, setCarsLength] = useState<number>(0);
     const [param, setParam] = useState<string | undefined>(undefined);
+    const [sortType, setSortType] = useState<string>("Default");
     const quantity = 8;
 
     const loadMoreCars = () => {
         setLastNumber((prev) => prev + quantity);
+    };
+
+    const sortedCars = (
+        allCars: CarsInfo[] | undefined
+    ): CarsInfo[] | undefined => {
+        if (!allCars) return [];
+        switch (sortType) {
+            case "Increasing":
+                return [...allCars].sort((a, b) => a.Price - b.Price);
+            case "Decreasing":
+                return [...allCars].sort((a, b) => b.Price - a.Price);
+            case "Newest":
+                return [...allCars].sort((a, b) => b.Year - a.Year);
+            case "TopSpeed":
+                return [...allCars].sort(
+                    (a, b) => b["Top Speed"] - a["Top Speed"]
+                );
+            default:
+                return allCars;
+        }
+    };
+
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortType(event.target.value);
     };
 
     return (
@@ -41,11 +67,13 @@ const AllCars = () => {
                         className="p-3 rounded-xl bg-white border border-gray-200"
                         name="sort"
                         id="sort"
+                        onChange={handleSortChange}
                     >
                         <option value="Default">Default</option>
                         <option value="Decreasing">Decreasing Price</option>
                         <option value="Increasing">Increasing Price</option>
-                        <option value="Newest">Newest</option>
+                        <option value="Newest">Newest Car</option>
+                        <option value="TopSpeed">Top Speed</option>
                     </select>
                 </div>
             </div>
@@ -63,6 +91,7 @@ const AllCars = () => {
                 lastNumber={lastNumber}
                 setCarsLength={setCarsLength}
                 setParam={setParam}
+                sortedList={sortedCars}
             />
 
             <div
@@ -71,10 +100,12 @@ const AllCars = () => {
                     lastNumber < carsLength && loadMoreCars();
                 }}
             >
-                <Button
-                    classes="bg-primary text-white px-32 m-auto mt-20 rounded-2xl"
-                    text="Load More "
-                />
+                {lastNumber < carsLength && (
+                    <Button
+                        classes="bg-primary text-white px-32 m-auto mt-20 rounded-2xl"
+                        text="Load More "
+                    />
+                )}
             </div>
         </div>
     );

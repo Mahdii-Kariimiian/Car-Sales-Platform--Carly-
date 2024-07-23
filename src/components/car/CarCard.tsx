@@ -1,18 +1,20 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { NavLink, useParams } from "react-router-dom";
+import { fetchCars } from "../../Axios/Axios";
 import { CarsInfo } from "../../Types/Types";
 import favoriteIcon from "../../assets/Icons/favorite-icon.svg";
 import fuelIcon from "../../assets/Icons/fuel-icon.svg";
 import transmissionIcon from "../../assets/Icons/Transmission-icon.svg";
 import arrowIcon from "../../assets/Icons/arrow-icon.svg";
 import maxSpeedIcon from "../../assets/Icons/maxspeed-icon.svg";
-import { NavLink, useParams } from "react-router-dom";
-import { fetchCars } from "../../Axios/Axios";
 
+// Types
 type LatestCarProps = {
     firstNumber?: number;
     lastNumber?: number;
     setCarsLength?: Dispatch<SetStateAction<number>>;
     setParam?: Dispatch<SetStateAction<string | undefined>>;
+    sortedList?: (cars: CarsInfo[] | undefined) => CarsInfo[] | undefined;
 };
 
 const CarCard: React.FC<LatestCarProps> = ({
@@ -20,32 +22,52 @@ const CarCard: React.FC<LatestCarProps> = ({
     firstNumber,
     setCarsLength,
     setParam,
+    sortedList,
 }) => {
+    //States and Variables
     const { type } = useParams();
     const [listedCars, setListedCars] = useState<CarsInfo[]>([]);
+    const [allCars, setAllCars] = useState<CarsInfo[] | undefined>([]);
 
+    //UseEffects
     useEffect(() => {
+        // Fetch data if type of the car is NOT selected (with pagination)
         !type &&
             fetchCars("cars.json").then((res) => {
-                setCarsLength && setCarsLength(res.data.length);
+                const fetchedCars = res.data;
+                setCarsLength && setCarsLength(fetchedCars.length);
+                setAllCars(fetchedCars);
                 setListedCars(
                     lastNumber
-                        ? res.data.slice(firstNumber, lastNumber)
-                        : res.data
+                        ? fetchedCars.slice(firstNumber, lastNumber)
+                        : fetchedCars
                 );
             });
     }, [lastNumber]);
 
     useEffect(() => {
+        // Fetch data if the Type IS selected
         fetchCars("cars.json").then((res) => {
-            const typeCars: CarsInfo[] = res.data.filter((car: CarsInfo) => {
-                return car.Type.toLowerCase() === type;
-            });
-            type && setListedCars(typeCars);
-            type && setCarsLength && setCarsLength(typeCars.length);
-            setParam && setParam(type);
+            if (type) {
+                const typeCars: CarsInfo[] = res.data.filter(
+                    (car: CarsInfo) => {
+                        return car.Type.toLowerCase() === type;
+                    }
+                );
+                setListedCars(typeCars);
+                //carLength is used for loading more cars
+                setCarsLength && setCarsLength(typeCars.length);
+                setParam && setParam(type);
+            }
         });
     }, [type]);
+
+    // Sort Cars based on the user's selection
+    useEffect(() => {
+        sortedList &&
+            allCars &&
+            setListedCars(sortedList(allCars.slice(0, lastNumber)) || []);
+    }, [allCars, sortedList, lastNumber]);
 
     return (
         <div>
