@@ -12,17 +12,22 @@ import { useEffect, useState } from "react";
 
 const Index = () => {
     const [carCount, setCarCount] = useState<number>(0);
+    const [newCar, setNewCar] = useState<CarsInfo>();
     const navigate = useNavigate();
     const { register, control, handleSubmit } = useForm<CarsInfo>();
-
+console.log(carCount)
     useEffect(() => {
-        fetchCars("cars.json").then((res) => {
-            setCarCount(res.data.length);
-        });
+        // Fetching existing cars and counting them
+        fetchCars("cars.json")
+            .then((res) => {
+                // Assuming res.data is an object where each key is a car node
+                setCarCount(Object.keys(res.data).length);
+            })
+            .catch((error) => console.error("Error fetching cars:", error));
     }, []);
 
     const onSubmit = (newCar: CarsInfo) => {
-        const carToApi = {
+        const updatedCar = {
             ...newCar,
             id: Number(carCount) + 1,
             Price: Number(newCar.Price),
@@ -30,9 +35,11 @@ const Index = () => {
             Discount: Number(newCar.Discount),
             "Top Speed": Number(newCar["Top Speed"]),
         };
+        console.log(updatedCar);
+
         fetchCars
-            .post("cars.json", { carToApi })
-            .then((res) => console.log(res.data));
+            .post("cars.json", updatedCar)
+            .then((res) => console.log(res.data.name));
     };
     return (
         <div className="px-28 py-32">

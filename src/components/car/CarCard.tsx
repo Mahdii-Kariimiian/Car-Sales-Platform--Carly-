@@ -28,7 +28,6 @@ const CarCard: React.FC<LatestCarProps> = ({
     const { type } = useParams();
     const [listedCars, setListedCars] = useState<CarsInfo[]>([]);
     const [allCars, setAllCars] = useState<CarsInfo[] | undefined>([]);
-    console.log(allCars);
 
     //UseEffects
     useEffect(() => {
