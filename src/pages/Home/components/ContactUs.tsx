@@ -25,7 +25,7 @@ const ContactUs = () => {
                         <p>ali@boxcars.com</p>
                     </div>
                 </div>
-                <Button classes="bg-dark text-white" text="Contact Us" />
+                <Button classes="bg-dark text-white" text="Contact Us" path="/contactus" />
             </div>
         </div>
     );

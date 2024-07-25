@@ -7,6 +7,7 @@ import fuelIcon from "../../assets/Icons/fuel-icon.svg";
 import transmissionIcon from "../../assets/Icons/Transmission-icon.svg";
 import arrowIcon from "../../assets/Icons/arrow-icon.svg";
 import maxSpeedIcon from "../../assets/Icons/maxspeed-icon.svg";
+import "./CarCard.css"
 
 // Types
 type LatestCarProps = {
@@ -72,12 +73,12 @@ const CarCard: React.FC<LatestCarProps> = ({
     return (
         <div>
             {listedCars ? (
-                <div className="grid grid-cols-4 text-dark  gap-9">
+                <div className="container">
                     {listedCars.map((car, index) => {
                         return (
                             <div
                                 key={index.toString()}
-                                className=" relative pb-12 border border-gray-200 overflow-hidden rounded-lg"
+                                className="card"
                             >
                                 <div>
                                     <img
@@ -86,7 +87,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                                         alt={car.Model}
                                     />
 
-                                    <div className="absolute top-6 right-6 size-8 flex items-center justify-center bg-white rounded-full">
+                                    <div className="favorite-icon">
                                         <img
                                             src={favoriteIcon}
                                             alt={favoriteIcon}
@@ -99,7 +100,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                                         {car.Model}
                                     </p>
 
-                                    <div className="grid grid-cols-3 items-end border-t text-xl border-b pb-3 border-gray-200 justify-between pt-5">
+                                    <div className="card-info">
                                         <div className="text-center">
                                             <img
                                                 className="pb-3.5 m-auto"

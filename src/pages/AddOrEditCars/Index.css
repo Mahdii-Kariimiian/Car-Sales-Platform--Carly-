@@ -1,5 +1,5 @@
 .item {
-    @apply border border-gray-200 rounded-xl p-3 text-xl flex flex-col text-gray-500;
+    @apply border border-gray-200 rounded-xl py-2 px-3 text-xl flex flex-col text-gray-500;
 }
 
 .select {

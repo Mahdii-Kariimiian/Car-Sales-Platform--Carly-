@@ -6,7 +6,7 @@ import "./navbar.css";
 
 const Navbar = () => {
     return (
-        <div className="container">
+        <div className="flex items-center justify-between text-base pt-12 pb-12 px-28 text-dark-blue font-dm-sans">
             <Link to={"/"}>
                 <img className="w-36 mr-2" src={Carly} alt="logo" />
             </Link>

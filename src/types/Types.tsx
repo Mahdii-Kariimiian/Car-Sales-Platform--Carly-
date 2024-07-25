@@ -5,7 +5,7 @@ export type CarStyle = {
 };
 
 export type CarsInfo = {
-    id: number;
+    id: number | string;
     Model: string;
     Brand: string;
     Price: number;
@@ -28,6 +28,7 @@ export type BuyOrSell = {
     icon: string;
     color: string;
     buttonColor: string;
+    path: string
 };
 
 export type FooterData = [

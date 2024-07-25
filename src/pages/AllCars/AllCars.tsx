@@ -108,7 +108,8 @@ const AllCars = () => {
                 {lastNumber < carsLength && (
                     <Button
                         classes="bg-primary text-white px-32 m-auto mt-20 rounded-2xl"
-                        text="Load More "
+                        text="Load More"
+                        path=""
                     />
                 )}
             </div>

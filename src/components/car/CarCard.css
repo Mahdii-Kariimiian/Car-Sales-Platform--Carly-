@@ -1,0 +1,15 @@
+.container {
+    @apply grid grid-cols-4 gap-9 text-dark;
+}
+
+.card {
+    @apply relative pb-12 border border-gray-200 overflow-hidden rounded-lg
+}
+
+.favorite-icon {
+    @apply absolute top-6 right-6 size-8 flex items-center justify-center bg-white rounded-full
+}
+
+.card-info {
+    @apply grid grid-cols-3 items-end border-t text-xl border-b pb-3 border-gray-200 justify-between pt-5
+}

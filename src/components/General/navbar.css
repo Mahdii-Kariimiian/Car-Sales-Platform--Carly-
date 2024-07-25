@@ -1,8 +1,3 @@
-.container {
-    @apply flex items-center justify-between text-base pt-12 pb-12 px-28;
-    @layer text-dark-blue  , font-dm-sans;
-}
-
 .menu-list {
     @apply flex text-lg items-center gap-6;
     @layer font-poppins-bold;

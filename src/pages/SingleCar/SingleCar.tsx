@@ -1,5 +1,5 @@
 import { cars } from "../../db/Data";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { CarsInfo } from "../../Types/Types";
 import Button from "../../Components/General/Button";
 import steeringWheel from "../../assets/Icons/steering wheel-icon.svg";
@@ -16,10 +16,11 @@ import edit from "../../assets/Icons/edit-icon.svg";
 import favorite from "../../assets/Icons/favorite-icon.svg";
 import share from "../../assets/Icons/share-icon.svg";
 import { CarOverviewInfo } from "../../Types/Types";
-
 import OverviewItem from "../SingleCar/Components/OverviewItem";
 
 const SingleCar = () => {
+    const navigate = useNavigate();
+    console.log(navigate);
     const { id } = useParams<{ id: string }>();
     const singleCar: CarsInfo | undefined = cars.find((car: CarsInfo) => {
         return car.id.toLocaleString() === id;
@@ -63,6 +64,10 @@ const SingleCar = () => {
         },
     ];
 
+    const editCar = () => {
+        navigate(`/editcar/${id}`, { state: { car: singleCar } });
+    };
+
     return (
         <div className=" px-28 pt-28 text-xl ">
             <div className="flex justify-between gap-10 items-end">
@@ -87,7 +92,8 @@ const SingleCar = () => {
                             {singleCar?.Model} - {singleCar?.Year}
                         </h1>
                         <img src={remove} alt="remove" />
-                        <img src={edit} alt="edit" />
+
+                        <img src={edit} alt="edit" onClick={editCar} />
                     </div>
                 </div>
                 <div className="flex gap-5 pb-8 text-2xl">
