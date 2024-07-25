@@ -28,13 +28,14 @@ const CarCard: React.FC<LatestCarProps> = ({
     const { type } = useParams();
     const [listedCars, setListedCars] = useState<CarsInfo[]>([]);
     const [allCars, setAllCars] = useState<CarsInfo[] | undefined>([]);
+    console.log(allCars);
 
     //UseEffects
     useEffect(() => {
         // Fetch data if type of the car is NOT selected (with pagination)
         !type &&
             fetchCars("cars.json").then((res) => {
-                const fetchedCars = res.data;
+                const fetchedCars: CarsInfo[] = res.data;
                 setCarsLength && setCarsLength(fetchedCars.length);
                 setAllCars(fetchedCars);
                 setListedCars(

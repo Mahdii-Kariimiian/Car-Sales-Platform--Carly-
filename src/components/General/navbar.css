@@ -1,0 +1,22 @@
+.container {
+    @apply flex items-center justify-between text-base pt-12 pb-12 px-28;
+    @layer text-dark-blue  , font-dm-sans;
+}
+
+.menu-list {
+    @apply flex text-lg items-center gap-6;
+    @layer font-poppins-bold;
+}
+
+.menu-lists {
+    @apply hover:bg-gray-400 px-3 py-1 hover:rounded-md cursor-pointer transition-all;
+}
+
+.button {
+    @apply px-6 py-3 border rounded-lg hover:text-white hover:bg-dark transition-all;
+    @layer border-dark-blue;
+}
+
+.icon {
+    @apply flex gap-3 items-center text-lg;
+}

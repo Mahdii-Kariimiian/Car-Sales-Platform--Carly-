@@ -5,16 +5,20 @@ import Button from "../../Components/General/Button";
 import { CarsInfo } from "../../Types/Types";
 
 const AllCars = () => {
+    //States and Variables
     const [lastNumber, setLastNumber] = useState<number>(8);
     const [carsLength, setCarsLength] = useState<number>(0);
     const [param, setParam] = useState<string | undefined>(undefined);
     const [sortType, setSortType] = useState<string>("Default");
     const quantity = 8;
 
+    // Functions
+    // Load more Cars
     const loadMoreCars = () => {
         setLastNumber((prev) => prev + quantity);
     };
 
+    // Sort Cars List
     const sortedCars = (
         allCars: CarsInfo[] | undefined
     ): CarsInfo[] | undefined => {
@@ -35,6 +39,7 @@ const AllCars = () => {
         }
     };
 
+    // Change sort Value
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortType(event.target.value);
     };

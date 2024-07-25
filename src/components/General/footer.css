@@ -1,0 +1,7 @@
+.container {
+    @apply bg-white py-14 px-28;
+}
+
+.list-menu {
+    @apply font-bold mb-4;
+}
