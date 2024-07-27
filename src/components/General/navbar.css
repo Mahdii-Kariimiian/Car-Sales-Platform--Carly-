@@ -4,7 +4,7 @@
 }
 
 .menu-lists {
-    @apply hover:bg-gray-400 px-3 py-1 hover:rounded-md cursor-pointer transition-all;
+    @apply hover:bg-gray-200 px-3 py-1 hover:rounded-md cursor-pointer transition-all;
 }
 
 .button {

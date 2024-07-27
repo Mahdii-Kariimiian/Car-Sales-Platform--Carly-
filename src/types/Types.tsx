@@ -28,7 +28,7 @@ export type BuyOrSell = {
     icon: string;
     color: string;
     buttonColor: string;
-    path: string
+    path: string;
 };
 
 export type FooterData = [
@@ -42,4 +42,12 @@ export type CarOverviewInfo = {
     icon: string;
     text: string;
     description: number | string | undefined;
+};
+
+export type message = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: number;
+    message: string;
 };

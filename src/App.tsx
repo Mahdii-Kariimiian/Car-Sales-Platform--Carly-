@@ -5,6 +5,7 @@ import SingleCar from "./Pages/SingleCar/SingleCar";
 import AllCars from "./Pages/AllCars/AllCars";
 import ScrollToTop from "./Components/General/ScrollToTop";
 import AddOrEdit from "./Pages/AddOrEditCars/Index";
+import ContactUs from "./Pages/ContactUs/ContactUs";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                             path="/listingcars/:type"
                             element={<AllCars />}
                         />
+                        <Route path="/contactus" element={<ContactUs />} />
                     </Route>
                     <Route path="addcar" element={<AddOrEdit />} />
                     <Route path="editcar/:id" element={<AddOrEdit />} />

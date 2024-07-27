@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import backIcon from "../../assets/Icons/back-icon.svg";
-import Button from "../../Components/General/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
@@ -17,37 +16,45 @@ const Index = () => {
     const { id } = useParams();
 
     // States and Variables
+    const [hash, setHash] = useState<string | undefined>("");
     const [editedCar, setEditedCar] = useState<CarsInfo | null>(null);
     const [carCount, setCarCount] = useState<number>(0);
-    console.log(editedCar, carCount);
 
     // React-hook-form methods
     const { register, control, handleSubmit, formState, watch, reset } =
         useForm<CarsInfo>({ defaultValues: editedCar || {} });
-
     const { errors } = formState;
     const imageUrl = watch("Image");
 
-    console.log(editedCar);
     useEffect(() => {
         fetchCars("cars.json")
             .then((res) => {
-                const allCars = res.data;
+                // const hashArray = Object.keys(res.data);
+                const allCars = Object.values(res.data);
                 // Number of objects in array to specify the next id
-                setCarCount(Object.keys(allCars).length); 
+                setCarCount(allCars.length);
                 // Get data of car to Edit from API
-                const carToEdit = allCars.find(
-                    (car: CarsInfo) => car.id === Number(id)
+                const carToEdit =
+                    id &&
+                    allCars.find((car, index) => {
+                        return index === Number(id);
+                    });
+                // Get firebase Hash to edit car 
+                setHash(
+                    Object.keys(res.data).find((hash, index) => {
+                        return index === Number(id);
+                    })
                 );
-                carToEdit && reset(carToEdit);
+
+                carToEdit && setEditedCar(carToEdit);
+                carToEdit && reset(carToEdit); //??
             })
             .catch((error) => console.error("Error fetching cars:", error));
-    }, [id, reset]);
+    }, []);
 
     const onSubmit = (newCar: CarsInfo) => {
         const updatedCar = {
             ...newCar,
-            id: editedCar?.id ?? carCount,
             // Changing types to Number
             Price: Number(newCar.Price),
             Year: Number(newCar.Year),
@@ -59,10 +66,10 @@ const Index = () => {
         if (editedCar) {
             // Use PUT to update the existing car
             fetchCars
-                .put(`cars/${editedCar.id}.json`, updatedCar)
+                .put(`cars/${hash}.json`, updatedCar)
                 .then((res) => {
-                    console.log(res.data);
-                    navigate("/listingcars");
+                    // console.log(res.data);
+                    // navigate("/listingcars");
                 })
                 .catch((error) => console.error("Error updating car:", error));
         } else {
@@ -70,8 +77,8 @@ const Index = () => {
             fetchCars
                 .post(`cars.json`, updatedCar)
                 .then((res) => {
-                    console.log(res.data);
-                    navigate("/listingcars");
+                    // console.log(res.data);
+                    // navigate("/listingcars");
                 })
                 .catch((error) => console.error("Error adding car:", error));
         }
@@ -277,11 +284,9 @@ const Index = () => {
                             </div>
                         </div>
                         <div className="col-span-full">
-                            <Button
-                                text="Add"
-                                classes="w-full text-white bg-primary"
-                                path="/listingcars"
-                            />
+                            <button className="w-full text-white bg-primary flex items-center justify-center gap-2 font-semibold text-xl px-10 py-5 rounded-lg hover:opacity-70 transition-all">
+                                Add
+                            </button>
                         </div>
                     </form>
                     <DevTool control={control} />

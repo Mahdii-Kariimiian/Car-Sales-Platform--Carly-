@@ -7,7 +7,7 @@ import fuelIcon from "../../assets/Icons/fuel-icon.svg";
 import transmissionIcon from "../../assets/Icons/Transmission-icon.svg";
 import arrowIcon from "../../assets/Icons/arrow-icon.svg";
 import maxSpeedIcon from "../../assets/Icons/maxspeed-icon.svg";
-import "./CarCard.css"
+import "./CarCard.css";
 
 // Types
 type LatestCarProps = {
@@ -26,60 +26,67 @@ const CarCard: React.FC<LatestCarProps> = ({
     sortedList,
 }) => {
     //States and Variables
-    const { type } = useParams();
-    const [listedCars, setListedCars] = useState<CarsInfo[]>([]);
-    const [allCars, setAllCars] = useState<CarsInfo[] | undefined>([]);
+    console.log("carcard  global");
+    const { type } = useParams(); //For rendering based on the style(type) of the cars
+    const [listedCars, setListedCars] = useState<CarsInfo[]>([]); // Cars shown in page based on pagination number
+    const [allCars, setAllCars] = useState<CarsInfo[] | undefined>([]); // All of the cars
+
+    //Functions
+    const fetchAndSetCars = async () => {
+        console.log("carcard fetchAndSetCars func");
+        try {
+            const res = await fetchCars("cars.json");
+            const fetchedCars: CarsInfo[] = Object.values(res.data);
+
+            type
+                ? (() => {
+                      console.log("carcard fetchAndSetCars func with type");
+                      const typeCars = fetchedCars.filter(
+                          (car) => car.Type.toLowerCase() === type.toLowerCase()
+                      );
+                      setListedCars(typeCars.slice(0, lastNumber));
+                      setCarsLength?.(typeCars.length);
+                      setParam?.(type);
+                  })()
+                : (() => {
+                      console.log("carcard fetchAndSetCars func without type");
+                      setAllCars(fetchedCars);
+                      setListedCars(
+                          lastNumber
+                              ? fetchedCars.slice(firstNumber, lastNumber)
+                              : fetchedCars
+                      );
+                      setCarsLength?.(fetchedCars.length);
+                  })();
+        } catch (error) {
+            console.error("Error fetching cars:", error);
+        }
+    };
 
     //UseEffects
+    //All cars and Cars based on type
     useEffect(() => {
-        // Fetch data if type of the car is NOT selected (with pagination)
-        !type &&
-            fetchCars("cars.json").then((res) => {
-                const fetchedCars: CarsInfo[] = res.data;
-                setCarsLength && setCarsLength(fetchedCars.length);
-                setAllCars(fetchedCars);
-                setListedCars(
-                    lastNumber
-                        ? fetchedCars.slice(firstNumber, lastNumber)
-                        : fetchedCars
-                );
-            });
-    }, [lastNumber]);
+        console.log("carcard first useeffect");
+        fetchAndSetCars();
+    }, [type, firstNumber, lastNumber, setCarsLength, setParam, sortedList]);
 
+    // Sort Cars based on user's selection
     useEffect(() => {
-        // Fetch data if the Type IS selected
-        fetchCars("cars.json").then((res) => {
-            if (type) {
-                const typeCars: CarsInfo[] = res.data.filter(
-                    (car: CarsInfo) => {
-                        return car.Type.toLowerCase() === type;
-                    }
-                );
-                setListedCars(typeCars);
-                //carLength is used for loading more cars
-                setCarsLength && setCarsLength(typeCars.length);
-                setParam && setParam(type);
-            }
-        });
-    }, [type]);
+        console.log("carcard second useeffect");
 
-    // Sort Cars based on the user's selection
-    useEffect(() => {
-        sortedList &&
-            allCars &&
-            setListedCars(sortedList(allCars.slice(0, lastNumber)) || []);
-    }, [allCars, sortedList, lastNumber]);
+        if (sortedList && allCars) {
+            const sortedCars = sortedList(allCars);
+            setListedCars(sortedList(sortedCars?.slice(0, lastNumber)) || []);
+        }
+    }, [allCars, sortedList]);
 
     return (
         <div>
-            {listedCars ? (
+            {listedCars.length > 0 ? (
                 <div className="container">
                     {listedCars.map((car, index) => {
                         return (
-                            <div
-                                key={index.toString()}
-                                className="card"
-                            >
+                            <div key={index.toString()} className="card">
                                 <div>
                                     <img
                                         className="h-64 object-cover w-full"
@@ -146,8 +153,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                                         )}
                                         <NavLink
                                             className="ml-auto"
-                                            key={car.id.toString()}
-                                            to={`/listingcars/singlecar/${car.id}`}
+                                            to={`/listingcars/singlecar/${index}`}
                                         >
                                             <p className=" text-lg text-primary flex gap-2">
                                                 View Details
@@ -165,7 +171,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                     })}
                 </div>
             ) : (
-                <div className="text-8xl">Loading</div>
+                <div className="text-5xl p-10">Loading</div>
             )}
         </div>
     );

@@ -11,7 +11,7 @@ const CarBodyStyle: React.FC<CarBodyStyleProps> = ({ CarStyles }) => {
             {CarStyles.map((style, index) => {
                 return (
                     <Link to={`/listingcars/${style.title.toLowerCase()}`} key={index}>
-                        <div className="px-5 pb-11 hover:ring hover:ring-gray-200 hover:rounded-md">
+                        <div className="px-5 pb-11 hover:outline hover:outline-gray-200 hover:rounded-md">
                             <img
                                 className="w-60 gap-9"
                                 src={style.src}

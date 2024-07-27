@@ -1,14 +1,12 @@
 import { CarStyles } from "../../../db/Data";
-import CarBodyStyle from "./CarStyleItem";
+import CarStyleItem from "./CarStyleItem";
 
 const CarBodyStyles = () => {
     return (
         <div className="text-center px-5 pt-36 pb-12 font-dm-sans">
-            <h2 className="text-5xl font-bold pb-9">
-                Select a Body Style
-            </h2>
+            <h2 className="text-5xl font-bold pb-9">Select a Body Style</h2>
             <div>
-                <CarBodyStyle CarStyles={CarStyles} />
+                <CarStyleItem CarStyles={CarStyles} />
             </div>
         </div>
     );

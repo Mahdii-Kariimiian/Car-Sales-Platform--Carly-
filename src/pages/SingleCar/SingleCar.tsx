@@ -20,7 +20,6 @@ import OverviewItem from "../SingleCar/Components/OverviewItem";
 
 const SingleCar = () => {
     const navigate = useNavigate();
-    console.log(navigate);
     const { id } = useParams<{ id: string }>();
     const singleCar: CarsInfo | undefined = cars.find((car: CarsInfo) => {
         return car.id.toLocaleString() === id;
