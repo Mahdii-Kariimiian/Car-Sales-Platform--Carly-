@@ -31,7 +31,7 @@ const CarCard: React.FC<LatestCarProps> = ({
     const [hashes, setHashes] = useState<string[]>([""]);
     const [listedCars, setListedCars] = useState<CarsInfo[]>([]); // Cars shown in page based on pagination number
     const [allCars, setAllCars] = useState<CarsInfo[] | undefined>([]); // All of the cars
-    
+
     //Functions
     const fetchAndSetCars = async () => {
         // console.log("carcard fetchAndSetCars func");

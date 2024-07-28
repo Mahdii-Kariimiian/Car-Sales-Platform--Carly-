@@ -72,13 +72,15 @@ const SingleCar = () => {
         navigate(`/editcar/${id}`, { state: { car: singleCar } });
     };
 
-    const removeCar = () => {};
-    fetchCars
-        .delete(`cars/${id}.json`)
-        .then((res) => console.log(res.data))
-        .catch((error) => {
-            console.log(error);
-        });
+    const removeCar = () => {
+        fetchCars
+            .delete(`cars/${id}.json`)
+            .then((res) => console.log(res.data))
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <div className=" px-28 pt-28 text-xl ">
             <div className="flex justify-between gap-10 items-end">

@@ -373,7 +373,7 @@ export const sellOrBuy = [
         icon: buyCarIcon,
         color: "bg-[#CEE1F2]",
         buttonColor: "bg-[#405FF2]",
-        path: "/listingcars"
+        path: "/listingcars",
     },
     {
         id: 1,
@@ -384,7 +384,7 @@ export const sellOrBuy = [
         icon: sellCarIcon,
         color: "bg-[#FFE9F3]",
         buttonColor: "bg-[#050B20]",
-        path: "/addcar"
+        path: "/addcar",
     },
 ];
 
@@ -420,4 +420,3 @@ export const footerData = {
         "Convertible",
     ],
 };
-
