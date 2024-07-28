@@ -1,5 +1,10 @@
-.container {
+.footer-container {
     @apply bg-white py-14 px-28;
+}
+
+.lists-container {
+    @apply grid gap-10 text-dark text-lg max-sm:text-center;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .list-menu {

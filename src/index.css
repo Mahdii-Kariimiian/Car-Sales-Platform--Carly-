@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 * {
-    font-size: 80%;
+    font-size: 85%;
     @apply font-dm-sans;
+}
+
+.padding-measures {
+    @apply max-md:px-md max-sm:px-sm px-full
 }

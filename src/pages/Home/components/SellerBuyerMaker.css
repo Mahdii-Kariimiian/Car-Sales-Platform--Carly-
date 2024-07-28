@@ -1,0 +1,7 @@
+.seller-buyer-maker-container {
+    @apply lg:flex gap-9 py-14 max-lg:space-y-10;
+}
+
+.card-container {
+    @apply flex gap-20 items-end justify-between rounded-lg w-full p-12 xl:p-24;
+}

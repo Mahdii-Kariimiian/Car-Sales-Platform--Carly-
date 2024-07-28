@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import "./Button.css"
+
+//Types
 type ButtonProps = {
     classes: string;
     text: string;
@@ -11,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({ classes, text, icon , path }) => {
         <div>
             <Link to={path}>
                 <button
-                    className={`${classes} flex items-center justify-center gap-2 font-semibold text-xl px-10 py-5 rounded-lg hover:opacity-70 transition-all`}
+                    className={`${classes} button`}
                 >
                     {icon && (
                         <span>

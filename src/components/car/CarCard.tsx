@@ -26,21 +26,23 @@ const CarCard: React.FC<LatestCarProps> = ({
     sortedList,
 }) => {
     //States and Variables
-    console.log("carcard  global");
+    // console.log("carcard  global");
     const { type } = useParams(); //For rendering based on the style(type) of the cars
+    const [hashes, setHashes] = useState<string[]>([""]);
     const [listedCars, setListedCars] = useState<CarsInfo[]>([]); // Cars shown in page based on pagination number
     const [allCars, setAllCars] = useState<CarsInfo[] | undefined>([]); // All of the cars
-
+    
     //Functions
     const fetchAndSetCars = async () => {
-        console.log("carcard fetchAndSetCars func");
+        // console.log("carcard fetchAndSetCars func");
         try {
             const res = await fetchCars("cars.json");
             const fetchedCars: CarsInfo[] = Object.values(res.data);
+            setHashes(Object.keys(res.data));
 
             type
                 ? (() => {
-                      console.log("carcard fetchAndSetCars func with type");
+                      //   console.log("carcard fetchAndSetCars func with type");
                       const typeCars = fetchedCars.filter(
                           (car) => car.Type.toLowerCase() === type.toLowerCase()
                       );
@@ -49,7 +51,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                       setParam?.(type);
                   })()
                 : (() => {
-                      console.log("carcard fetchAndSetCars func without type");
+                      //   console.log("carcard fetchAndSetCars func without type");
                       setAllCars(fetchedCars);
                       setListedCars(
                           lastNumber
@@ -66,13 +68,13 @@ const CarCard: React.FC<LatestCarProps> = ({
     //UseEffects
     //All cars and Cars based on type
     useEffect(() => {
-        console.log("carcard first useeffect");
+        // console.log("carcard first useeffect");
         fetchAndSetCars();
     }, [type, firstNumber, lastNumber, setCarsLength, setParam, sortedList]);
 
     // Sort Cars based on user's selection
     useEffect(() => {
-        console.log("carcard second useeffect");
+        // console.log("carcard second useeffect");
 
         if (sortedList && allCars) {
             const sortedCars = sortedList(allCars);
@@ -153,7 +155,8 @@ const CarCard: React.FC<LatestCarProps> = ({
                                         )}
                                         <NavLink
                                             className="ml-auto"
-                                            to={`/listingcars/singlecar/${index}`}
+                                            state={hashes}
+                                            to={`/listingcars/singlecar/${hashes[index]}`}
                                         >
                                             <p className=" text-lg text-primary flex gap-2">
                                                 View Details

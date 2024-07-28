@@ -19,8 +19,8 @@ const ContactUs = () => {
         console.log(data);
     };
     return (
-        <div className="px-28">
-            <div className="px-28 py-11">
+        <div className="padding-measures">
+            <div className="padding-measures py-11">
                 <div className="pb-4">
                     <span className="text-xl text-primary ">
                         <Link to="/">Home{"  "}</Link>

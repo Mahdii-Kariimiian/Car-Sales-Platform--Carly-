@@ -21,6 +21,12 @@ export default {
                 cyan: "#CEE1F2",
                 pink: "#FFE9F3",
             },
+            padding: {
+                sm: "1rem",
+                md: "3rem",
+                lg: "5rem",
+                full: "7rem",
+            },
         },
     },
     plugins: [],

@@ -1,6 +1,7 @@
 import { BuyOrSell } from "../../../Types/Types";
 import Button from "../../../Components/General/Button";
 import arrow from "../../../assets/Icons/white-arrow-icon.svg";
+import "./SellerBuyerMaker.css";
 
 type SellerBuyerMakerProps = {
     sellOrBuy: BuyOrSell[];
@@ -8,11 +9,11 @@ type SellerBuyerMakerProps = {
 
 const sellerBuyerMaker: React.FC<SellerBuyerMakerProps> = ({ sellOrBuy }) => {
     return (
-        <div className="flex gap-9 px-28 py-14 ">
+        <div className="seller-buyer-maker-container padding-measures">
             {sellOrBuy.map((card, index) => {
                 return (
                     <div
-                        className={`${card.color} flex gap-20 items-end justify-between rounded-lg w-full p-24`}
+                        className={`${card.color} card-container`}
                         key={index.toString()}
                     >
                         <div className="space-y-4">

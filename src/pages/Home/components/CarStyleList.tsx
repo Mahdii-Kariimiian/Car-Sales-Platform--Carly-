@@ -1,10 +1,11 @@
 import { CarStyles } from "../../../db/Data";
 import CarStyleItem from "./CarStyleItem";
+import "./CarStyleList.css"
 
 const CarBodyStyles = () => {
     return (
-        <div className="text-center px-5 pt-36 pb-12 font-dm-sans">
-            <h2 className="text-5xl font-bold pb-9">Select a Body Style</h2>
+        <div className="car-style-list-container">
+            <h2 className="car-style-list-title">Select a Body Style</h2>
             <div>
                 <CarStyleItem CarStyles={CarStyles} />
             </div>

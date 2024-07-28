@@ -1,15 +1,15 @@
+import { footerData } from "../../db/Data";
 import facebook from "../../assets/Icons/facebook-icon.svg";
 import twitter from "../../assets/Icons/twitter-icon.svg";
 import instagram from "../../assets/Icons/instagram-icon.svg";
 import linkedin from "../../assets/Icons/linkedin-icon.svg";
 import Link from "./UlList";
-import { footerData } from "../../db/Data";
-import "./footer.css";
+import "./Footer.css";
 
 const Footer = () => {
     return (
-        <footer className="bg-white py-14 px-28">
-            <div className="grid grid-cols-5 gap-10 text-dark text-lg">
+        <footer className="footer-container">
+            <div className="lists-container">
                 <div>
                     <h2 className="list-menu">Company</h2>
                     <Link links={footerData.Company} />
@@ -30,12 +30,14 @@ const Footer = () => {
                 <div>
                     <h2 className="list-menu">Sale Hours</h2>
 
-                    <li>Monday – Friday: 09:00AM – 09:00 PM</li>
-                    <li>Saturday: 09:00AM – 07:00PM</li>
-                    <li>Sunday: Closed</li>
+                    <ul>
+                        <li>Monday – Friday: 09:00AM – 09:00 PM</li>
+                        <li>Saturday: 09:00AM – 07:00PM</li>
+                        <li>Sunday: Closed</li>
+                    </ul>
 
                     <h2 className="font-bold mt-6 mb-4">Connect With Us</h2>
-                    <div className="flex items-end space-x-6 text-2xl">
+                    <div className="flex items-end space-x-6 text-2xl max-sm:justify-center">
                         <a href="#" aria-label="Facebook">
                             <img src={facebook} alt="facebook" />
                         </a>

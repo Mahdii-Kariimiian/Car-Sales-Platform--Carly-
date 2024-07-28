@@ -1,0 +1,11 @@
+.latest-cars-container {
+    @apply text-center pb-9;
+}
+
+.latest-cars-title {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold pb-12;
+}
+
+.latest-cars-list {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}

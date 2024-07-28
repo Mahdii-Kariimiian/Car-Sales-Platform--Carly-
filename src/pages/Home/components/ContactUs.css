@@ -1,0 +1,23 @@
+.contact-us-container {
+    @apply lg:flex max-lg:space-y-5 items-center gap-28 py-48 text-dark;
+}
+
+.contact-us-title {
+    @apply text-3xl lg:text-5xl font-bold;
+}
+
+.contact-us-info-container {
+    @apply flex flex-col sm:flex-row gap-6 text-xl max-lg:justify-center items-center;
+}
+
+.contact-us-info {
+    @apply flex gap-4 border border-dark rounded-full px-10 py-3 max-w-max whitespace-nowrap;
+}
+
+.contact-us-button {
+    @apply max-lg:m-auto bg-dark text-white
+}
+
+.contact-us-image {
+    @apply object-cover w-full lg:w-[80%]
+}

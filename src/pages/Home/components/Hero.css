@@ -1,0 +1,15 @@
+.hero-container {
+    @apply px-full relative ;
+}
+
+.hero-image {
+    @apply w-full mb-10;
+}
+
+.hero-title {
+    @apply text-4xl sm:text-5xl lg:text-[3.5rem] text-center max-lg:leading-10 lg:text-white lg:absolute lg:top-[26%] lg:transform lg:-translate-x-[50%] lg:left-[50%] lg:w-[80%];
+}
+
+.hero-subtitle {
+    @apply text-lg mb-10 lg:absolute text-center lg:text-white lg:text-xl lg:top-[18%] lg:transform lg:-translate-x-[50%] lg:left-[50%];
+}

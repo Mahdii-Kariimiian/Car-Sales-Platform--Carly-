@@ -1,5 +1,6 @@
 .container {
-    @apply grid grid-cols-4 gap-9 text-dark;
+    @apply grid gap-9 text-dark;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 .card {

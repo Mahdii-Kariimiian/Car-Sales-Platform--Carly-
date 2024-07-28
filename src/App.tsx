@@ -6,10 +6,11 @@ import AllCars from "./Pages/AllCars/AllCars";
 import ScrollToTop from "./Components/General/ScrollToTop";
 import AddOrEdit from "./Pages/AddOrEditCars/Index";
 import ContactUs from "./Pages/ContactUs/ContactUs";
+import AboutUs from "./Pages/About/AboutUs";
 
 function App() {
     return (
-        <div className="text-main">
+        <div>
             <BrowserRouter>
                 <ScrollToTop />
                 <Routes>
@@ -25,6 +26,7 @@ function App() {
                             element={<AllCars />}
                         />
                         <Route path="/contactus" element={<ContactUs />} />
+                        <Route path="/aboutus" element={<AboutUs />} />
                     </Route>
                     <Route path="addcar" element={<AddOrEdit />} />
                     <Route path="editcar/:id" element={<AddOrEdit />} />

@@ -1,0 +1,7 @@
+.car-style-list-container {
+    @apply text-center px-5 pt-36 pb-12 font-dm-sans
+}
+
+.car-style-list-title {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold pb-9
+}

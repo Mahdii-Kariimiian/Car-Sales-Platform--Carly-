@@ -1,5 +1,6 @@
 import { CarStyle } from "../../../Types/Types";
 import { Link } from "react-router-dom";
+import "./CarStyleItem.css";
 
 type CarBodyStyleProps = {
     CarStyles: CarStyle[];
@@ -7,11 +8,14 @@ type CarBodyStyleProps = {
 
 const CarBodyStyle: React.FC<CarBodyStyleProps> = ({ CarStyles }) => {
     return (
-        <div className="flex justify-between w-full">
+        <div className="car-body">
             {CarStyles.map((style, index) => {
                 return (
-                    <Link to={`/listingcars/${style.title.toLowerCase()}`} key={index}>
-                        <div className="px-5 pb-11 hover:outline hover:outline-gray-200 hover:rounded-md">
+                    <Link
+                        to={`/listingcars/${style.title.toLowerCase()}`}
+                        key={index}
+                    >
+                        <div className="CarBodyStyle-container">
                             <img
                                 className="w-60 gap-9"
                                 src={style.src}

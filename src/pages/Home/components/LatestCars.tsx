@@ -1,10 +1,13 @@
 import CarCard from "../../../Components/Car/CarCard";
+import "./LatestCars.css"
 
 const LatestCars = () => {
     return (
-        <div className="text-center pb-9">
-            <h2 className="text-5xl font-bold pb-12">Latest Cars</h2>
-            <CarCard firstNumber={0} lastNumber={4} />
+        <div className="latest-cars-container padding-measures">
+            <h2 className="latest-cars-title">Latest Cars</h2>
+            <div className="latest-cars-list">
+                <CarCard firstNumber={0} lastNumber={4} />
+            </div>
         </div>
     );
 };
