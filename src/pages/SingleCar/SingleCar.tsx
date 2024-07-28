@@ -1,5 +1,5 @@
 import { cars } from "../../db/Data";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { CarsInfo } from "../../Types/Types";
 import Button from "../../Components/General/Button";
 import steeringWheel from "../../assets/Icons/steering wheel-icon.svg";
@@ -17,12 +17,17 @@ import favorite from "../../assets/Icons/favorite-icon.svg";
 import share from "../../assets/Icons/share-icon.svg";
 import { CarOverviewInfo } from "../../Types/Types";
 import OverviewItem from "../SingleCar/Components/OverviewItem";
+import { fetchCars } from "../../Axios/Axios";
 
 const SingleCar = () => {
     const navigate = useNavigate();
-    const { id } = useParams<{ id: string }>();
+    const location = useLocation();
+    const { state } = location;
+    console.log(state);
+    const { id } = useParams<{ id: string }>(); // hash of the selected car
     const singleCar: CarsInfo | undefined = cars.find((car: CarsInfo) => {
-        return car.id.toLocaleString() === id;
+        console.log(car.id.toLocaleString(), state.indexOf(id));
+        return car.id === state.indexOf(id);
     });
 
     const carOverviewInfo: CarOverviewInfo[] = [
@@ -67,6 +72,13 @@ const SingleCar = () => {
         navigate(`/editcar/${id}`, { state: { car: singleCar } });
     };
 
+    const removeCar = () => {};
+    fetchCars
+        .delete(`cars/${id}.json`)
+        .then((res) => console.log(res.data))
+        .catch((error) => {
+            console.log(error);
+        });
     return (
         <div className=" px-28 pt-28 text-xl ">
             <div className="flex justify-between gap-10 items-end">
@@ -90,7 +102,7 @@ const SingleCar = () => {
                         <h1 className="text-5xl font-semibold mr-3">
                             {singleCar?.Model} - {singleCar?.Year}
                         </h1>
-                        <img src={remove} alt="remove" />
+                        <img onClick={removeCar} src={remove} alt="remove" />
 
                         <img src={edit} alt="edit" onClick={editCar} />
                     </div>
@@ -169,11 +181,13 @@ const SingleCar = () => {
                         classes="bg-primary text-white "
                         text="Make an Offer Price"
                         icon={offer}
+                        path=""
                     />
                     <Button
                         classes="bg-white text-dark border border-dark"
                         text="Schedule Test Drive"
                         icon={steeringWheel}
+                        path=""
                     />
                 </div>
             </div>
