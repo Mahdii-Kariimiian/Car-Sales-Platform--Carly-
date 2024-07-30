@@ -1,6 +1,6 @@
-import { CarStyle } from "../../../Types/Types";
+import { CarStyle } from "../../../../types";
 import { Link } from "react-router-dom";
-import "./CarStyleItem.css";
+import "./style.css";
 
 type CarBodyStyleProps = {
     CarStyles: CarStyle[];

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useForm } from "react-hook-form";
-import { message } from "../../Types/Types";
+import { message } from "../../types";
 import emailIcon from "../../assets/Icons/email-icon.svg";
 import facebookIcon from "../../assets/Icons/facebook-icon.svg";
 import instagramIcon from "../../assets/Icons/instagram-icon.svg";

@@ -1,7 +1,7 @@
 import { cars } from "../../db/Data";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
-import { CarsInfo } from "../../Types/Types";
-import Button from "../../Components/General/Button";
+import { CarsInfo } from "../../types/Types";
+import Button from "../../components/general/button";
 import steeringWheel from "../../assets/Icons/steering wheel-icon.svg";
 import offer from "../../assets/Icons/offer-icon.svg";
 import carBody from "../../assets/Icons/car-icon.svg";
@@ -15,9 +15,9 @@ import remove from "../../assets/Icons/remove-icon.svg";
 import edit from "../../assets/Icons/edit-icon.svg";
 import favorite from "../../assets/Icons/favorite-icon.svg";
 import share from "../../assets/Icons/share-icon.svg";
-import { CarOverviewInfo } from "../../Types/Types";
-import OverviewItem from "../SingleCar/Components/OverviewItem";
-import { fetchCars } from "../../Axios/Axios";
+import { CarOverviewInfo } from "../../types";
+import OverviewItem from "./components/OverviewItem";
+import carServices from "../../services";
 
 const SingleCar = () => {
     const navigate = useNavigate();
@@ -73,7 +73,7 @@ const SingleCar = () => {
     };
 
     const removeCar = () => {
-        fetchCars
+        carServices
             .delete(`cars/${id}.json`)
             .then((res) => console.log(res.data))
             .catch((error) => {

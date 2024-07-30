@@ -1,5 +1,5 @@
-import heroBg from "../../../assets/Images/hero-background.png";
-import "./Hero.css";
+import heroBg from "../../../../assets/Images/hero-background.png";
+import "./style.css";
 
 const Hero = () => {
     return (

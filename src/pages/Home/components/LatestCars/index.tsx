@@ -1,5 +1,5 @@
-import CarCard from "../../../Components/Car/CarCard";
-import "./LatestCars.css"
+import CarCard from "../../../../components/carCard";
+import "./style.css";
 
 const LatestCars = () => {
     return (

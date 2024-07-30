@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import Index from "./Pages/Home/Index";
-import SingleCar from "./Pages/SingleCar/SingleCar";
-import AllCars from "./Pages/AllCars/AllCars";
-import ScrollToTop from "./Components/General/ScrollToTop";
-import AddOrEdit from "./Pages/AddOrEditCars/Index";
-import ContactUs from "./Pages/ContactUs/ContactUs";
-import AboutUs from "./Pages/About/AboutUs";
+import Index from "./pages/Home";
+import SingleCar from "./pages/SingleCar";
+import AllCars from "./pages/AllCars";
+import ScrollToTop from "./components/general/scrollToTop";
+import AddOrEdit from "./pages/AddOrEditCars";
+import ContactUs from "./pages/ContactUs";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
     return (

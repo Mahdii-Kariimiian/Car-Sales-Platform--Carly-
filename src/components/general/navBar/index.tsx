@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import mobileIcon from "../../assets/Icons/mobile-icon.svg";
-import profileIcon from "../../assets/Icons/profile-icon.svg";
-import Carly from "../../assets/Logo/carly.svg";
+import mobileIcon from "../../../assets/Icons/mobile-icon.svg";
+import profileIcon from "../../../assets/Icons/profile-icon.svg";
+import Carly from "../../../assets/Logo/carly.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
-import "./Navbar.css";
 import { useState } from "react";
+import "./style.css";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);

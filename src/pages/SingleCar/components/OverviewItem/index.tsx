@@ -1,4 +1,4 @@
-import { CarOverviewInfo } from "../../../Types/Types";
+import { CarOverviewInfo } from "../../../types/Types";
 
 type OverviewProps = CarOverviewInfo;
 

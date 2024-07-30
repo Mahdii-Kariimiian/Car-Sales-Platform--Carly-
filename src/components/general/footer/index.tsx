@@ -1,10 +1,10 @@
-import { footerData } from "../../db/Data";
-import facebook from "../../assets/Icons/facebook-icon.svg";
-import twitter from "../../assets/Icons/twitter-icon.svg";
-import instagram from "../../assets/Icons/instagram-icon.svg";
-import linkedin from "../../assets/Icons/linkedin-icon.svg";
-import Link from "./UlList";
-import "./Footer.css";
+import { footerData } from "../../../db/Data";
+import facebook from "../../../assets/Icons/facebook-icon.svg";
+import twitter from "../../../assets/Icons/twitter-icon.svg";
+import instagram from "../../../assets/Icons/instagram-icon.svg";
+import linkedin from "../../../assets/Icons/linkedin-icon.svg";
+import Link from "../ulList";
+import "./style.css";
 
 const Footer = () => {
     return (

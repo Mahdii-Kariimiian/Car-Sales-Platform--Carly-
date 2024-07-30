@@ -1,13 +1,13 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { fetchCars } from "../../Axios/Axios";
-import { CarsInfo } from "../../Types/Types";
+import carServices from "../../services";
+import { CarsInfo } from "../../types";
 import favoriteIcon from "../../assets/Icons/favorite-icon.svg";
 import fuelIcon from "../../assets/Icons/fuel-icon.svg";
 import transmissionIcon from "../../assets/Icons/Transmission-icon.svg";
 import arrowIcon from "../../assets/Icons/arrow-icon.svg";
 import maxSpeedIcon from "../../assets/Icons/maxspeed-icon.svg";
-import "./CarCard.css";
+import "./style.css";
 
 // Types
 type LatestCarProps = {
@@ -36,7 +36,7 @@ const CarCard: React.FC<LatestCarProps> = ({
     const fetchAndSetCars = async () => {
         // console.log("carcard fetchAndSetCars func");
         try {
-            const res = await fetchCars("cars.json");
+            const res = await carServices("cars.json");
             const fetchedCars: CarsInfo[] = Object.values(res.data);
             setHashes(Object.keys(res.data));
 

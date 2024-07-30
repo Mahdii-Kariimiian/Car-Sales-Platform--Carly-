@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import CarCard from "../../Components/Car/CarCard";
-import Button from "../../Components/General/Button";
-import { CarsInfo } from "../../Types/Types";
+import CarCard from "../../components/carCard";
+import Button from "../../components/general/button";
+import { CarsInfo } from "../../types";
 
 const AllCars = () => {
     // console.log("AllCars global");

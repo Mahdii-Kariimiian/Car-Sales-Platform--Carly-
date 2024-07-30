@@ -1,8 +1,8 @@
-import image from "../../../assets/Images/contact-us-image.png";
-import mobileIcon from "../../../assets/Icons/mobile-icon.svg";
-import emailIcon from "../../../assets/Icons/email-icon.svg";
-import Button from "../../../Components/General/Button";
-import "./ContactUs.css";
+import image from "../../../../assets/Images/contact-us-image.png";
+import mobileIcon from "../../../../assets/Icons/mobile-icon.svg";
+import emailIcon from "../../../../assets/Icons/email-icon.svg";
+import Button from "../../../../components/general/button";
+import "./style.css";
 
 const ContactUs = () => {
     return (

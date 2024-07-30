@@ -4,10 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { CarStyles } from "../../db/Data";
-import { CarsInfo } from "../../Types/Types";
-import { CarStyle } from "../../Types/Types";
-import { fetchCars } from "../../Axios/Axios";
-import "./Index.css";
+import { CarsInfo } from "../../types/";
+import { CarStyle } from "../../types/";
+import carServices from "../../services";
+import "./style.css";
 
 const Index = () => {
     // React-router methods
@@ -27,7 +27,7 @@ const Index = () => {
     const imageUrl = watch("Image");
 
     useEffect(() => {
-        fetchCars("cars.json")
+        carServices("cars.json")
             .then((res) => {
                 // const hashArray = Object.keys(res.data);
                 const allCars = Object.values(res.data);
@@ -39,7 +39,7 @@ const Index = () => {
                     allCars.find((car, index) => {
                         return index === Number(id);
                     });
-                // Get firebase Hash to edit car 
+                // Get firebase Hash to edit car
                 setHash(
                     Object.keys(res.data).find((hash, index) => {
                         return index === Number(id);
@@ -65,7 +65,7 @@ const Index = () => {
 
         if (editedCar) {
             // Use PUT to update the existing car
-            fetchCars
+            carServices
                 .put(`cars/${hash}.json`, updatedCar)
                 .then((res) => {
                     // console.log(res.data);
@@ -74,7 +74,7 @@ const Index = () => {
                 .catch((error) => console.error("Error updating car:", error));
         } else {
             // Use POST to add a new car
-            fetchCars
+            carServices
                 .post(`cars.json`, updatedCar)
                 .then((res) => {
                     // console.log(res.data);

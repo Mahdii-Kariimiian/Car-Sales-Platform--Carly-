@@ -1,6 +1,5 @@
-import {sellOrBuy} from "../../../db/Data";
-import SellerBuyerMaker from "./SellerBuyerMaker";
-
+import { sellOrBuy } from "../../../../db/Data";
+import SellerBuyerMaker from "./components/SellerBuyerMaker";
 
 const SellerBuyer = () => {
     return (
