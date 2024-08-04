@@ -1,4 +1,4 @@
-import { CarOverviewInfo } from "../../../types/Types";
+import { CarOverviewInfo } from "@/types";
 
 type OverviewProps = CarOverviewInfo;
 

@@ -1,22 +1,20 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { NavLink, useParams } from "react-router-dom";
-import carServices from "../../services";
-import { CarsInfo } from "../../types";
-import favoriteIcon from "../../assets/Icons/favorite-icon.svg";
-import fuelIcon from "../../assets/Icons/fuel-icon.svg";
-import transmissionIcon from "../../assets/Icons/Transmission-icon.svg";
-import arrowIcon from "../../assets/Icons/arrow-icon.svg";
-import maxSpeedIcon from "../../assets/Icons/maxspeed-icon.svg";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import carServices from "@/services";
+import { CarsInfo, LatestCarProps, CarsKeyValue } from "@/types";
+// assets
+import favoriteIcon from "@/assets/Icons/favorite-icon.svg";
+import fuelIcon from "@/assets/Icons/fuel-icon.svg";
+import transmissionIcon from "@/assets/Icons/Transmission-icon.svg";
+import arrowIcon from "@/assets/Icons/arrow-icon.svg";
+import maxSpeedIcon from "@/assets/Icons/maxSpeed-icon.svg";
+//Toastify library
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// Css
 import "./style.css";
 
-// Types
-type LatestCarProps = {
-    firstNumber?: number;
-    lastNumber?: number;
-    setCarsLength?: Dispatch<SetStateAction<number>>;
-    setParam?: Dispatch<SetStateAction<string | undefined>>;
-    sortedList?: (cars: CarsInfo[] | undefined) => CarsInfo[] | undefined;
-};
+import AllCarsSkeleton from "@/pages/AllCars/AllCarsSkeleton";
 
 const CarCard: React.FC<LatestCarProps> = ({
     lastNumber,
@@ -25,81 +23,107 @@ const CarCard: React.FC<LatestCarProps> = ({
     setParam,
     sortedList,
 }) => {
-    //States and Variables
-    // console.log("carcard  global");
-    const { type } = useParams(); //For rendering based on the style(type) of the cars
-    const [hashes, setHashes] = useState<string[]>([""]);
-    const [listedCars, setListedCars] = useState<CarsInfo[]>([]); // Cars shown in page based on pagination number
-    const [allCars, setAllCars] = useState<CarsInfo[] | undefined>([]); // All of the cars
+    // States and Variables
+    const { type } = useParams();
+    const [listedCars, setListedCars] = useState<CarsKeyValue>([]);
+    const [allCars, setAllCars] = useState<CarsKeyValue>([]);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
-    //Functions
+    // Functions
     const fetchAndSetCars = async () => {
-        // console.log("carcard fetchAndSetCars func");
+        setLoading(true); // Start loading
         try {
             const res = await carServices("cars.json");
-            const fetchedCars: CarsInfo[] = Object.values(res.data);
-            setHashes(Object.keys(res.data));
+            const fetchedCars: CarsKeyValue = Object.entries(res.data);
 
-            type
-                ? (() => {
-                      //   console.log("carcard fetchAndSetCars func with type");
-                      const typeCars = fetchedCars.filter(
-                          (car) => car.Type.toLowerCase() === type.toLowerCase()
-                      );
-                      setListedCars(typeCars.slice(0, lastNumber));
-                      setCarsLength?.(typeCars.length);
-                      setParam?.(type);
-                  })()
-                : (() => {
-                      //   console.log("carcard fetchAndSetCars func without type");
-                      setAllCars(fetchedCars);
-                      setListedCars(
-                          lastNumber
-                              ? fetchedCars.slice(firstNumber, lastNumber)
-                              : fetchedCars
-                      );
-                      setCarsLength?.(fetchedCars.length);
-                  })();
-        } catch (error) {
-            console.error("Error fetching cars:", error);
+            if (type) {
+                const typeCars = fetchedCars.filter(
+                    (car: [string, CarsInfo]) =>
+                        car[1].Type.toLowerCase() === type.toLowerCase()
+                );
+
+                setListedCars(typeCars.slice(firstNumber, lastNumber));
+                setCarsLength?.(typeCars.length);
+                setParam?.(type);
+            } else {
+                setAllCars(fetchedCars);
+                setListedCars(fetchedCars.slice(firstNumber, lastNumber));
+                setCarsLength?.(fetchedCars.length);
+            }
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                notify(error.message);
+            } else {
+                notify("An unknown error occurred");
+            }
+        } finally {
+            setLoading(false); // End loading
         }
     };
 
-    //UseEffects
-    //All cars and Cars based on type
+    // Show single car info
+    const handleViewInfo = (carId: string, car: CarsInfo) => {
+        navigate(`/listingcars/singlecar/${carId}`, { state: { car } });
+    };
+
+    // Use Effects
+    // Show cars with or without type(style) selected
     useEffect(() => {
-        // console.log("carcard first useeffect");
         fetchAndSetCars();
-    }, [type, firstNumber, lastNumber, setCarsLength, setParam, sortedList]);
+    }, [type, firstNumber, lastNumber, setCarsLength, setParam]);
 
-    // Sort Cars based on user's selection
+    // Show cars with Sorted options
     useEffect(() => {
-        // console.log("carcard second useeffect");
-
-        if (sortedList && allCars) {
-            const sortedCars = sortedList(allCars);
-            setListedCars(sortedList(sortedCars?.slice(0, lastNumber)) || []);
+        if (sortedList && allCars.length > 0) {
+            const sortedCars = sortedList(
+                allCars.map((car: CarsKeyValue) => car[1])
+            );
+            setListedCars(
+                sortedCars
+                    .slice(firstNumber, lastNumber)
+                    .map((car: CarsKeyValue, index: number) => [
+                        allCars[index][0],
+                        car,
+                    ])
+            );
         }
-    }, [allCars, sortedList]);
+    }, [allCars, sortedList, firstNumber, lastNumber]);
+
+    // Toastify Library
+    const notify = (message: string) => {
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    };
 
     return (
         <div>
-            {listedCars.length > 0 ? (
+            {loading ? (
+                <AllCarsSkeleton />
+            ) : listedCars.length > 0 ? (
                 <div className="container">
-                    {listedCars.map((car, index) => {
+                    {listedCars.map((carObj: [string, CarsInfo]) => {
+                        const car = carObj[1];
                         return (
-                            <div key={index.toString()} className="card">
+                            <div key={carObj[0]} className="card">
                                 <div>
                                     <img
                                         className="h-64 object-cover w-full"
                                         src={car.Image}
                                         alt={car.Model}
                                     />
-
                                     <div className="favorite-icon">
                                         <img
                                             src={favoriteIcon}
-                                            alt={favoriteIcon}
+                                            alt="favorite icon"
                                             aria-label="favorite"
                                         />
                                     </div>
@@ -108,7 +132,6 @@ const CarCard: React.FC<LatestCarProps> = ({
                                     <p className="text-xl text-left pt-5 pb-8">
                                         {car.Model}
                                     </p>
-
                                     <div className="card-info">
                                         <div className="text-center">
                                             <img
@@ -130,12 +153,11 @@ const CarCard: React.FC<LatestCarProps> = ({
                                             <img
                                                 className="pb-3.5 m-auto"
                                                 src={transmissionIcon}
-                                                alt="transmission type "
+                                                alt="transmission type"
                                             />
                                             {car.Transmission}
                                         </div>
                                     </div>
-
                                     <div className="flex pt-5 items-end">
                                         {car.Discount ? (
                                             <div className="text-start">
@@ -153,20 +175,19 @@ const CarCard: React.FC<LatestCarProps> = ({
                                                 $ {car.Price.toLocaleString()}
                                             </p>
                                         )}
-                                        <NavLink
-                                            className="ml-auto"
-                                            state={hashes}
-                                            to={`/listingcars/singlecar/${hashes[index]}`}
+                                        <button
+                                            className="ml-auto text-lg text-primary flex gap-2"
+                                            onClick={() =>
+                                                handleViewInfo(carObj[0], car)
+                                            }
                                         >
-                                            <p className=" text-lg text-primary flex gap-2">
-                                                View Details
-                                                <img
-                                                    className="w-3"
-                                                    src={arrowIcon}
-                                                    alt="arrow Icon"
-                                                />
-                                            </p>
-                                        </NavLink>
+                                            View Details
+                                            <img
+                                                className="w-3"
+                                                src={arrowIcon}
+                                                alt="arrow Icon"
+                                            />
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -174,8 +195,9 @@ const CarCard: React.FC<LatestCarProps> = ({
                     })}
                 </div>
             ) : (
-                <div className="text-5xl p-10">Loading</div>
+                <div className="text-5xl p-10">No Cars Available</div>
             )}
+            <ToastContainer />
         </div>
     );
 };

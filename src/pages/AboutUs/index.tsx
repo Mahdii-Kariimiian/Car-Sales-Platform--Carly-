@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import image1 from "../../assets/Images/about-us-image (1).png";
-import image2 from "../../assets/Images/about-us-image (2).png";
-import image3 from "../../assets/Images/about-us-image (3).png";
-import image4 from "../../assets/Images/about-us-image (4).png";
-import image5 from "../../assets/Images/about-us-image (5).png";
+import image1 from "@/assets/Images/about-us-image (1).png";
+import image2 from "@/assets/Images/about-us-image (2).png";
+import image3 from "@/assets/Images/about-us-image (3).png";
+import image4 from "@/assets/Images/about-us-image (4).png";
+import image5 from "@/assets/Images/about-us-image (5).png";
 
 const AboutUs = () => {
     return (

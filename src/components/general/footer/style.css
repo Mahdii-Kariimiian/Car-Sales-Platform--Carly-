@@ -1,12 +1,12 @@
-.footer-container {
+.footer__container {
     @apply bg-white py-14 px-28;
 }
 
-.lists-container {
+.footer__lists-container {
     @apply grid gap-10 text-dark text-lg max-sm:text-center;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
-.list-menu {
+.footer__list-menu {
     @apply font-bold mb-4;
 }

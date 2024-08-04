@@ -1,6 +1,6 @@
-import { BuyOrSell } from "../../../../../../types";
-import Button from "../../../../../../components/general/button";
-import arrow from "../../../../../../assets/Icons/white-arrow-icon.svg";
+import { BuyOrSell } from "@/types";
+import Button from "@/components/general/button";
+import arrow from "@/assets/Icons/white-arrow-icon.svg";
 import "./style.css";
 
 type SellerBuyerMakerProps = {

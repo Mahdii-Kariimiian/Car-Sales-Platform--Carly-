@@ -1,32 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import CarCard from "../../components/carCard";
-import Button from "../../components/general/button";
-import { CarsInfo } from "../../types";
+import CarCard from "@/components/carCard";
+import Button from "@/components/general/button";
+import { CarsKeyValue } from "@/types";
 
 const AllCars = () => {
-    // console.log("AllCars global");
     //States and Variables
-    const [lastNumber, setLastNumber] = useState<number>(8);
+    const [lastNumber, setLastNumber] = useState<number>(12);
     const [carsLength, setCarsLength] = useState<number>(0);
     const [param, setParam] = useState<string | undefined>(undefined);
     const [sortType, setSortType] = useState<string>("Default");
-    const quantity = 8;
+    const quantity = 12;
 
     // Functions
     // Load more Cars
     const loadMoreCars = () => {
-        // console.log("AllCars load more");
         lastNumber < carsLength && setLastNumber((prev) => prev + quantity);
     };
-    console.log(param);
-    console.log(sortType);
 
     // Sort Cars List
-    const sortedCars = (
-        allCars: CarsInfo[] | undefined
-    ): CarsInfo[] | undefined => {
-        // console.log("AllCars sorted cars func");
+    const sortedCars = (allCars: CarsKeyValue | undefined) => {
         if (!allCars) return [];
         switch (sortType) {
             case "Increasing":
@@ -46,7 +39,6 @@ const AllCars = () => {
 
     // Change sort Value
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        // console.log("AllCars handleSortChange");
         setSortType(event.target.value);
     };
 
@@ -104,7 +96,6 @@ const AllCars = () => {
                 setParam={setParam}
                 sortedList={sortedCars}
             />
-
             <div
                 className="w-full"
                 onClick={() => {

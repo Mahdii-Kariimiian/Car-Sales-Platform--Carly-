@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import mobileIcon from "../../../assets/Icons/mobile-icon.svg";
-import profileIcon from "../../../assets/Icons/profile-icon.svg";
-import Carly from "../../../assets/Logo/carly.svg";
+import mobileIcon from "@/assets/Icons/mobile-icon.svg";
+import profileIcon from "@/assets/Icons/profile-icon.svg";
+import Carly from "@/assets/Logo/carly.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
 import "./style.css";
@@ -10,39 +10,39 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
-        <div className="navbar-container padding-measures">
+        <div className="navbar__container padding-measures">
             <Link to={"/"}>
                 <img className="w-36 mr-2" src={Carly} alt="logo" />
             </Link>
 
-            <div className="menu-list">
-                <Link className="menu-lists ml-4" to="/listingcars">
+            <div className="navbar__menu-list">
+                <Link className="navbar__menu-lists ml-4" to="/listingcars">
                     Cars
                 </Link>
 
-                <Link to="/aboutus" className="menu-lists">
+                <Link to="/aboutus" className="navbar__menu-lists">
                     About
                 </Link>
-                <Link to="/contactus" className="menu-lists">
+                <Link to="/contactus" className="navbar__menu-lists">
                     Contact
                 </Link>
             </div>
-            <div className="icon mx-auto max-lg:hidden">
+            <div className="navbar__icon mx-auto max-lg:hidden">
                 <img src={mobileIcon} alt="mobile icon" />
                 <p>+75 123 456 789</p>
             </div>
-            <div className="icon cursor-pointer max-md:hidden">
+            <div className="navbar__icon cursor-pointer max-md:hidden">
                 <img src={profileIcon} alt="profile icon" />
                 <p className="mr-9 whitespace-nowrap">Sign in</p>
             </div>
-            <button className="button text-lg max-md:hidden">
+            <button className="navbar__button max-md:hidden">
                 Submit Listing
             </button>
 
             {/* Hamburger Menu  */}
             <div
                 onClick={() => setIsOpen((prev) => (prev = !prev))}
-                className="hamburger-icon"
+                className="navbar__hamburger-icon"
             >
                 <GiHamburgerMenu />
             </div>
@@ -50,25 +50,25 @@ const Navbar = () => {
                 <div>
                     <div
                         onClick={() => setIsOpen((prev) => (prev = !prev))}
-                        className="menu-list-hamburger space-y-7"
+                        className="navbar__menu-list-hamburger space-y-7"
                     >
                         <Link
-                            className="menu-lists-hamburger"
+                            className="navbar__menu-lists-hamburger"
                             to="/listingcars"
                         >
                             Cars
                         </Link>
-                        <Link to="aboutus" className="menu-lists-hamburger">
+                        <Link to="aboutus" className="navbar__menu-lists-hamburger">
                             About
                         </Link>
-                        <Link to="/contactus" className="menu-lists-hamburger">
+                        <Link to="/contactus" className="navbar__menu-lists-hamburger">
                             Contact
                         </Link>
                         <div className="icon py-10 text-2xl">
                             <p>+75 123 456 789</p>
                         </div>
-                        <button className="button-hamburger">Sign in</button>
-                        <button className="button-hamburger">
+                        <button className="navbar__button-hamburger">Sign in</button>
+                        <button className="navbar__button-hamburger">
                             Submit Listing
                         </button>
                     </div>

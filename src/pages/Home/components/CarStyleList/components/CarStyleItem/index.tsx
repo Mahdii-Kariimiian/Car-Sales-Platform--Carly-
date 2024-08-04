@@ -1,4 +1,4 @@
-import { CarStyle } from "../../../../types";
+import { CarStyle } from "@/types";
 import { Link } from "react-router-dom";
 import "./style.css";
 

@@ -1,5 +1,5 @@
-import { CarStyles } from "../../../../db/Data";
-import CarStyleItem from "../CarStyleItem";
+import { CarStyles } from "@/db";
+import CarStyleItem from "./components/CarStyleItem";
 import "./style.css";
 
 const CarBodyStyles = () => {

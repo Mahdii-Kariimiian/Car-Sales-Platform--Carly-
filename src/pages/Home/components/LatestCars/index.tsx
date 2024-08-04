@@ -1,4 +1,4 @@
-import CarCard from "../../../../components/carCard";
+import CarCard from "@/components/carCard";
 import "./style.css";
 
 const LatestCars = () => {

@@ -1,11 +1,11 @@
-import Sedan from "../assets/car-styles/sedan.jpg";
-import Coupe from "../assets/car-styles/Coupe.jpg";
-import Truck from "../assets/car-styles/Truck.jpg";
-import SUV from "../assets/car-styles/SUV.jpg";
-import Hatchback from "../assets/car-styles/Hatchback.jpg";
-import Convertible from "../assets/car-styles/Convertible.jpg";
-import buyCarIcon from "../assets/Icons/buy-car-icon.png";
-import sellCarIcon from "../assets/Icons/sell-car-icon.png";
+import Sedan from "@/assets/car-styles/sedan.jpg";
+import Coupe from "@/assets/car-styles/Coupe.jpg";
+import Truck from "@/assets/car-styles/Truck.jpg";
+import SUV from "@/assets/car-styles/SUV.jpg";
+import Hatchback from "@/assets/car-styles/Hatchback.jpg";
+import Convertible from "@/assets/car-styles/Convertible.jpg";
+import buyCarIcon from "@/assets/Icons/buy-car-icon.png";
+import sellCarIcon from "@/assets/Icons/sell-car-icon.png";
 
 export const CarStyles = [
     {

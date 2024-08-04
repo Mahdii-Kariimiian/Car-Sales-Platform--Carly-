@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { useForm } from "react-hook-form";
-import { message } from "../../types";
-import emailIcon from "../../assets/Icons/email-icon.svg";
-import facebookIcon from "../../assets/Icons/facebook-icon.svg";
-import instagramIcon from "../../assets/Icons/instagram-icon.svg";
-import twitterIcon from "../../assets/Icons/twitter-icon.svg";
-import linkedinIcon from "../../assets/Icons/linkedin-icon.svg";
-import mobileIcon from "../../assets/Icons/mobile-icon.svg";
-import addressIcon from "../../assets/Icons/address-icon.svg";
-import arrowIcon from "../../assets/Icons/arrow-icon.svg";
+import { message } from "@/types";
+import emailIcon from "@/assets/Icons/email-icon.svg";
+import facebookIcon from "@/assets/Icons/facebook-icon.svg";
+import instagramIcon from "@/assets/Icons/instagram-icon.svg";
+import twitterIcon from "@/assets/Icons/twitter-icon.svg";
+import linkedinIcon from "@/assets/Icons/linkedin-icon.svg";
+import mobileIcon from "@/assets/Icons/mobile-icon.svg";
+import addressIcon from "@/assets/Icons/address-icon.svg";
+import arrowIcon from "@/assets/Icons/arrow-icon.svg";
 
 const ContactUs = () => {
     const { register, handleSubmit } = useForm();

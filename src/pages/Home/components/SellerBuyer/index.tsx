@@ -1,4 +1,4 @@
-import { sellOrBuy } from "../../../../db/Data";
+import { sellOrBuy } from "@/db";
 import SellerBuyerMaker from "./components/SellerBuyerMaker";
 
 const SellerBuyer = () => {

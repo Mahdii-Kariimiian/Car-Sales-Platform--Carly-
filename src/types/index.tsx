@@ -51,3 +51,18 @@ export type message = {
     phone: number;
     message: string;
 };
+
+export type LatestCarProps = {
+    firstNumber?: number;
+    lastNumber?: number;
+    setCarsLength?: React.Dispatch<React.SetStateAction<number>>;
+    setParam?: React.Dispatch<React.SetStateAction<string | undefined>>;
+    sortedList?: (cars: CarsInfo[] | undefined) => CarsInfo[] | undefined;
+};
+
+export type Validation = {
+    string: { string: string };
+};
+
+
+export type CarsKeyValue = [string , CarsInfo][]; 

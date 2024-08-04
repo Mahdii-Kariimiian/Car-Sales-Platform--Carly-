@@ -1,39 +1,39 @@
-.navbar-container {
+.navbar__container {
     @apply flex items-center justify-between text-base pt-12 pb-12;
     @layer text-dark-blue , font-dm-sans;
 }
 
-.menu-list {
+.navbar__menu-list {
     @apply flex text-lg items-center gap-6;
     @layer font-poppins-bold;
 }
 
-.menu-lists {
+.navbar__menu-lists {
     @apply hover:bg-gray-200 px-3 py-1 hover:rounded-md cursor-pointer transition-all max-md:hidden;
 }
 
-.menu-lists-hamburger {
-    @apply text-2xl hover:bg-gray-200 hover:text-dark px-3 py-1 hover:rounded-md cursor-pointer transition-all;
+.navbar__menu-lists-hamburger {
+    @apply text-2xl hover:bg-gray-200 hover:text-dark px-3 py-3 text-center hover:rounded-md cursor-pointer w-56 transition-all;
 }
 
-.menu-list-hamburger {
+.navbar__menu-list-hamburger {
     @apply md:hidden flex flex-col items-center pt-28 absolute inset-0 bg-dark text-white z-10;
 }
 
-.hamburger-icon {
+.navbar__hamburger-icon {
     @apply text-3xl ml-auto md:hidden;
 }
 
-.button {
-    @apply px-6 py-3 border rounded-lg hover:text-white hover:bg-dark transition-all whitespace-nowrap;
+.navbar__button {
+    @apply px-6 py-3 border rounded-lg hover:text-white hover:bg-black transition-all whitespace-nowrap;
     @layer border-dark-blue;
 }
 
-.button-hamburger {
-    @apply px-6 py-3 text-xl border rounded-lg hover:text-dark hover:bg-white transition-all whitespace-nowrap min-w-56;
+.navbar__button-hamburger {
+    @apply px-6 py-3 text-xl border rounded-lg hover:text-dark hover:bg-white transition-all whitespace-nowrap min-w-56 ;
     @layer border-dark-blue;
 }
 
-.icon {
+.navbar__icon {
     @apply flex gap-3 items-center text-lg;
 }

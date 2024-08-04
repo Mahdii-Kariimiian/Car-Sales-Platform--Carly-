@@ -1,34 +1,34 @@
-import { footerData } from "../../../db/Data";
-import facebook from "../../../assets/Icons/facebook-icon.svg";
-import twitter from "../../../assets/Icons/twitter-icon.svg";
-import instagram from "../../../assets/Icons/instagram-icon.svg";
-import linkedin from "../../../assets/Icons/linkedin-icon.svg";
+import { footerData } from "@/db";
+import facebook from "@/assets/Icons/facebook-icon.svg";
+import twitter from "@/assets/Icons/twitter-icon.svg";
+import instagram from "@/assets/Icons/instagram-icon.svg";
+import linkedin from "@/assets/Icons/linkedin-icon.svg";
 import Link from "../ulList";
 import "./style.css";
 
 const Footer = () => {
     return (
-        <footer className="footer-container">
-            <div className="lists-container">
+        <footer className="footer__container">
+            <div className="footer__lists-container">
                 <div>
-                    <h2 className="list-menu">Company</h2>
+                    <h2 className="footer__list-menu">Company</h2>
                     <Link links={footerData.Company} />
                 </div>
                 <div>
-                    <h2 className="list-menu">Quick Links</h2>
+                    <h2 className="footer__list-menu">Quick Links</h2>
 
                     <Link links={footerData.QuickLinks} />
                 </div>
                 <div>
-                    <h2 className="list-menu">Our Brands</h2>
+                    <h2 className="footer__list-menu">Our Brands</h2>
                     <Link links={footerData.OurBrands} />
                 </div>
                 <div>
-                    <h2 className="list-menu">Vehicles Type</h2>
+                    <h2 className="footer__list-menu">Vehicles Type</h2>
                     <Link links={footerData.VehicleTypes} />
                 </div>
                 <div>
-                    <h2 className="list-menu">Sale Hours</h2>
+                    <h2 className="footer__list-menu">Sale Hours</h2>
 
                     <ul>
                         <li>Monday – Friday: 09:00AM – 09:00 PM</li>

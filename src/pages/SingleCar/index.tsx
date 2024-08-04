@@ -1,34 +1,33 @@
-import { cars } from "../../db/Data";
+import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
-import { CarsInfo } from "../../types/Types";
-import Button from "../../components/general/button";
-import steeringWheel from "../../assets/Icons/steering wheel-icon.svg";
-import offer from "../../assets/Icons/offer-icon.svg";
-import carBody from "../../assets/Icons/car-icon.svg";
-import fuel from "../../assets/Icons/fuel-icon.svg";
-import maxSpeed from "../../assets/Icons/maxspeed-icon.svg";
-import calendar from "../../assets/Icons/calendar-icon.svg";
-import profile from "../../assets/Icons/profile-icon.svg";
-import color from "../../assets/Icons/car-icon.svg";
-import transmission from "../../assets/Icons/Transmission-icon.svg";
-import remove from "../../assets/Icons/remove-icon.svg";
-import edit from "../../assets/Icons/edit-icon.svg";
-import favorite from "../../assets/Icons/favorite-icon.svg";
-import share from "../../assets/Icons/share-icon.svg";
-import { CarOverviewInfo } from "../../types";
 import OverviewItem from "./components/OverviewItem";
-import carServices from "../../services";
+import Button from "@/components/general/button";
+import carServices from "@/services";
+import steeringWheel from "@/assets/Icons/steering wheel-icon.svg";
+import offer from "@/assets/Icons/offer-icon.svg";
+import carBody from "@/assets/Icons/car-icon.svg";
+import fuel from "@/assets/Icons/fuel-icon.svg";
+import maxSpeed from "@/assets/Icons/maxSpeed-icon.svg";
+import calendar from "@/assets/Icons/calendar-icon.svg";
+import profile from "@/assets/Icons/profile-icon.svg";
+import color from "@/assets/Icons/car-icon.svg";
+import transmission from "@/assets/Icons/Transmission-icon.svg";
+import remove from "@/assets/Icons/remove-icon.svg";
+import edit from "@/assets/Icons/edit-icon.svg";
+import favorite from "@/assets/Icons/favorite-icon.svg";
+import share from "@/assets/Icons/share-icon.svg";
+import { CarsInfo, CarOverviewInfo } from "@/types";
 
 const SingleCar = () => {
+    const [singleCar, setSingleCar] = useState<CarsInfo | undefined>(undefined);
     const navigate = useNavigate();
     const location = useLocation();
     const { state } = location;
-    console.log(state);
-    const { id } = useParams<{ id: string }>(); // hash of the selected car
-    const singleCar: CarsInfo | undefined = cars.find((car: CarsInfo) => {
-        console.log(car.id.toLocaleString(), state.indexOf(id));
-        return car.id === state.indexOf(id);
-    });
+    const { id } = useParams();
+
+    useEffect(() => {
+        setSingleCar(state?.car);
+    }, []);
 
     const carOverviewInfo: CarOverviewInfo[] = [
         {
@@ -68,17 +67,18 @@ const SingleCar = () => {
         },
     ];
 
-    const editCar = () => {
+    const goTOEditCarPage = () => {
         navigate(`/editcar/${id}`, { state: { car: singleCar } });
     };
 
     const removeCar = () => {
         carServices
             .delete(`cars/${id}.json`)
-            .then((res) => console.log(res.data))
+            .then((res: CarsInfo) => console.log(res.data))
             .catch((error) => {
                 console.log(error);
             });
+        navigate("/listingcars");
     };
 
     return (
@@ -100,13 +100,23 @@ const SingleCar = () => {
                             {"  "} {singleCar?.Model} - {singleCar?.Year}
                         </span>
                     </div>
-                    <div className=" flex gap-4 items-center pb-8">
+                    <div className=" flex gap-6 items-center pb-8">
                         <h1 className="text-5xl font-semibold mr-3">
                             {singleCar?.Model} - {singleCar?.Year}
                         </h1>
-                        <img onClick={removeCar} src={remove} alt="remove" />
+                        <img
+                            className="cursor-pointer"
+                            onClick={removeCar}
+                            src={remove}
+                            alt="remove"
+                        />
 
-                        <img src={edit} alt="edit" onClick={editCar} />
+                        <img
+                            className="cursor-pointer"
+                            src={edit}
+                            alt="edit"
+                            onClick={goTOEditCarPage}
+                        />
                     </div>
                 </div>
                 <div className="flex gap-5 pb-8 text-2xl">

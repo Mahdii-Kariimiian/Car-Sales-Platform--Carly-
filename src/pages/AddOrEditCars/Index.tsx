@@ -1,57 +1,34 @@
 import { useEffect, useState } from "react";
-import backIcon from "../../assets/Icons/back-icon.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import backIcon from "@/assets/Icons/back-icon.svg";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
-import { CarStyles } from "../../db/Data";
-import { CarsInfo } from "../../types/";
-import { CarStyle } from "../../types/";
-import carServices from "../../services";
+import { CarStyles } from "@/db";
+import { CarsInfo, CarStyle, Validation } from "@/types/";
+import carServices from "@/services";
+import validationData from "./validationData";
+import { ToastContainer, toast } from "react-toastify";
 import "./style.css";
 
 const Index = () => {
     // React-router methods
-
     const navigate = useNavigate();
     const { id } = useParams();
+    const { state } = useLocation();
 
     // States and Variables
-    const [hash, setHash] = useState<string | undefined>("");
-    const [editedCar, setEditedCar] = useState<CarsInfo | null>(null);
-    const [carCount, setCarCount] = useState<number>(0);
+    const [editedCar, setEditedCar] = useState<CarsInfo | null>();
+    useEffect(() => {
+        setEditedCar(state?.car);
+    }, []);
 
     // React-hook-form methods
-    const { register, control, handleSubmit, formState, watch, reset } =
-        useForm<CarsInfo>({ defaultValues: editedCar || {} });
+    const { register, control, handleSubmit, formState, watch } =
+        useForm<CarsInfo>({ defaultValues: state?.car || null });
     const { errors } = formState;
     const imageUrl = watch("Image");
 
-    useEffect(() => {
-        carServices("cars.json")
-            .then((res) => {
-                // const hashArray = Object.keys(res.data);
-                const allCars = Object.values(res.data);
-                // Number of objects in array to specify the next id
-                setCarCount(allCars.length);
-                // Get data of car to Edit from API
-                const carToEdit =
-                    id &&
-                    allCars.find((car, index) => {
-                        return index === Number(id);
-                    });
-                // Get firebase Hash to edit car
-                setHash(
-                    Object.keys(res.data).find((hash, index) => {
-                        return index === Number(id);
-                    })
-                );
-
-                carToEdit && setEditedCar(carToEdit);
-                carToEdit && reset(carToEdit); //??
-            })
-            .catch((error) => console.error("Error fetching cars:", error));
-    }, []);
-
+    //Functions
     const onSubmit = (newCar: CarsInfo) => {
         const updatedCar = {
             ...newCar,
@@ -66,23 +43,52 @@ const Index = () => {
         if (editedCar) {
             // Use PUT to update the existing car
             carServices
-                .put(`cars/${hash}.json`, updatedCar)
-                .then((res) => {
-                    // console.log(res.data);
-                    // navigate("/listingcars");
+                .put(`cars/${id}.json`, updatedCar)
+                .then((res: CarsInfo) => {
+                    console.log(res.data);
+                    notify();
+                    navigate("/listingcars");
                 })
                 .catch((error) => console.error("Error updating car:", error));
         } else {
             // Use POST to add a new car
             carServices
                 .post(`cars.json`, updatedCar)
-                .then((res) => {
-                    // console.log(res.data);
-                    // navigate("/listingcars");
+                .then((res: CarsInfo) => {
+                    console.log(res.data);
+                    notify();
+                    navigate("/listingcars");
                 })
                 .catch((error) => console.error("Error adding car:", error));
         }
     };
+
+    const notify = () => {
+        toast.success(`Car Successfully ${state ? "Edited" : "Added"}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    };
+
+    const handleValidation = (name: string) => {
+        const validationEntry: Validation = validationData[name];
+        return validationEntry || {};
+    };
+
+    // Get validation for all fields
+    const priceValidation = handleValidation("Price");
+    const modelValidation = handleValidation("Model");
+    const brandValidation = handleValidation("Brand");
+    const topSpeedValidation = handleValidation("Top Speed");
+    const yearValidation = handleValidation("Year");
+    const imageValidation = handleValidation("Image");
+    const descriptionValidation = handleValidation("Description");
 
     return (
         <div className="px-28 py-32">
@@ -110,9 +116,7 @@ const Index = () => {
                                 <input
                                     className="input"
                                     id="model"
-                                    {...register("Model", {
-                                        required: "This field is required",
-                                    })}
+                                    {...register("Model", modelValidation)}
                                 />
                             </div>
                             <p className="text-red-500 text-lg mt-1">
@@ -125,9 +129,7 @@ const Index = () => {
                                 <input
                                     className="input"
                                     id="brand"
-                                    {...register("Brand", {
-                                        required: "This field is required",
-                                    })}
+                                    {...register("Brand", brandValidation)}
                                 />
                             </div>
                             <p className="text-red-500 text-lg mt-1">
@@ -143,7 +145,8 @@ const Index = () => {
                                     className="input"
                                     id="price"
                                     {...register("Price", {
-                                        required: "This field is required",
+                                        ...priceValidation,
+                                        valueAsNumber: true,
                                     })}
                                 />
                             </div>
@@ -157,9 +160,10 @@ const Index = () => {
                                 <input
                                     className="input"
                                     id="max-speed"
-                                    {...register("Top Speed", {
-                                        required: "This field is required",
-                                    })}
+                                    {...register(
+                                        "Top Speed",
+                                        topSpeedValidation
+                                    )}
                                 />
                             </div>
                             <p className="text-red-500 text-lg mt-1">
@@ -173,13 +177,7 @@ const Index = () => {
                                     className="input"
                                     id="year"
                                     inputMode="numeric"
-                                    {...register("Year", {
-                                        pattern: {
-                                            value: /^(19[0-9][0-9]|20[0-2][0-9]|202[0-4])$/s,
-                                            message: "Enter right year",
-                                        },
-                                        required: "This field is required",
-                                    })}
+                                    {...register("Year", yearValidation)}
                                 />
                             </div>
                             <p className="text-red-500 text-lg mt-1">
@@ -244,7 +242,10 @@ const Index = () => {
                             <input
                                 className="input"
                                 id="discount"
-                                {...register("Discount")}
+                                {...register(
+                                    "Discount",
+                                    handleValidation("Discount")
+                                )}
                             />
                         </div>
                         <div className="flex flex-col gap-8 col-span-full">
@@ -255,9 +256,7 @@ const Index = () => {
                                         className="input"
                                         type="text"
                                         placeholder="www.google.com"
-                                        {...register("Image", {
-                                            required: "This field is required",
-                                        })}
+                                        {...register("Image", imageValidation)}
                                     />
                                 </div>
                                 <p className="text-red-500 text-lg mt-1">
@@ -272,9 +271,10 @@ const Index = () => {
                                     <textarea
                                         className="input"
                                         rows={5}
-                                        {...register("Description", {
-                                            required: "This field is required",
-                                        })}
+                                        {...register(
+                                            "Description",
+                                            descriptionValidation
+                                        )}
                                         id="Description"
                                     ></textarea>
                                 </div>
@@ -285,7 +285,7 @@ const Index = () => {
                         </div>
                         <div className="col-span-full">
                             <button className="w-full text-white bg-primary flex items-center justify-center gap-2 font-semibold text-xl px-10 py-5 rounded-lg hover:opacity-70 transition-all">
-                                Add
+                                {state ? "Edit" : "Add"}
                             </button>
                         </div>
                     </form>
@@ -305,6 +305,7 @@ const Index = () => {
                     </p>
                 )}
             </div>
+            <ToastContainer />
         </div>
     );
 };
