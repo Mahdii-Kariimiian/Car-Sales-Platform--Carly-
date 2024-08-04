@@ -16,7 +16,10 @@ import remove from "@/assets/Icons/remove-icon.svg";
 import edit from "@/assets/Icons/edit-icon.svg";
 import favorite from "@/assets/Icons/favorite-icon.svg";
 import share from "@/assets/Icons/share-icon.svg";
-import { CarsInfo, CarOverviewInfo } from "@/types";
+import { CarsInfo, CarKeyValue, CarOverviewInfo } from "@/types";
+// Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SingleCar = () => {
     const [singleCar, setSingleCar] = useState<CarsInfo | undefined>(undefined);
@@ -25,10 +28,12 @@ const SingleCar = () => {
     const { state } = location;
     const { id } = useParams();
 
+    //Use effects
     useEffect(() => {
         setSingleCar(state?.car);
-    }, []);
+    }, [state]);
 
+    // Data
     const carOverviewInfo: CarOverviewInfo[] = [
         {
             icon: carBody,
@@ -67,30 +72,67 @@ const SingleCar = () => {
         },
     ];
 
-    const goTOEditCarPage = () => {
+    // Functions
+    const goToEditCarPage = () => {
         navigate(`/editcar/${id}`, { state: { car: singleCar } });
     };
 
     const removeCar = () => {
         carServices
             .delete(`cars/${id}.json`)
-            .then((res: CarsInfo) => console.log(res.data))
-            .catch((error) => {
+            .then((res: CarKeyValue) => {
+                if (res.status === 200 || res.status === 204) {
+                    notify("Car deleted successfully", false);
+                    setTimeout(() => {
+                        navigate("/listingcars");
+                    }, 1000);
+                } else {
+                    notify("An error occurred", true);
+                }
+            })
+            .catch((error: unknown) => {
                 console.log(error);
+                notify("Failed to delete car", true);
             });
-        navigate("/listingcars");
+    };
+
+    // Noatify library
+    const notify = (message: string, isError = false) => {
+        if (isError) {
+            toast.error(message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        } else {
+            toast.success(message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
     };
 
     return (
-        <div className=" px-28 pt-28 text-xl ">
+        <div className="px-28 pt-28 text-xl">
             <div className="flex justify-between gap-10 items-end">
                 <div>
                     <div className="pb-4">
-                        <span className="text-xl text-primary ">
+                        <span className="text-xl text-primary">
                             <Link to="/">Home{"  "}</Link>
                         </span>
                         /
-                        <span className="text-xl text-primary  ">
+                        <span className="text-xl text-primary">
                             <Link to="/listingcars">
                                 {"  "}Listings{"  "}
                             </Link>
@@ -100,7 +142,7 @@ const SingleCar = () => {
                             {"  "} {singleCar?.Model} - {singleCar?.Year}
                         </span>
                     </div>
-                    <div className=" flex gap-6 items-center pb-8">
+                    <div className="flex gap-6 items-center pb-8">
                         <h1 className="text-5xl font-semibold mr-3">
                             {singleCar?.Model} - {singleCar?.Year}
                         </h1>
@@ -115,7 +157,7 @@ const SingleCar = () => {
                             className="cursor-pointer"
                             src={edit}
                             alt="edit"
-                            onClick={goTOEditCarPage}
+                            onClick={goToEditCarPage}
                         />
                     </div>
                 </div>
@@ -203,6 +245,7 @@ const SingleCar = () => {
                     />
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };

@@ -1,15 +1,19 @@
-import React from "react";
+import { Link } from "react-router-dom";
 type LinkProps = {
-    links: string[];
-};
+    link: string;
+    title: string;
+}[];
 
-const Link: React.FC<LinkProps> = ({ links }) => {
+const LinkComponent: React.FC<LinkProps> = ({ links }) => {
+    console.log(links);
     return (
         <div>
-            {links.map((link, index) => {
+            {links.map((link: string, index: string) => {
                 return (
                     <ul className="space-y-2 text-lg" key={index.toString()}>
-                        <li>{link}</li>
+                        <li className="text-lg max-w-[max-content]">
+                            <Link to={link.link}>{link.title}</Link>
+                        </li>
                     </ul>
                 );
             })}
@@ -17,4 +21,4 @@ const Link: React.FC<LinkProps> = ({ links }) => {
     );
 };
 
-export default Link;
+export default LinkComponent;

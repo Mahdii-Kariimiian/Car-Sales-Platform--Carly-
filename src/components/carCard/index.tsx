@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 // Css
 import "./style.css";
 
-import AllCarsSkeleton from "@/pages/AllCars/AllCarsSkeleton";
+import CarCardSkeleton from "./CarCardSkeleton";
 
 const CarCard: React.FC<LatestCarProps> = ({
     lastNumber,
@@ -107,7 +107,7 @@ const CarCard: React.FC<LatestCarProps> = ({
     return (
         <div>
             {loading ? (
-                <AllCarsSkeleton />
+                <CarCardSkeleton />
             ) : listedCars.length > 0 ? (
                 <div className="container">
                     {listedCars.map((carObj: [string, CarsInfo]) => {

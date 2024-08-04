@@ -49,7 +49,9 @@ const Index = () => {
                     notify();
                     navigate("/listingcars");
                 })
-                .catch((error) => console.error("Error updating car:", error));
+                .catch((error: unknown) =>
+                    console.error("Error updating car:", error)
+                );
         } else {
             // Use POST to add a new car
             carServices
@@ -59,7 +61,9 @@ const Index = () => {
                     notify();
                     navigate("/listingcars");
                 })
-                .catch((error) => console.error("Error adding car:", error));
+                .catch((error: unknown) =>
+                    console.error("Error adding car:", error)
+                );
         }
     };
 

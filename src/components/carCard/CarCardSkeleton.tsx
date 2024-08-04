@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const AllCarsSkeleton = () => {
+const CarCardSkeleton = () => {
     return (
         <div>
             <div className="container">
@@ -95,4 +95,4 @@ const AllCarsSkeleton = () => {
     );
 };
 
-export default AllCarsSkeleton;
+export default CarCardSkeleton;

@@ -3,7 +3,7 @@ import facebook from "@/assets/Icons/facebook-icon.svg";
 import twitter from "@/assets/Icons/twitter-icon.svg";
 import instagram from "@/assets/Icons/instagram-icon.svg";
 import linkedin from "@/assets/Icons/linkedin-icon.svg";
-import Link from "../ulList";
+import LinkComponent from "../ulList";
 import "./style.css";
 
 const Footer = () => {
@@ -12,20 +12,20 @@ const Footer = () => {
             <div className="footer__lists-container">
                 <div>
                     <h2 className="footer__list-menu">Company</h2>
-                    <Link links={footerData.Company} />
+                    <LinkComponent links={footerData.Company} />
                 </div>
                 <div>
                     <h2 className="footer__list-menu">Quick Links</h2>
 
-                    <Link links={footerData.QuickLinks} />
+                    <LinkComponent links={footerData.QuickLinks} />
                 </div>
                 <div>
                     <h2 className="footer__list-menu">Our Brands</h2>
-                    <Link links={footerData.OurBrands} />
+                    <LinkComponent links={footerData.OurBrands} />
                 </div>
                 <div>
                     <h2 className="footer__list-menu">Vehicles Type</h2>
-                    <Link links={footerData.VehicleTypes} />
+                    <LinkComponent links={footerData.VehicleTypes} />
                 </div>
                 <div>
                     <h2 className="footer__list-menu">Sale Hours</h2>

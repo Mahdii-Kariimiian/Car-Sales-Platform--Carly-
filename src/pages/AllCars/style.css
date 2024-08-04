@@ -1,0 +1,19 @@
+.all-cars__container {
+    @apply py-14 max-md:px-md max-sm:px-sm px-full;
+}
+
+.all-cars__nav {
+    @apply sm:flex sm:justify-between max-sm:space-y-5 max-sm:mb-10;
+}
+
+.all-cars__nav__sort {
+    @apply flex gap-5 items-center text-xl;
+}
+
+.all-cars__nav__sort-title {
+    @apply text-xl text-gray-600 whitespace-nowrap;
+}
+
+.all-cars__button {
+    @apply bg-primary text-white px-32 m-auto mt-20 rounded-2xl;
+}
