@@ -5,7 +5,6 @@ type LinkProps = {
 }[];
 
 const LinkComponent: React.FC<LinkProps> = ({ links }) => {
-    console.log(links);
     return (
         <div>
             {links.map((link: string, index: string) => {

@@ -73,7 +73,7 @@ const CarCardSkeleton = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex pt-5 items-end">
+                                <div className="flex pt-5 items-end justify-between">
                                     <Skeleton
                                         baseColor="#C1C1BF"
                                         highlightColor="#999B9D"

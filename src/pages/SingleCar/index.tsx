@@ -96,7 +96,7 @@ const SingleCar = () => {
             });
     };
 
-    // Noatify library
+    // Noatify functions
     const notify = (message: string, isError = false) => {
         if (isError) {
             toast.error(message, {

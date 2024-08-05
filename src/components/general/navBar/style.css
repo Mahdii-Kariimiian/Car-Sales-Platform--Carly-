@@ -17,11 +17,11 @@
 }
 
 .navbar__menu-list-hamburger {
-    @apply md:hidden flex flex-col items-center pt-28 absolute inset-0 bg-dark text-white z-10;
+    @apply md:hidden flex flex-col items-center pt-28 absolute top-0 bottom-0 left-0 right-[20%] min-w-64 bg-dark text-white z-10;
 }
 
 .navbar__hamburger-icon {
-    @apply text-3xl ml-auto md:hidden;
+    @apply ml-auto md:hidden;
 }
 
 .navbar__button {
@@ -30,7 +30,7 @@
 }
 
 .navbar__button-hamburger {
-    @apply px-6 py-3 text-xl border rounded-lg hover:text-dark hover:bg-white transition-all whitespace-nowrap min-w-56 ;
+    @apply px-6 py-3 text-xl border rounded-lg hover:text-dark hover:bg-white transition-all whitespace-nowrap min-w-56;
     @layer border-dark-blue;
 }
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import backIcon from "@/assets/Icons/back-icon.svg";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
@@ -7,7 +6,11 @@ import { CarStyles } from "@/db";
 import { CarsInfo, CarStyle, Validation } from "@/types/";
 import carServices from "@/services";
 import validationData from "./validationData";
+import backIcon from "@/assets/Icons/back-icon.svg";
+//Toastify
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+//CSS
 import "./style.css";
 
 const Index = () => {

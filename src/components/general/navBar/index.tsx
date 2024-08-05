@@ -44,7 +44,7 @@ const Navbar = () => {
                 onClick={() => setIsOpen((prev) => (prev = !prev))}
                 className="navbar__hamburger-icon"
             >
-                <GiHamburgerMenu />
+                <GiHamburgerMenu className="text-2xl" />
             </div>
             {isOpen ? (
                 <div>

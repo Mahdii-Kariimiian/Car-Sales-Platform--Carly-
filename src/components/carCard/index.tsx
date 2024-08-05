@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import carServices from "@/services";
 import { CarsInfo, LatestCarProps, CarsKeyValue } from "@/types";
+import CarCardSkeleton from "./CarCardSkeleton";
 // assets
 import favoriteIcon from "@/assets/Icons/favorite-icon.svg";
 import fuelIcon from "@/assets/Icons/fuel-icon.svg";
@@ -11,10 +12,11 @@ import maxSpeedIcon from "@/assets/Icons/maxSpeed-icon.svg";
 //Toastify library
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+//Lazy Loading Images library
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 // Css
 import "./style.css";
-
-import CarCardSkeleton from "./CarCardSkeleton";
 
 const CarCard: React.FC<LatestCarProps> = ({
     lastNumber,
@@ -90,7 +92,7 @@ const CarCard: React.FC<LatestCarProps> = ({
         }
     }, [allCars, sortedList, firstNumber, lastNumber]);
 
-    // Toastify Library
+    // Toastify function
     const notify = (message: string) => {
         toast.error(message, {
             position: "top-right",
@@ -115,7 +117,8 @@ const CarCard: React.FC<LatestCarProps> = ({
                         return (
                             <div key={carObj[0]} className="card">
                                 <div>
-                                    <img
+                                    <LazyLoadImage
+                                        effect="blur"
                                         className="h-64 object-cover w-full"
                                         src={car.Image}
                                         alt={car.Model}

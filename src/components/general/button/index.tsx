@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({ classes, text, icon , path }) => {
         <div>
             <Link to={path}>
                 <button
-                    className={`${classes} button`}
+                    className={`${classes} button-style`}
                 >
                     {icon && (
                         <span>
