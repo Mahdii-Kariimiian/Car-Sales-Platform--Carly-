@@ -3,7 +3,7 @@
 }
 
 .footer__lists-container {
-    @apply grid gap-10 text-dark text-lg max-sm:text-center;
+    @apply grid gap-10 text-dark text-lg max-md:text-center;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 

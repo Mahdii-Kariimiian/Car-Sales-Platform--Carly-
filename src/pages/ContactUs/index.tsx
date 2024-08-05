@@ -31,7 +31,7 @@ const ContactUs = () => {
             </div>
             <div>
                 <MapContainer
-                    className="w-full h-96"
+                    className="w-full h-96 z-0"
                     center={[51.505, -0.09]}
                     zoom={13}
                     scrollWheelZoom={false}
@@ -40,7 +40,7 @@ const ContactUs = () => {
                     <Marker position={[51.505, -0.09]}></Marker>
                 </MapContainer>
             </div>
-            <div className="mt-20 px-28 flex gap-32">
+            <div className="mt-20 lg:px-28 lg:flex gap-32">
                 <div>
                     <h3 className="text-4xl font-bold mb-2">Get In Touch</h3>
                     <p className="text-lg">
@@ -51,7 +51,7 @@ const ContactUs = () => {
                         action=""
                         noValidate
                         onSubmit={handleSubmit(onSubmit)}
-                        className="mt-10 grid grid-cols-2 gap-8"
+                        className="mt-10 lg:grid lg:grid-cols-2 gap-8 max-lg:space-y-4 mb-12"
                     >
                         <div className="text-xl flex flex-col gap-1 border border-gray-200 rounded-xl p-2">
                             <label htmlFor="firstname">First Name</label>
@@ -85,7 +85,7 @@ const ContactUs = () => {
                                 {...register("phone")}
                             />
                         </div>
-                        <div className="text-xl flex flex-col gap-1 border border-gray-200 rounded-xl  p-2 col-span-full">
+                        <div className="text-xl flex flex-col gap-1 border border-gray-200 rounded-xl p-2 col-span-full">
                             <label htmlFor="message">Message</label>
                             <textarea
                                 rows={5}
@@ -178,9 +178,9 @@ const ContactUs = () => {
                     </div>
                 </div>
             </div>
-            <div className="px-28 mt-28">
+            <div className="lg:px-28 mt-28">
                 <h2 className="text-4xl font-bold">Our Offices</h2>
-                <div className="grid grid-cols-3 gap-28 justify-between py-16">
+                <div className="lg:grid lg:grid-cols-3 gap-28 justify-between py-16 max-lg:space-y-10">
                     <div className="text-start">
                         <h4 className="text-2xl font-semibold mb-2 pb-5">
                             San Francisco
@@ -193,12 +193,12 @@ const ContactUs = () => {
                             href="https://www.google.com/maps?q=416+Dewey+Blvd,+San+Francisco,+CA+94116,+USA"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className=" flex gap-2 items-center underline text-xl text-primary"
+                            className="flex gap-2 items-center underline text-xl text-primary"
                         >
                             See on Map
                             <img className="size-4" src={arrowIcon} alt="" />
                         </a>
-                        <div className="flex justify-between w-full items-start mt-6">
+                        <div className="lg:flex space-y-4 justify-between w-full items-start mt-6">
                             <a
                                 href="mailto:alisan@boxcars.com"
                                 className="text-lg mb-2"
@@ -227,7 +227,7 @@ const ContactUs = () => {
                             See on Map
                             <img className="size-4" src={arrowIcon} alt="" />
                         </a>
-                        <div className="flex justify-between items-start mt-6">
+                        <div className="lg:flex space-y-4 justify-between items-start mt-6">
                             <a
                                 href="mailto:aliny@boxcars.com"
                                 className="text-lg mb-2"
@@ -256,7 +256,7 @@ const ContactUs = () => {
                             See on Map
                             <img className="size-4" src={arrowIcon} alt="" />
                         </a>
-                        <div className="flex justify-between items-start mt-6">
+                        <div className="lg:flex space-y-4 justify-between items-start mt-6">
                             <a
                                 href="mailto:alild@boxcars.com"
                                 className="text-lg mb-2"

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { faq } from "@/db";
 import { Faq } from "@/types";
 import openIcon from "@/assets/Icons/open-icon.svg";
 import closeIcon from "@/assets/Icons/close-icon.svg";

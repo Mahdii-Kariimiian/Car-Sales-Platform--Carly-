@@ -42,7 +42,7 @@ const Navbar = () => {
             {/* Hamburger Menu  */}
             <div
                 onClick={() => setIsOpen((prev) => (prev = !prev))}
-                className="navbar__hamburger-icon"
+                className="navbar__hamburger-icon z-10"
             >
                 <GiHamburgerMenu className="text-2xl" />
             </div>
@@ -58,16 +58,24 @@ const Navbar = () => {
                         >
                             Cars
                         </Link>
-                        <Link to="aboutus" className="navbar__menu-lists-hamburger">
+                        <Link
+                            to="aboutus"
+                            className="navbar__menu-lists-hamburger"
+                        >
                             About
                         </Link>
-                        <Link to="/contactus" className="navbar__menu-lists-hamburger">
+                        <Link
+                            to="/contactus"
+                            className="navbar__menu-lists-hamburger"
+                        >
                             Contact
                         </Link>
                         <div className="icon py-10 text-2xl">
                             <p>+75 123 456 789</p>
                         </div>
-                        <button className="navbar__button-hamburger">Sign in</button>
+                        <button className="navbar__button-hamburger">
+                            Sign in
+                        </button>
                         <button className="navbar__button-hamburger">
                             Submit Listing
                         </button>

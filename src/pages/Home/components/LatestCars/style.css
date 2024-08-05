@@ -1,5 +1,5 @@
 .latest-cars-container {
-    @apply text-center pb-9;
+    @apply text-center pb-9 mt-8;
 }
 
 .latest-cars-title {

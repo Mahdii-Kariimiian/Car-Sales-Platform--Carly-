@@ -190,7 +190,7 @@ const AboutUs = () => {
             {/* Frequently asked */}
             <div className="mt-36 text-center">
                 <h2 className="text-3xl">Frequently Asked Questions</h2>
-                <div className="p-8 mx-64 space-y-4">
+                <div className="p-8 lg:mx-64 space-y-4">
                     {faq.map((item: Faq) => {
                         return <Accordion item={item} />;
                     })}
