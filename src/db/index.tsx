@@ -6,6 +6,9 @@ import Hatchback from "@/assets/car-styles/Hatchback.jpg";
 import Convertible from "@/assets/car-styles/Convertible.jpg";
 import buyCarIcon from "@/assets/Icons/buy-car-icon.png";
 import sellCarIcon from "@/assets/Icons/sell-car-icon.png";
+import customers1 from "@/assets/Images/customers (1).png";
+import customers2 from "@/assets/Images/customers (2).png";
+import customers3 from "@/assets/Images/customers (3).png";
 
 export const CarStyles = [
     {
@@ -502,3 +505,58 @@ export const footerData = {
         },
     ],
 };
+
+export const customers = [
+    {
+        title: "Great Work",
+        description:
+            "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.",
+        img: customers1,
+        name: "Leslie Alexander",
+        socialMedia: "Facebook",
+    },
+    {
+        title: "Great Awesome Design",
+        description:
+            "“Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et. ”",
+        img: customers2,
+        name: "Jenny Wilson",
+        socialMedia: "UI/UX Designer",
+    },
+    {
+        title: "Great Perfect Quality Design",
+        description:
+            "“At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati.”",
+        img: customers3,
+        name: "Courtney Henry ",
+        socialMedia: "Software Developer",
+    },
+];
+
+export const faq = [
+    {
+        question:
+            "Does BoxCar own the cars I see online or are they owned by other.",
+        answer: "Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.",
+    },
+    {
+        question:
+            "Does BoxCar own the cars I see online or are they owned by other.",
+        answer: "Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.",
+    },
+    {
+        question:
+            "Does BoxCar own the cars I see online or are they owned by other.",
+        answer: "Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.",
+    },
+    {
+        question:
+            "Does BoxCar own the cars I see online or are they owned by other.",
+        answer: "Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.",
+    },
+    {
+        question:
+            "Does BoxCar own the cars I see online or are they owned by other.",
+        answer: "Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.",
+    },
+];

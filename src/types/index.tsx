@@ -64,5 +64,17 @@ export type Validation = {
     string: { string: string };
 };
 
+export type CarsKeyValue = [string, CarsInfo][];
 
-export type CarsKeyValue = [string , CarsInfo][]; 
+export type Customers = {
+    title: string;
+    description: string;
+    img: string;
+    name: string;
+    socialMedia: string;
+};
+
+export type Faq = {
+    question: string ;
+    answer : string;
+}
