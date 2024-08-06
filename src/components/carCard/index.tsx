@@ -32,6 +32,8 @@ const CarCard: React.FC<LatestCarProps> = ({
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    console.log(type);
+
     // Functions
     const fetchAndSetCars = async () => {
         setLoading(true); // Start loading
@@ -109,7 +111,7 @@ const CarCard: React.FC<LatestCarProps> = ({
     return (
         <div>
             {loading ? (
-                <CarCardSkeleton />
+                <CarCardSkeleton quantity={lastNumber} />
             ) : listedCars.length > 0 ? (
                 <div className="container">
                     {listedCars.map((carObj: [string, CarsInfo]) => {

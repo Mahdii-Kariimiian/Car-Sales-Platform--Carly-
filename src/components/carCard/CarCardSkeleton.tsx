@@ -1,11 +1,14 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+type CarCardSkeletonProps = {
+    quantity: number;
+};
 
-const CarCardSkeleton = () => {
+const CarCardSkeleton: React.FC<CarCardSkeletonProps> = ({ quantity }) => {
     return (
         <div>
             <div className="container">
-                {Array(12)
+                {Array(quantity)
                     .fill(0)
                     .map((_, index) => (
                         <div key={index} className="card">

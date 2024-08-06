@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CarCard from "@/components/carCard";
 import Button from "@/components/general/button";
@@ -9,7 +9,7 @@ const AllCars = () => {
     //States and Variables
     const [lastNumber, setLastNumber] = useState<number>(12);
     const [carsLength, setCarsLength] = useState<number>(0);
-    const [param, setParam] = useState<string | undefined>(undefined);
+    const [param, setParam] = useState<string | null>(null);
     const [sortType, setSortType] = useState<string>("Default");
     const quantity = 12;
 
@@ -53,7 +53,10 @@ const AllCars = () => {
 
                     {param ? (
                         <span className="text-lg text-primary ">
-                            <Link to="/listingcars">
+                            <Link
+                                onClick={() => setParam(null)}
+                                to="/listingcars"
+                            >
                                 {" "}
                                 {"  "} / {"  "} Listings
                             </Link>
@@ -61,12 +64,12 @@ const AllCars = () => {
                     ) : (
                         <span className="text-lg ">/{"  "}Listings</span>
                     )}
-                    {param && (
+                    {param ? (
                         <span className="text-lg ">
                             {"  "} / {"  "}
                             {param}
                         </span>
-                    )}
+                    ) : null}
                 </div>
                 <div className="all-cars__nav__sort">
                     <p className="all-cars__nav__sort-title">Sort by</p>
