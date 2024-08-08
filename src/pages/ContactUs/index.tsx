@@ -18,6 +18,7 @@ const ContactUs = () => {
     const onSubmit = (data: message) => {
         console.log(data);
     };
+    
     return (
         <div className="padding-measures">
             <div className="padding-measures py-11">

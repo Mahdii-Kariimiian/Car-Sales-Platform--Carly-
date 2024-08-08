@@ -41,47 +41,47 @@ const Navbar = () => {
 
             {/* Hamburger Menu  */}
             <div
-                onClick={() => setIsOpen((prev) => (prev = !prev))}
-                className="navbar__hamburger-icon z-10"
+                onClick={() => setIsOpen(!isOpen)}
+                className="navbar__hamburger-icon"
             >
                 <GiHamburgerMenu className="text-2xl" />
             </div>
-            {isOpen ? (
-                <div>
-                    <div
-                        onClick={() => setIsOpen((prev) => (prev = !prev))}
-                        className="navbar__menu-list-hamburger space-y-7"
-                    >
-                        <Link
-                            className="navbar__menu-lists-hamburger"
-                            to="/listingcars"
-                        >
-                            Cars
-                        </Link>
-                        <Link
-                            to="aboutus"
-                            className="navbar__menu-lists-hamburger"
-                        >
-                            About
-                        </Link>
-                        <Link
-                            to="/contactus"
-                            className="navbar__menu-lists-hamburger"
-                        >
-                            Contact
-                        </Link>
-                        <div className="icon py-10 text-2xl">
-                            <p>+75 123 456 789</p>
-                        </div>
-                        <button className="navbar__button-hamburger">
-                            Sign in
-                        </button>
-                        <button className="navbar__button-hamburger">
-                            Submit Listing
-                        </button>
-                    </div>
+            <div
+                className={`navbar__menu-list-hamburger space-y-7 transition-all duration-300 ease-in-out transform ${
+                    isOpen ? 'translate-x-0 opacity-95' : '-translate-x-full opacity-0'
+                }`}
+            >
+                <Link
+                    className="navbar__menu-lists-hamburger"
+                    to="/listingcars"
+                    onClick={() => setIsOpen(false)}
+                >
+                    Cars
+                </Link>
+                <Link
+                    to="aboutus"
+                    className="navbar__menu-lists-hamburger"
+                    onClick={() => setIsOpen(false)}
+                >
+                    About
+                </Link>
+                <Link
+                    to="/contactus"
+                    className="navbar__menu-lists-hamburger"
+                    onClick={() => setIsOpen(false)}
+                >
+                    Contact
+                </Link>
+                <div className="icon py-10 text-2xl">
+                    <p>+75 123 456 789</p>
                 </div>
-            ) : null}
+                <button className="navbar__button-hamburger">
+                    Sign in
+                </button>
+                <button className="navbar__button-hamburger">
+                    Submit Listing
+                </button>
+            </div>
         </div>
     );
 };

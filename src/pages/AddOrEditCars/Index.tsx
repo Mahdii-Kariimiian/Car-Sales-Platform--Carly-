@@ -5,7 +5,7 @@ import { DevTool } from "@hookform/devtools";
 import { CarStyles } from "@/db";
 import { CarsInfo, CarStyle, Validation } from "@/types/";
 import carServices from "@/services";
-import validationData from "./validationData";
+import { validationData } from "@/db";
 import backIcon from "@/assets/Icons/back-icon.svg";
 //Toastify
 import { ToastContainer, toast } from "react-toastify";
@@ -70,6 +70,7 @@ const Index = () => {
         }
     };
 
+    // Noatify function
     const notify = () => {
         toast.success(`Car Successfully ${state ? "Edited" : "Added"}`, {
             position: "top-right",

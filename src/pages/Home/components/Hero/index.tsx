@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import heroBg from "@/assets/Images/hero-background.png";
 import "./style.css";
+import axios from "axios";
 
 const Hero = () => {
     return (

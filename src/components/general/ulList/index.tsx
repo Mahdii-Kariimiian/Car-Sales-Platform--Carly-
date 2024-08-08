@@ -1,21 +1,24 @@
 import { Link } from "react-router-dom";
-type LinkProps = {
-    link: string;
-    title: string;
-}[];
 
-const LinkComponent: React.FC<LinkProps> = ({ links }) => {
+type LinkComponentProps = {
+    links: { link: string; title: string }[];
+};
+
+const LinkComponent: React.FC<LinkComponentProps> = ({ links }) => {
     return (
-        <div>
-            {links.map((link: string, index: string) => {
-                return (
-                    <ul className="space-y-2 text-lg" key={index.toString()}>
-                        <li className="text-lg max-w-[max-content] hover:border-b hover:border-b-dark ">
-                            <Link to={link.link}>{link.title}</Link>
-                        </li>
-                    </ul>
-                );
-            })}
+        <div className="max-lg:text-center">
+            {links.map((linkItem, index) => (
+                <ul className="space-y-2 text-lg" key={index}>
+                    <li className="text-lg">
+                        <Link
+                            className="hover:border-b hover:border-b-dark"
+                            to={linkItem.link}
+                        >
+                            {linkItem.title}
+                        </Link>
+                    </li>
+                </ul>
+            ))}
         </div>
     );
 };

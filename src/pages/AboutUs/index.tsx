@@ -13,7 +13,7 @@ import { Customers, Faq } from "@/types";
 import Accordion from "../../components/general/Accordion";
 
 const AboutUs = () => {
-    console.log(faq);
+
     return (
         <div className="padding-measures">
             {/* Baguet List  */}
@@ -181,7 +181,7 @@ const AboutUs = () => {
             {/* customer */}
             <div className="bg-teal-50 padding-measures px-36 py-28 rounded-xl">
                 <h2 className="text-3xl mb-14">What our customers say</h2>
-                <div className="lg:flex gap-10 space-y-4 ">
+                <div className="lg:flex gap-10 max-lg:space-y-4 ">
                     {customers.map((customer: Customers) => {
                         return <CustomerCard customer={customer} />;
                     })}

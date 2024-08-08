@@ -32,8 +32,6 @@ const CarCard: React.FC<LatestCarProps> = ({
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    console.log(type);
-
     // Functions
     const fetchAndSetCars = async () => {
         setLoading(true); // Start loading
@@ -121,7 +119,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                                 <div>
                                     <LazyLoadImage
                                         effect="blur"
-                                        className="h-64 object-cover w-full"
+                                        className="h-72 object-cover w-full"
                                         src={car.Image}
                                         alt={car.Model}
                                     />

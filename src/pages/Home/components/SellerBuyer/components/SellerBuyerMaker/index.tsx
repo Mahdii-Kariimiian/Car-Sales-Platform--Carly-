@@ -16,7 +16,7 @@ const sellerBuyerMaker: React.FC<SellerBuyerMakerProps> = ({ sellOrBuy }) => {
                         className={`${card.color} card-container`}
                         key={index.toString()}
                     >
-                        <div className="space-y-4">
+                        <div className="space-y-4 items-center max-lg:flex max-lg:flex-col justify-center">
                             <h2 className="text-4xl text-[#050B20] font-bold pb-4">
                                 {card.title}
                             </h2>
@@ -31,7 +31,7 @@ const sellerBuyerMaker: React.FC<SellerBuyerMakerProps> = ({ sellOrBuy }) => {
                             />
                         </div>
                         <img
-                            className="w-32"
+                            className="w-32 m-auto"
                             src={card.icon}
                             alt="buy or sell"
                         />

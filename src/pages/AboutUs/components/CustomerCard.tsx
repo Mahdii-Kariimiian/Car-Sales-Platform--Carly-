@@ -15,7 +15,7 @@ const CustomerCard: React.FC<CustomerCardProps> = ({
             <p>{description}</p>
             <div className="flex gap-3 items-center">
                 <img className="size-14" src={img} alt="customer profile" />
-                <div>
+                <div className="space-y-1">
                     <p className="font-semibold">{name}</p>
                     <p>{socialMedia}</p>
                 </div>

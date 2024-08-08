@@ -8,5 +8,5 @@
 }
 
 .footer__list-menu {
-    @apply font-bold mb-4;
+    @apply max-lg:text-center font-bold mb-4;
 }

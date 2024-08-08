@@ -17,11 +17,7 @@ const index: React.FC<AccordionProps> = ({ item: { answer, question } }) => {
                 className=" cursor-pointer text-lg font-semibold flex justify-between gap-2"
             >
                 {question}
-                <img
-                    className="transition-all"
-                    src={isOpen ? closeIcon : openIcon}
-                    alt=""
-                />
+                <img src={isOpen ? closeIcon : openIcon} alt="" />
             </div>
             <div
                 onClick={() => setIsOpen(false)}

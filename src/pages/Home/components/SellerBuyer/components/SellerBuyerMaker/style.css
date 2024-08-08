@@ -3,5 +3,5 @@
 }
 
 .card-container {
-    @apply flex gap-20 items-end justify-between rounded-lg w-full p-12 xl:p-24;
+    @apply lg:flex max-lg:space-y-10 max-lg:text-center gap-20 items-end justify-between rounded-lg w-full p-12 xl:p-24;
 }
