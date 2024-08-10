@@ -3,50 +3,48 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { CarStyles } from "@/db";
-import { CarsInfo, CarStyle, Validation } from "@/types/";
+import { CarsInfo, CarStyle } from "@/types/";
 import carServices from "@/services";
-import validationData from "./validationData";
+import { ValidationType, FieldValidation } from "./validation/ValidationTypes";
 import backIcon from "@/assets/Icons/back-icon.svg";
 //Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //CSS
 import "./style.css";
+import validationData from "./validation/ValidationData";
 
-const Index = () => {
+const index = () => {
+    ////////// Methods //////////
     // React-router methods
     const navigate = useNavigate();
     const { id } = useParams();
     const { state } = useLocation();
 
-    // States and Variables
+    ////////// States and Variables //////////
     const [editedCar, setEditedCar] = useState<CarsInfo | null>();
     useEffect(() => {
-        setEditedCar(state?.car);
+        setEditedCar(state?.car || null);
     }, []);
 
     // React-hook-form methods
     const { register, control, handleSubmit, formState, watch } =
         useForm<CarsInfo>({ defaultValues: state?.car || null });
     const { errors } = formState;
-    const imageUrl = watch("Image");
+    const imageUrl = watch("image");
 
-    //Functions
+    ////////// Functions //////////
     const onSubmit = (newCar: CarsInfo) => {
-        const updatedCar = {
-            ...newCar,
-            // Changing types to Number
-            Price: Number(newCar.Price),
-            Year: Number(newCar.Year),
-            Discount: Number(newCar.Discount),
-            "Top Speed": Number(newCar["Top Speed"]),
-            // Finish changing types to Number
-        };
-
         if (editedCar) {
             // Use PUT to update the existing car
-            carServices
-                .put(`cars/${id}.json`, updatedCar)
+            // console.log(editedCar);
+            carServices(`cars/${id}`, {
+                method: "PATCH",
+                body: JSON.stringify(newCar),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
                 .then((res: CarsInfo) => {
                     console.log(res.data);
                     notify();
@@ -57,8 +55,15 @@ const Index = () => {
                 );
         } else {
             // Use POST to add a new car
+            console.log("add");
             carServices
-                .post(`cars.json`, updatedCar)
+                .post(`cars`, {
+                    method: "POST",
+                    body: JSON.stringify(newCar),
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                })
                 .then((res: CarsInfo) => {
                     console.log(res.data);
                     notify();
@@ -70,6 +75,23 @@ const Index = () => {
         }
     };
 
+    // Handle Validations
+    const handleValidation = (item: keyof ValidationType) => {
+        const validationEntry: FieldValidation = validationData[item];
+        return validationEntry;
+    };
+
+    // Get validation for all fields
+    const priceValidation = handleValidation("price");
+    const modelValidation = handleValidation("model");
+    const brandValidation = handleValidation("brand");
+    const topSpeedValidation = handleValidation("topSpeed");
+    const yearValidation = handleValidation("manufactureYear");
+    const imageValidation = handleValidation("image");
+    const descriptionValidation = handleValidation("description");
+    const discountedPriceValidation = handleValidation("discountedPrice");
+
+    // Toastify Library
     const notify = () => {
         toast.success(`Car Successfully ${state ? "Edited" : "Added"}`, {
             position: "top-right",
@@ -82,20 +104,6 @@ const Index = () => {
             theme: "dark",
         });
     };
-
-    const handleValidation = (name: string) => {
-        const validationEntry: Validation = validationData[name];
-        return validationEntry || {};
-    };
-
-    // Get validation for all fields
-    const priceValidation = handleValidation("Price");
-    const modelValidation = handleValidation("Model");
-    const brandValidation = handleValidation("Brand");
-    const topSpeedValidation = handleValidation("Top Speed");
-    const yearValidation = handleValidation("Year");
-    const imageValidation = handleValidation("Image");
-    const descriptionValidation = handleValidation("Description");
 
     return (
         <div className="px-28 py-32">
@@ -123,11 +131,11 @@ const Index = () => {
                                 <input
                                     className="input"
                                     id="model"
-                                    {...register("Model", modelValidation)}
+                                    {...register("model", modelValidation)}
                                 />
                             </div>
                             <p className="text-red-500 text-lg mt-1">
-                                {errors.Model?.message}
+                                {errors.model?.message}
                             </p>
                         </div>
                         <div>
@@ -136,11 +144,11 @@ const Index = () => {
                                 <input
                                     className="input"
                                     id="brand"
-                                    {...register("Brand", brandValidation)}
+                                    {...register("brand", brandValidation)}
                                 />
                             </div>
                             <p className="text-red-500 text-lg mt-1">
-                                {errors.Brand?.message}
+                                {errors.brand?.message}
                             </p>
                         </div>
                         <div>
@@ -151,74 +159,74 @@ const Index = () => {
                                     pattern="[0-9]*"
                                     className="input"
                                     id="price"
-                                    {...register("Price", {
-                                        ...priceValidation,
-                                        valueAsNumber: true,
-                                    })}
+                                    {...register("price", priceValidation)}
                                 />
                             </div>
                             <p className="text-red-500 text-lg mt-1">
-                                {errors.Price?.message}
+                                {errors.price?.message}
                             </p>
                         </div>
                         <div>
                             <div className="item">
-                                <label htmlFor="max-speed">Max-speed</label>
+                                <label htmlFor="topSpeed">Top speed</label>
                                 <input
                                     className="input"
-                                    id="max-speed"
+                                    id="topSpeed"
                                     {...register(
-                                        "Top Speed",
+                                        "topSpeed",
                                         topSpeedValidation
                                     )}
                                 />
                             </div>
                             <p className="text-red-500 text-lg mt-1">
-                                {errors["Top Speed"]?.message}
+                                {errors.topSpeed?.message}
                             </p>
                         </div>
                         <div>
                             <div className="item">
-                                <label htmlFor="year">Year</label>
+                                <label htmlFor="manufactureYear">Year</label>
                                 <input
                                     className="input"
-                                    id="year"
+                                    id="manufactureYear"
                                     inputMode="numeric"
-                                    {...register("Year", yearValidation)}
+                                    {...register(
+                                        "manufactureYear",
+                                        yearValidation
+                                    )}
                                 />
                             </div>
                             <p className="text-red-500 text-lg mt-1">
-                                {errors.Year?.message}
+                                {errors.manufactureYear?.message}
                             </p>
                         </div>
                         <div className="item">
-                            <label htmlFor="Transmission">Transmission</label>
+                            <label htmlFor="transmission">Transmission</label>
                             <select
                                 className="select"
-                                id="Transmission"
-                                {...register("Transmission")}
+                                id="transmission"
+                                {...register("transmission")}
                             >
                                 <option value="Automatic">Automatic</option>
                                 <option value="Manual">Manual</option>
                             </select>
                         </div>
                         <div className="item">
-                            <label htmlFor="Condition">Condition</label>
+                            <label htmlFor="condition">Condition</label>
                             <select
                                 className="select"
-                                id="Condition"
-                                {...register("Condition")}
+                                id="condition"
+                                {...register("condition")}
                             >
                                 <option value="Used">Used</option>
                                 <option value="New">New</option>
                             </select>
                         </div>
                         <div className="item">
-                            <label htmlFor="Fuel">Fuel</label>
+                            <label htmlFor="fuel">Fuel</label>
                             <select
                                 className="select"
-                                {...register("Fuel")}
-                                id="Fuel"
+                                {...register("fuel")}
+                                id="fuel"
                             >
                                 <option value="Petrol">Petrol</option>
                                 <option value="Diesel">Diesel</option>
@@ -226,11 +234,11 @@ const Index = () => {
                             </select>
                         </div>
                         <div className="item">
-                            <label htmlFor="Type">Type</label>
+                            <label htmlFor="type">Type</label>
                             <select
                                 className="select"
-                                {...register("Type")}
-                                id="Type"
+                                {...register("type")}
+                                id="type"
                             >
                                 {CarStyles.map((style: CarStyle) => {
                                     return (
@@ -245,48 +253,49 @@ const Index = () => {
                             </select>
                         </div>
                         <div className="item">
-                            <label htmlFor="discount">Discount</label>
+                            <label htmlFor="discountedPrice">Discount</label>
                             <input
                                 className="input"
-                                id="discount"
+                                id="discountedPrice"
                                 {...register(
-                                    "Discount",
-                                    handleValidation("Discount")
+                                    "discountedPrice",
+                                    discountedPriceValidation
                                 )}
                             />
                         </div>
                         <div className="flex flex-col gap-8 col-span-full">
                             <div>
                                 <div className="item">
-                                    <label htmlFor="Image">Image URL</label>
+                                    <label htmlFor="image">Image URL</label>
                                     <input
+                                        id="image"
                                         className="input"
                                         type="text"
                                         placeholder="www.google.com"
-                                        {...register("Image", imageValidation)}
+                                        {...register("image", imageValidation)}
                                     />
                                 </div>
                                 <p className="text-red-500 text-lg mt-1">
-                                    {errors.Image?.message}
+                                    {errors.image?.message}
                                 </p>
                             </div>
                             <div>
                                 <div className="item">
-                                    <label htmlFor="Description">
+                                    <label htmlFor="description">
                                         Description
                                     </label>
                                     <textarea
                                         className="input"
                                         rows={5}
                                         {...register(
-                                            "Description",
+                                            "description",
                                             descriptionValidation
                                         )}
-                                        id="Description"
+                                        id="description"
                                     ></textarea>
                                 </div>
                                 <p className="text-red-500 text-lg mt-1">
-                                    {errors.Description?.message}
+                                    {errors.description?.message}
                                 </p>
                             </div>
                         </div>
@@ -317,4 +326,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default index;

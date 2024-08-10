@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import OverviewItem from "./components/OverviewItem";
 import Button from "@/components/general/button";
 import carServices from "@/services";
+import { CarsInfo, CarKeyValue, CarOverviewInfo } from "@/types";
 import steeringWheel from "@/assets/Icons/steering wheel-icon.svg";
 import offer from "@/assets/Icons/offer-icon.svg";
 import carBody from "@/assets/Icons/car-icon.svg";
@@ -16,7 +17,6 @@ import remove from "@/assets/Icons/remove-icon.svg";
 import edit from "@/assets/Icons/edit-icon.svg";
 import favorite from "@/assets/Icons/favorite-icon.svg";
 import share from "@/assets/Icons/share-icon.svg";
-import { CarsInfo, CarKeyValue, CarOverviewInfo } from "@/types";
 // Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,51 +28,51 @@ const SingleCar = () => {
     const { state } = location;
     const { id } = useParams();
 
-    //Use effects
+    ////////// Use effects //////////
     useEffect(() => {
         setSingleCar(state?.car);
     }, [state]);
 
-    // Data
+    ////////// Data //////////
     const carOverviewInfo: CarOverviewInfo[] = [
         {
             icon: carBody,
             text: "Body",
-            description: singleCar?.Type,
+            description: singleCar?.type,
         },
         {
             icon: maxSpeed,
             text: "Mileage",
-            description: singleCar?.["Top Speed"],
+            description: singleCar?.topSpeed,
         },
         {
             icon: fuel,
             text: "Fuel Type",
-            description: singleCar?.Fuel,
+            description: singleCar?.fuel,
         },
         {
             icon: calendar,
             text: "Year",
-            description: singleCar?.Year,
+            description: singleCar?.manufactureYear,
         },
         {
             icon: profile,
             text: "Condition",
-            description: singleCar?.Condition,
+            description: singleCar?.condition,
         },
         {
             icon: color,
             text: "Color",
-            description: singleCar?.Brand,
+            description: singleCar?.brand,
         },
         {
             icon: transmission,
             text: "Transmission",
-            description: singleCar?.Transmission,
+            description: singleCar?.transmission,
         },
     ];
 
-    // Functions
+    ////////// Functions //////////
     const goToEditCarPage = () => {
         navigate(`/editcar/${id}`, { state: { car: singleCar } });
     };
@@ -139,12 +139,13 @@ const SingleCar = () => {
                         </span>
                         /
                         <span className="text-lg pb-7">
-                            {"  "} {singleCar?.Model} - {singleCar?.Year}
+                            {"  "} {singleCar?.model} -{" "}
+                            {singleCar?.manufactureYear}
                         </span>
                     </div>
                     <div className="flex gap-6 items-center pb-8">
                         <h1 className="text-5xl font-semibold mr-3">
-                            {singleCar?.Model} - {singleCar?.Year}
+                            {singleCar?.model} - {singleCar?.manufactureYear}
                         </h1>
                         <img
                             className="cursor-pointer"
@@ -180,8 +181,8 @@ const SingleCar = () => {
                 <div>
                     <img
                         className="w-full mb-28 rounded-3xl"
-                        src={singleCar?.Image}
-                        alt={singleCar?.Model}
+                        src={singleCar?.image}
+                        alt={singleCar?.model}
                     />
 
                     <div className="">
@@ -201,7 +202,7 @@ const SingleCar = () => {
                         </div>
                         <h3 className="text-3xl pt-12 pb-7">Description</h3>
                         <p className="text-xl pb-32 leading-10">
-                            {singleCar?.Description}
+                            {singleCar?.description}
                         </p>
                     </div>
                 </div>
@@ -211,24 +212,23 @@ const SingleCar = () => {
                     {singleCar?.Discount ? (
                         <div className="text-start">
                             <span className="text-xl line-through">
-                                $ {singleCar?.Price.toLocaleString()}
+                                $ {singleCar?.price}
                             </span>
                             <span className="text-2xl font-bold ml-3">
-                                $ {singleCar?.Discount.toLocaleString()}
+                                $ {singleCar?.discountedPrice}
                             </span>
                             <div>
                                 Instant Saving :{" "}
                                 <span>
-                                    {(
-                                        singleCar?.Price - singleCar?.Discount
-                                    ).toLocaleString()}{" "}
+                                    {singleCar?.price -
+                                        singleCar?.discountedPrice}{" "}
                                     $
                                 </span>
                             </div>
                         </div>
                     ) : (
                         <p className="text-xl font-bold">
-                            $ {singleCar?.Price.toLocaleString()}
+                            $ {singleCar?.price}
                         </p>
                     )}
                     <Button

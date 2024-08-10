@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import CarCard from "@/components/carCard";
 import Button from "@/components/general/button";

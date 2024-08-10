@@ -5,19 +5,21 @@ export type CarStyle = {
 };
 
 export type CarsInfo = {
-    id: number | string;
-    Model: string;
-    Brand: string;
-    Price: number;
-    Discount: number;
-    Year: number;
-    "Top Speed": number;
-    Type: string;
-    Transmission: string;
-    Condition: string;
-    Fuel: string;
-    Description: string;
-    Image: string;
+    id: number;
+    createdAt?: string;
+    updatedAt?: string;
+    model: string;
+    brand: string;
+    price: number;
+    discountedPrice: number;
+    manufactureYear: number;
+    topSpeed: number;
+    type: string;
+    transmission: string;
+    condition: string;
+    fuel: string;
+    description: string;
+    image: string;
 };
 
 export type BuyOrSell = {
@@ -75,6 +77,6 @@ export type Customers = {
 };
 
 export type Faq = {
-    question: string ;
-    answer : string;
-}
+    question: string;
+    answer: string;
+};

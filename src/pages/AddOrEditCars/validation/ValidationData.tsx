@@ -1,32 +1,33 @@
-const validation = {
-    Model: {
+const validationData = {
+    model: {
         required: "This field is required",
     },
-    Brand: {
+    brand: {
         required: "This field is required",
     },
-    Price: {
+    price: {
         required: "This field is required",
     },
-    "Top Speed": {
+    topSpeed: {
         required: "This field is required",
     },
-    Year: {
+    manufactureYear: {
         pattern: {
             value: /^(19[0-9][0-9]|20[0-2][0-9]|202[0-4])$/s,
             message: "Enter a right year between 1900 to current year",
         },
         required: "This field is required",
     },
-    Image: {
+    image: {
         required: "This field is required",
         pattern: {
             value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp|svg))$/,
         },
     },
-    Description: {
+    description: {
         required: "This field is required",
     },
+    discountedPrice: {},
 };
 
-export default validation;
+export default validationData;

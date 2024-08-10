@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import carServices from "@/services";
-import { CarsInfo, LatestCarProps, CarsKeyValue } from "@/types";
+import { CarsInfo, LatestCarProps } from "@/types";
 import CarCardSkeleton from "./CarCardSkeleton";
 // assets
 import favoriteIcon from "@/assets/Icons/favorite-icon.svg";
@@ -17,6 +17,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 // Css
 import "./style.css";
+import useCRUD from "../../services/useCRUD";
 
 const CarCard: React.FC<LatestCarProps> = ({
     lastNumber,
@@ -25,28 +26,33 @@ const CarCard: React.FC<LatestCarProps> = ({
     setParam,
     sortedList,
 }) => {
-    // States and Variables
+    ////////// States and Variables //////////
     const { type } = useParams();
-    const [listedCars, setListedCars] = useState<CarsKeyValue>([]);
-    const [allCars, setAllCars] = useState<CarsKeyValue>([]);
+    const [listedCars, setListedCars] = useState<CarsInfo>([]);
+    const [allCars, setAllCars] = useState<CarsInfo>([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const { read } = useCRUD("https://localhost:8000/", {
+        "content-type": "application/json",
+    });
 
-    console.log(type);
+    useEffect(() => {
+        read("cars")
+            .then((res) => console.log(`res ${res}`))
+            .catch((err) => console.log(err.message));
+    }, []);
 
-    // Functions
+    ////////// Functions //////////
     const fetchAndSetCars = async () => {
         setLoading(true); // Start loading
         try {
-            const res = await carServices("cars.json");
-            const fetchedCars: CarsKeyValue = Object.entries(res.data);
+            const res = await carServices("cars");
+            const fetchedCars: CarsInfo[] = res.data;
 
             if (type) {
-                const typeCars = fetchedCars.filter(
-                    (car: [string, CarsInfo]) =>
-                        car[1].Type.toLowerCase() === type.toLowerCase()
-                );
-
+                const typeCars = fetchedCars.filter((car: CarsInfo) => {
+                    return car.type.toLowerCase() === type.toLowerCase();
+                });
                 setListedCars(typeCars.slice(firstNumber, lastNumber));
                 setCarsLength?.(typeCars.length);
                 setParam?.(type);
@@ -66,12 +72,12 @@ const CarCard: React.FC<LatestCarProps> = ({
         }
     };
 
-    // Show single car info
-    const handleViewInfo = (carId: string, car: CarsInfo) => {
-        navigate(`/listingcars/singlecar/${carId}`, { state: { car } });
+    // Go to single car page
+    const handleViewInfo = (car: CarsInfo) => {
+        navigate(`/listingcars/singlecar/${car.id}`, { state: { car } });
     };
 
-    // Use Effects
+    ////////// Use Effects ////////////
     // Show cars with or without type(style) selected
     useEffect(() => {
         fetchAndSetCars();
@@ -80,17 +86,8 @@ const CarCard: React.FC<LatestCarProps> = ({
     // Show cars with Sorted options
     useEffect(() => {
         if (sortedList && allCars.length > 0) {
-            const sortedCars = sortedList(
-                allCars.map((car: CarsKeyValue) => car[1])
-            );
-            setListedCars(
-                sortedCars
-                    .slice(firstNumber, lastNumber)
-                    .map((car: CarsKeyValue, index: number) => [
-                        allCars[index][0],
-                        car,
-                    ])
-            );
+            const sortedCars = sortedList(allCars);
+            setListedCars(sortedCars.slice(firstNumber, lastNumber));
         }
     }, [allCars, sortedList, firstNumber, lastNumber]);
 
@@ -111,19 +108,19 @@ const CarCard: React.FC<LatestCarProps> = ({
     return (
         <div>
             {loading ? (
+                // Skeleton (maybe move to app.tsx with lazy and suspense)
                 <CarCardSkeleton quantity={lastNumber} />
             ) : listedCars.length > 0 ? (
                 <div className="container">
-                    {listedCars.map((carObj: [string, CarsInfo]) => {
-                        const car = carObj[1];
+                    {listedCars.map((car: CarsInfo) => {
                         return (
-                            <div key={carObj[0]} className="card">
+                            <div key={car.id} className="card">
                                 <div>
                                     <LazyLoadImage
                                         effect="blur"
                                         className="h-64 object-cover w-full"
-                                        src={car.Image}
-                                        alt={car.Model}
+                                        src={car.image}
+                                        alt={car.model}
                                     />
                                     <div className="favorite-icon">
                                         <img
@@ -135,7 +132,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                                 </div>
                                 <div className="px-9">
                                     <p className="text-xl text-left pt-5 pb-8">
-                                        {car.Model}
+                                        {car.model}
                                     </p>
                                     <div className="card-info">
                                         <div className="text-center">
@@ -144,7 +141,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                                                 src={maxSpeedIcon}
                                                 alt="max Speed"
                                             />
-                                            <p>{car["Top Speed"]} Miles</p>
+                                            <p>{car.topSpeed} Miles</p>
                                         </div>
                                         <div className="text-center">
                                             <img
@@ -152,7 +149,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                                                 src={fuelIcon}
                                                 alt="fuel type"
                                             />
-                                            {car.Fuel}
+                                            {car.fuel}
                                         </div>
                                         <div className="text-center">
                                             <img
@@ -160,31 +157,27 @@ const CarCard: React.FC<LatestCarProps> = ({
                                                 src={transmissionIcon}
                                                 alt="transmission type"
                                             />
-                                            {car.Transmission}
+                                            {car.transmission}
                                         </div>
                                     </div>
                                     <div className="flex pt-5 items-end">
-                                        {car.Discount ? (
+                                        {car.discountedPrice ? (
                                             <div className="text-start">
                                                 <p className="text-lg line-through">
-                                                    ${" "}
-                                                    {car.Price.toLocaleString()}
+                                                    $ {car.price}
                                                 </p>
                                                 <p className="text-2xl font-bold">
-                                                    ${" "}
-                                                    {car.Discount.toLocaleString()}
+                                                    $ {car.discountedPrice}
                                                 </p>
                                             </div>
                                         ) : (
                                             <p className="text-xl font-bold">
-                                                $ {car.Price.toLocaleString()}
+                                                $ {car.price}
                                             </p>
                                         )}
                                         <button
                                             className="ml-auto text-lg text-primary flex gap-2"
-                                            onClick={() =>
-                                                handleViewInfo(carObj[0], car)
-                                            }
+                                            onClick={() => handleViewInfo(car)}
                                         >
                                             View Details
                                             <img
