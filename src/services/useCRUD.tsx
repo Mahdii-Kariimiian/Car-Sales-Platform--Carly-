@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "./axiosConfig";
 
 const useCRUD = (baseURL: string, defaultHeaders = {}) => {
     const [data, setData] = useState(null);

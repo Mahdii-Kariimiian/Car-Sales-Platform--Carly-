@@ -8,7 +8,7 @@ const Index = () => {
     return (
         <div>
             <Hero />
-            {/* <CarStyleList /> */}
+            <CarStyleList />
             <LatestCars />
             <SellerBuyer />
             <ContactUs />

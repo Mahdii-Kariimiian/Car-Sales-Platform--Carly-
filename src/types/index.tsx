@@ -6,8 +6,6 @@ export type CarStyle = {
 
 export type CarsInfo = {
     id: number;
-    createdAt?: string;
-    updatedAt?: string;
     model: string;
     brand: string;
     price: number;

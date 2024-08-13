@@ -2,60 +2,41 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CarCard from "@/components/carCard";
 import Button from "@/components/general/button";
-import { CarsKeyValue } from "@/types";
-import carServices from "@/services";
-import { CarsInfo } from "../../types";
+import useCRUD from "@/services/useCRUD";
+import { CarsKeyValue, CarsInfo } from "@/types";
 import { ToastContainer, toast } from "react-toastify";
 import "./style.css";
 
 const AllCars = () => {
     //States and Variables
+    const { read, data, error, loading } = useCRUD(`/cars`);
     const [carsArray, setCarsArray] = useState<CarsInfo[]>([]);
-    const [lastNumber, setLastNumber] = useState<number>(12);
     const [carsLength, setCarsLength] = useState<number>(0);
+    const [lastNumber, setLastNumber] = useState<number>(12);
     const [param, setParam] = useState<string | null>(null);
     const [sortType, setSortType] = useState<string>("Default");
     const quantity = 12;
 
-    const [loading, setLoading] = useState(true);
-
     useEffect(() => {
-        const fetchAndSetCars = async () => {
-            setLoading(true); // Start loading
-            try {
-                const res = await carServices("cars");
-                setCarsArray(res.data);
-            } catch (error: unknown) {
-                if (error instanceof Error) {
-                    notify(error.message);
-                } else {
-                    notify("An unknown error occurred");
-                }
-            } finally {
-                setLoading(false); // End loading
-            }
-        };
-        fetchAndSetCars();
+        read();
     }, []);
 
-    // Toastify function
-    const notify = (message: string) => {
-        toast.error(message, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-    };
+    useEffect(() => {
+        if (data) {
+            setCarsArray(data);
+            setCarsLength(data.length);
+        }
+
+        if (error) {
+            notify("Error fetching Data");
+        }
+    }, [data, error]);
 
     // Functions
     // Load more Cars
     const loadMoreCars = () => {
-        lastNumber < carsLength && setLastNumber((prev) => prev + quantity);
+        lastNumber < carsArray.length &&
+            setLastNumber((prev) => prev + quantity);
     };
 
     // Sort Cars List
@@ -78,6 +59,20 @@ const AllCars = () => {
     // Change sort Value
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortType(event.target.value);
+    };
+
+    // Toastify function
+    const notify = (message: string) => {
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
     };
 
     return (
@@ -126,18 +121,14 @@ const AllCars = () => {
             <p className="text-xl pb-12">
                 Showing 1 /{" "}
                 <span className="text-xl">
-                    {lastNumber > carsLength ? carsLength : lastNumber} from{" "}
-                    <span className="text-xl">{carsLength}</span>{" "}
+                    {lastNumber > carsArray.length
+                        ? carsArray.length
+                        : lastNumber}{" "}
+                    from <span className="text-xl">{carsLength}</span>{" "}
                 </span>
             </p>
 
-            <CarCard
-                lastNumber={lastNumber}
-                setCarsLength={setCarsLength}
-                setParam={setParam}
-                sortedList={sortedCars}
-                carsArray={carsArray}
-            />
+            {loading ? <h1>Loading...</h1> : <CarCard carsArray={carsArray} />}
             <div
                 className="w-full"
                 onClick={() => {

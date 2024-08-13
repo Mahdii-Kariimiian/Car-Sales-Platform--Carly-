@@ -21,15 +21,12 @@ function App() {
                             element={<SingleCar />}
                         />
                         <Route path="/allcars" element={<AllCars />} />
-                        <Route
-                            path="/allcars/:type"
-                            element={<AllCars />}
-                        />
+                        <Route path="/allcars/:type" element={<AllCars />} />
                         <Route path="/contactus" element={<ContactUs />} />
                         <Route path="/aboutus" element={<AboutUs />} />
+                        <Route path="addcar" element={<AddOrEdit />} />
+                        <Route path="editcar/:id" element={<AddOrEdit />} />
                     </Route>
-                    <Route path="addcar" element={<AddOrEdit />} />
-                    <Route path="editcar/:id" element={<AddOrEdit />} />
                 </Routes>
             </BrowserRouter>
         </div>
