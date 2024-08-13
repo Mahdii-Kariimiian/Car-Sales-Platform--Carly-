@@ -1,27 +1,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { CarsInfo } from "@/types";
-
-type StateType = string | null;
 
 const useCRUD = (baseURL: string, defaultHeaders = {}) => {
-    const [data, setData] = useState<CarsInfo[] | null>(null);
-    const [error, setError] = useState<StateType>(null);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [token, setToken] = useState<StateType>(null);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [token, setToken] = useState<string | null>(null);
 
     useEffect(() => {
-        const storedToken = localStorage.getItem("token"); // Load token on mount
+        const storedToken: string | null = localStorage.getItem("token"); // Load token on mount
         if (storedToken) {
             setToken(storedToken);
         }
     }, []);
 
-    const sendRequest = async (
-        method: string,
-        url: string,
-        payload: any = null
-    ) => {
+    const sendRequest = async (method: string, url: string, payload = null) => {
         setLoading(true);
 
         try {
@@ -31,7 +24,7 @@ const useCRUD = (baseURL: string, defaultHeaders = {}) => {
             };
 
             const response = await axios({
-                method: method,
+                method,
                 url: `${baseURL}${url}`,
                 data: payload,
                 headers,
@@ -39,12 +32,14 @@ const useCRUD = (baseURL: string, defaultHeaders = {}) => {
 
             setData(response.data);
         } catch (err) {
-            setError(err.message || "An error occurred");
+            setError(err);
+            // Consider more sophisticated error handling (status codes, specific messages)
+        } finally {
             setLoading(false);
         }
     };
 
-    const login = async (credentials: any) => {
+    const login = async (credentials) => {
         try {
             const response = await sendRequest("POST", "/login", credentials);
             if (response.token) {
@@ -52,22 +47,22 @@ const useCRUD = (baseURL: string, defaultHeaders = {}) => {
                 localStorage.setItem("token", response.token); // Store for persistence
             }
         } catch (err) {
-            setError(err.message || "Login failed");
+            // Handle login errors
         }
     };
 
-    const signup = async (userData: any) => {
+    const signup = async (userData) => {
         try {
             await sendRequest("POST", "/signup", userData);
         } catch (err) {
-            setError(err.message || "Signup failed");
+            // Handle signup errors
         }
     };
 
     // CRUD methods (all use sendRequest for DRY code)
-    const create = (payload: any) => sendRequest("POST", "", payload);
-    const read = (url: string) => sendRequest("GET", url);
-    const update = (id: number, payload: any) =>
+    const create = (payload) => sendRequest("POST", "", payload);
+    const read = () => sendRequest("GET", "");
+    const update = (id: number, payload) =>
         sendRequest("PUT", `/${id}`, payload);
     const remove = (id: number) => sendRequest("DELETE", `/${id}`);
 

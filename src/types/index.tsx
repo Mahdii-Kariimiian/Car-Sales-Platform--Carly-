@@ -55,11 +55,7 @@ export type message = {
 };
 
 export type LatestCarProps = {
-    firstNumber?: number;
-    lastNumber?: number;
-    setCarsLength?: React.Dispatch<React.SetStateAction<number>>;
-    setParam?: React.Dispatch<React.SetStateAction<string | undefined>>;
-    sortedList?: (cars: CarsInfo[] | undefined) => CarsInfo[] | undefined;
+    CarsArray: CarsInfo[];
 };
 
 export type Validation = {

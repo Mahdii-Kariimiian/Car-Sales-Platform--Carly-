@@ -16,7 +16,7 @@ const Navbar = () => {
             </Link>
 
             <div className="navbar__menu-list">
-                <Link className="navbar__menu-lists ml-4" to="/listingcars">
+                <Link className="navbar__menu-lists ml-4" to="/allcars">
                     Cars
                 </Link>
 
@@ -54,7 +54,7 @@ const Navbar = () => {
                     >
                         <Link
                             className="navbar__menu-lists-hamburger"
-                            to="/listingcars"
+                            to="/allcars"
                         >
                             Cars
                         </Link>

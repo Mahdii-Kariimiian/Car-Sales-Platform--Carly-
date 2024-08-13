@@ -1,118 +1,30 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import carServices from "@/services";
+import { useNavigate } from "react-router";
 import { CarsInfo, LatestCarProps } from "@/types";
-import CarCardSkeleton from "./CarCardSkeleton";
 // assets
 import favoriteIcon from "@/assets/Icons/favorite-icon.svg";
 import fuelIcon from "@/assets/Icons/fuel-icon.svg";
 import transmissionIcon from "@/assets/Icons/Transmission-icon.svg";
 import arrowIcon from "@/assets/Icons/arrow-icon.svg";
 import maxSpeedIcon from "@/assets/Icons/maxSpeed-icon.svg";
-//Toastify library
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 //Lazy Loading Images library
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 // Css
 import "./style.css";
-import useCRUD from "../../services/useCRUD";
-
-const CarCard: React.FC<LatestCarProps> = ({
-    lastNumber,
-    firstNumber,
-    setCarsLength,
-    setParam,
-    sortedList,
-}) => {
+const CarCard: React.FC<LatestCarProps> = ({ carsArray }) => {
     ////////// States and Variables //////////
-    const { type } = useParams();
-    const [listedCars, setListedCars] = useState<CarsInfo>([]);
-    const [allCars, setAllCars] = useState<CarsInfo>([]);
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const { read } = useCRUD("https://localhost:8000/", {
-        "content-type": "application/json",
-    });
-
-    useEffect(() => {
-        read("cars")
-            .then((res) => console.log(`res ${res}`))
-            .catch((err) => console.log(err.message));
-    }, []);
-
-    ////////// Functions //////////
-    const fetchAndSetCars = async () => {
-        setLoading(true); // Start loading
-        try {
-            const res = await carServices("cars");
-            const fetchedCars: CarsInfo[] = res.data;
-
-            if (type) {
-                const typeCars = fetchedCars.filter((car: CarsInfo) => {
-                    return car.type.toLowerCase() === type.toLowerCase();
-                });
-                setListedCars(typeCars.slice(firstNumber, lastNumber));
-                setCarsLength?.(typeCars.length);
-                setParam?.(type);
-            } else {
-                setAllCars(fetchedCars);
-                setListedCars(fetchedCars.slice(firstNumber, lastNumber));
-                setCarsLength?.(fetchedCars.length);
-            }
-        } catch (error: unknown) {
-            if (error instanceof Error) {
-                notify(error.message);
-            } else {
-                notify("An unknown error occurred");
-            }
-        } finally {
-            setLoading(false); // End loading
-        }
-    };
 
     // Go to single car page
     const handleViewInfo = (car: CarsInfo) => {
-        navigate(`/listingcars/singlecar/${car.id}`, { state: { car } });
-    };
-
-    ////////// Use Effects ////////////
-    // Show cars with or without type(style) selected
-    useEffect(() => {
-        fetchAndSetCars();
-    }, [type, firstNumber, lastNumber, setCarsLength, setParam]);
-
-    // Show cars with Sorted options
-    useEffect(() => {
-        if (sortedList && allCars.length > 0) {
-            const sortedCars = sortedList(allCars);
-            setListedCars(sortedCars.slice(firstNumber, lastNumber));
-        }
-    }, [allCars, sortedList, firstNumber, lastNumber]);
-
-    // Toastify function
-    const notify = (message: string) => {
-        toast.error(message, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
+        navigate(`/allcars/singlecar/${car.id}`, { state: { car } });
     };
 
     return (
         <div>
-            {loading ? (
-                // Skeleton (maybe move to app.tsx with lazy and suspense)
-                <CarCardSkeleton quantity={lastNumber} />
-            ) : listedCars.length > 0 ? (
-                <div className="container">
-                    {listedCars.map((car: CarsInfo) => {
+            <div className="container">
+                {carsArray &&
+                    carsArray.map((car: CarsInfo) => {
                         return (
                             <div key={car.id} className="card">
                                 <div>
@@ -191,11 +103,7 @@ const CarCard: React.FC<LatestCarProps> = ({
                             </div>
                         );
                     })}
-                </div>
-            ) : (
-                <div className="text-5xl p-10">No Cars Available</div>
-            )}
-            <ToastContainer />
+            </div>
         </div>
     );
 };

@@ -12,7 +12,7 @@ const CarBodyStyle: React.FC<CarBodyStyleProps> = ({ CarStyles }) => {
             {CarStyles.map((style, index) => {
                 return (
                     <Link
-                        to={`/listingcars/${style.title.toLowerCase()}`}
+                        to={`/allcars/${style.title.toLowerCase()}`}
                         key={index}
                     >
                         <div className="CarBodyStyle-container">

@@ -20,6 +20,7 @@ const index = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const { state } = useLocation();
+    console.log("render");
 
     ////////// States and Variables //////////
     const [editedCar, setEditedCar] = useState<CarsInfo | null>();
@@ -35,6 +36,7 @@ const index = () => {
 
     ////////// Functions //////////
     const onSubmit = (newCar: CarsInfo) => {
+        console.log(newCar);
         if (editedCar) {
             // Use PUT to update the existing car
             // console.log(editedCar);
@@ -48,7 +50,7 @@ const index = () => {
                 .then((res: CarsInfo) => {
                     console.log(res.data);
                     notify();
-                    navigate("/listingcars");
+                    navigate("/allcars");
                 })
                 .catch((error: unknown) =>
                     console.error("Error updating car:", error)
@@ -67,7 +69,7 @@ const index = () => {
                 .then((res: CarsInfo) => {
                     console.log(res.data);
                     notify();
-                    navigate("/listingcars");
+                    navigate("/allcars");
                 })
                 .catch((error: unknown) =>
                     console.error("Error adding car:", error)
@@ -270,7 +272,7 @@ const index = () => {
                                     <input
                                         id="image"
                                         className="input"
-                                        type="text"
+                                        type="file"
                                         placeholder="www.google.com"
                                         {...register("image", imageValidation)}
                                     />

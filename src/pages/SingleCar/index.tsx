@@ -84,7 +84,7 @@ const SingleCar = () => {
                 if (res.status === 200 || res.status === 204) {
                     notify("Car deleted successfully", false);
                     setTimeout(() => {
-                        navigate("/listingcars");
+                        navigate("/allcars");
                     }, 1000);
                 } else {
                     notify("An error occurred", true);
@@ -133,7 +133,7 @@ const SingleCar = () => {
                         </span>
                         /
                         <span className="text-xl text-primary">
-                            <Link to="/listingcars">
+                            <Link to="/allcars">
                                 {"  "}Listings{"  "}
                             </Link>
                         </span>

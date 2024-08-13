@@ -17,12 +17,12 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Index />} />
                         <Route
-                            path="/listingcars/singlecar/:id"
+                            path="/allcars/singlecar/:id"
                             element={<SingleCar />}
                         />
-                        <Route path="/listingcars" element={<AllCars />} />
+                        <Route path="/allcars" element={<AllCars />} />
                         <Route
-                            path="/listingcars/:type"
+                            path="/allcars/:type"
                             element={<AllCars />}
                         />
                         <Route path="/contactus" element={<ContactUs />} />

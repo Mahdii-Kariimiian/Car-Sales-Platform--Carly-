@@ -376,7 +376,7 @@ export const sellOrBuy = [
         icon: buyCarIcon,
         color: "bg-[#CEE1F2]",
         buttonColor: "bg-[#405FF2]",
-        path: "/listingcars",
+        path: "/allcars",
     },
     {
         id: 1,
@@ -473,35 +473,35 @@ export const footerData = {
     VehicleTypes: [
         {
             title: "Sedan",
-            link: "/listingcars/sedan",
+            link: "/allcars/sedan",
         },
         {
             title: "Hatchback",
-            link: "/listingcars/hatchback",
+            link: "/allcars/hatchback",
         },
         {
             title: "SUV",
-            link: "/listingcars/suv",
+            link: "/allcars/suv",
         },
         {
             title: "Hybrid",
-            link: "/listingcars/hybrid",
+            link: "/allcars/hybrid",
         },
         {
             title: "Electric",
-            link: "/listingcars/electric",
+            link: "/allcars/electric",
         },
         {
             title: "Coupe",
-            link: "/listingcars/coupe",
+            link: "/allcars/coupe",
         },
         {
             title: "Truck",
-            link: "/listingcars/truck",
+            link: "/allcars/truck",
         },
         {
             title: "Convertible",
-            link: "/listingcars/convertible",
+            link: "/allcars/convertible",
         },
     ],
 };

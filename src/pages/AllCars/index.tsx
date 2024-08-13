@@ -1,17 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CarCard from "@/components/carCard";
 import Button from "@/components/general/button";
 import { CarsKeyValue } from "@/types";
+import carServices from "@/services";
+import { CarsInfo } from "../../types";
+import { ToastContainer, toast } from "react-toastify";
 import "./style.css";
 
 const AllCars = () => {
     //States and Variables
+    const [carsArray, setCarsArray] = useState<CarsInfo[]>([]);
     const [lastNumber, setLastNumber] = useState<number>(12);
     const [carsLength, setCarsLength] = useState<number>(0);
     const [param, setParam] = useState<string | null>(null);
     const [sortType, setSortType] = useState<string>("Default");
     const quantity = 12;
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchAndSetCars = async () => {
+            setLoading(true); // Start loading
+            try {
+                const res = await carServices("cars");
+                setCarsArray(res.data);
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    notify(error.message);
+                } else {
+                    notify("An unknown error occurred");
+                }
+            } finally {
+                setLoading(false); // End loading
+            }
+        };
+        fetchAndSetCars();
+    }, []);
+
+    // Toastify function
+    const notify = (message: string) => {
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    };
 
     // Functions
     // Load more Cars
@@ -30,9 +69,7 @@ const AllCars = () => {
             case "Newest":
                 return [...allCars].sort((a, b) => b.Year - a.Year);
             case "TopSpeed":
-                return [...allCars].sort(
-                    (a, b) => b["Top Speed"] - a["Top Speed"]
-                );
+                return [...allCars].sort((a, b) => b.TopSeed - a.TopSpeed);
             default:
                 return allCars;
         }
@@ -53,10 +90,7 @@ const AllCars = () => {
 
                     {param ? (
                         <span className="text-lg text-primary ">
-                            <Link
-                                onClick={() => setParam(null)}
-                                to="/listingcars"
-                            >
+                            <Link onClick={() => setParam(null)} to="/allcars">
                                 {" "}
                                 {"  "} / {"  "} Listings
                             </Link>
@@ -102,6 +136,7 @@ const AllCars = () => {
                 setCarsLength={setCarsLength}
                 setParam={setParam}
                 sortedList={sortedCars}
+                carsArray={carsArray}
             />
             <div
                 className="w-full"
@@ -117,6 +152,7 @@ const AllCars = () => {
                     />
                 )}
             </div>
+            <ToastContainer />
         </div>
     );
 };
