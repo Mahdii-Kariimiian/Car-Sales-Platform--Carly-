@@ -24,7 +24,7 @@ const sellerBuyerMaker: React.FC<SellerBuyerMakerProps> = ({ sellOrBuy }) => {
                                 {card.description}
                             </p>
                             <Button
-                                classes={`${card.buttonColor} text-white flex-row-reverse`}
+                                classes={`${card.buttonColor} text-white flex-row-reverse whitespace-nowrap`}
                                 text={`${card.buttonText}`}
                                 icon={arrow}
                                 path={card.path}

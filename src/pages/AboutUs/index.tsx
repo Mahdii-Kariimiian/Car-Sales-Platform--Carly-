@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import image1 from "@/assets/Images/about-us-image (1).png";
 import image2 from "@/assets/Images/about-us-image (2).png";
 import image3 from "@/assets/Images/about-us-image (3).png";
@@ -6,25 +5,18 @@ import image4 from "@/assets/Images/about-us-image (4).png";
 import image5 from "@/assets/Images/about-us-image (5).png";
 import image6 from "@/assets/Images/about-us-image (6).png";
 import checkIcon from "@/assets/Icons/check-icon.svg";
-import Button from "../../components/general/button";
-import { customers, faq } from "@/db";
+import Button from "@/components/general/button";
+import Accordion from "./components/Accordion";
+import BreadcrumbList from "@/components/general/breadcrumbList";
 import CustomerCard from "./components/CustomerCard";
+import { customers, faq } from "@/db";
 import { Customers, Faq } from "@/types";
-import Accordion from "../../components/general/Accordion";
 
 const AboutUs = () => {
-    console.log(faq);
     return (
         <div className="padding-measures">
-            {/* Baguet List  */}
             <div className="padding-measures py-11">
-                <div className="pb-4">
-                    <span className="text-xl text-primary ">
-                        <Link to="/">Home{"  "}</Link>
-                    </span>
-                    <span className="text-lg"> / {"  "}About Us</span>
-                </div>
-                <h2 className="text-4xl font-bold">About Us </h2>
+                <BreadcrumbList title="About Us" />
             </div>
             {/* Main title and description */}
             <div className="lg:flex max-lg:space-y-4 gap-40 padding-measures">

@@ -4,9 +4,10 @@ import Index from "./pages/Home";
 import SingleCar from "./pages/SingleCar";
 import AllCars from "./pages/AllCars";
 import ScrollToTop from "./components/general/scrollToTop";
-import AddOrEdit from "./pages/AddOrEditCars";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
+import EditCar from "./pages/EditCar";
+import AddCar from "./pages/AddCar";
 
 function App() {
     return (
@@ -24,8 +25,8 @@ function App() {
                         <Route path="/allcars/:type" element={<AllCars />} />
                         <Route path="/contactus" element={<ContactUs />} />
                         <Route path="/aboutus" element={<AboutUs />} />
-                        <Route path="addcar" element={<AddOrEdit />} />
-                        <Route path="editcar/:id" element={<AddOrEdit />} />
+                        <Route path="addcar" element={<AddCar />} />
+                        <Route path="editcar/:id" element={<EditCar />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

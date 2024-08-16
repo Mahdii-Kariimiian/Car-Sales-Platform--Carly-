@@ -9,6 +9,9 @@ import sellCarIcon from "@/assets/Icons/sell-car-icon.png";
 import customers1 from "@/assets/Images/customers (1).png";
 import customers2 from "@/assets/Images/customers (2).png";
 import customers3 from "@/assets/Images/customers (3).png";
+import addressIcon from "../assets/Icons/address-icon.svg";
+import mobileIcon from "../assets/Icons/mobile-icon.svg";
+import emailIcon from "../assets/Icons/email-icon.svg";
 
 export const CarStyles = [
     {
@@ -558,5 +561,43 @@ export const faq = [
         question:
             "Does BoxCar own the cars I see online or are they owned by other.",
         answer: "Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.",
+    },
+];
+
+export const getInTouchItems = [
+    {
+        title: "Address",
+        description:
+            " 123 Queensberry Street, North - Melbourne VIC3051, Australia.",
+        icon: addressIcon,
+    },
+    { title: "Email", description: "ali@boxcars.com", icon: emailIcon },
+    { title: "Phone", description: "+76 956 123 456", icon: mobileIcon },
+];
+
+export const offices = [
+    {
+        name: "San Francisco",
+        address: "416 Dewey Blvd, San Francisco, CA 94116, USA",
+        mapLink:
+            "https://www.google.com/maps?q=416+Dewey+Blvd,+San+Francisco,+CA+94116,+USA",
+        email: "alisan@boxcars.com",
+        phone: "+88 656 123 456",
+    },
+    {
+        name: "New York",
+        address: "232–240 Wilson Ave, Brooklyn, NY 11237, USA",
+        mapLink:
+            "https://www.google.com/maps?q=232%E2%80%93240+Wilson+Ave,+Brooklyn,+NY+11237,+USA",
+        email: "aliny@boxcars.com",
+        phone: "+76 956 123 456",
+    },
+    {
+        name: "London",
+        address: "127–143 Borough High St, London SE1 1NP, UK",
+        mapLink:
+            "https://www.google.com/maps?q=127%E2%80%93143+Borough+High+St,+London+SE1+1NP,+UK",
+        email: "alild@boxcars.com",
+        phone: "+76 222 333 888",
     },
 ];

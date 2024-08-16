@@ -44,7 +44,7 @@ export type CarOverviewInfo = {
     description: number | string | undefined;
 };
 
-export type message = {
+export type Message = {
     firstName: string;
     lastName: string;
     email: string;
@@ -73,4 +73,18 @@ export type Customers = {
 export type Faq = {
     question: string;
     answer: string;
+};
+
+export type GetInTouchItems = {
+    title: string;
+    icon: string;
+    description: string;
+};
+
+export type Office = {
+    name: string;
+    address: string;
+    mapLink: string;
+    email: string;
+    phone: string;
 };

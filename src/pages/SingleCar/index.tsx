@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import OverviewItem from "./components/OverviewItem";
 import Button from "@/components/general/button";
-import carServices from "@/services";
+import carServices from "@/services/axiosConfig";
 import { CarsInfo, CarKeyValue, CarOverviewInfo } from "@/types";
 import steeringWheel from "@/assets/Icons/steering wheel-icon.svg";
 import offer from "@/assets/Icons/offer-icon.svg";
@@ -20,6 +20,7 @@ import share from "@/assets/Icons/share-icon.svg";
 // Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EditCar from "../EditCar";
 
 const SingleCar = () => {
     const [singleCar, setSingleCar] = useState<CarsInfo | undefined>(undefined);

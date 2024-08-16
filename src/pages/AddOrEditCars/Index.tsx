@@ -1,80 +1,53 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { CarStyles } from "@/db";
 import { CarsInfo, CarStyle } from "@/types/";
-import carServices from "@/services";
 import { ValidationType, FieldValidation } from "./validation/ValidationTypes";
 import backIcon from "@/assets/Icons/back-icon.svg";
-//Toastify
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import validationData from "./validation/ValidationData";
 //CSS
 import "./style.css";
-import validationData from "./validation/ValidationData";
+import { SetStateAction } from "react";
 
-const index = () => {
+interface Props {
+    carData?: CarsInfo;
+    setCarData: React.Dispatch<SetStateAction<CarsInfo>>;
+}
+
+const index: React.FC<Props> = ({ carData, setCarData }) => {
     ////////// Methods //////////
     // React-router methods
     const navigate = useNavigate();
-    const { id } = useParams();
-    const { state } = useLocation();
-    console.log("render");
-
-    ////////// States and Variables //////////
-    const [editedCar, setEditedCar] = useState<CarsInfo | null>();
-    useEffect(() => {
-        setEditedCar(state?.car || null);
-    }, []);
 
     // React-hook-form methods
     const { register, control, handleSubmit, formState, watch } =
-        useForm<CarsInfo>({ defaultValues: state?.car || null });
+        useForm<CarsInfo>({ defaultValues: carData?.car || {} });
     const { errors } = formState;
-    const imageUrl = watch("image");
+    const imageFile = watch("image");
 
     ////////// Functions //////////
     const onSubmit = (newCar: CarsInfo) => {
-        console.log(newCar);
-        if (editedCar) {
-            // Use PUT to update the existing car
-            // console.log(editedCar);
-            carServices(`cars/${id}`, {
-                method: "PATCH",
-                body: JSON.stringify(newCar),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-                .then((res: CarsInfo) => {
-                    console.log(res.data);
-                    notify();
-                    navigate("/allcars");
-                })
-                .catch((error: unknown) =>
-                    console.error("Error updating car:", error)
-                );
-        } else {
-            // Use POST to add a new car
-            console.log("add");
-            carServices
-                .post(`cars`, {
-                    method: "POST",
-                    body: JSON.stringify(newCar),
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                })
-                .then((res: CarsInfo) => {
-                    console.log(res.data);
-                    notify();
-                    navigate("/allcars");
-                })
-                .catch((error: unknown) =>
-                    console.error("Error adding car:", error)
-                );
+        const fd = new FormData();
+
+        fd.append("model", newCar.model);
+        fd.append("brand", newCar.brand);
+        fd.append("price", newCar.price);
+        fd.append("discountedPrice", newCar.discountedPrice);
+        fd.append("manufactureYear", newCar.manufactureYear);
+        fd.append("topSpeed", newCar.topSpeed);
+        fd.append("type", newCar.type);
+        fd.append("fuel", newCar.fuel);
+        fd.append("condition", newCar.condition);
+        fd.append("description", newCar.description);
+        fd.append("transmission", newCar.transmission);
+        // Add image if it exists
+        if (imageFile && imageFile[0]) {
+            fd.append("image", imageFile[0]);
         }
+
+        console.log(fd);
+        setCarData(fd);
     };
 
     // Handle Validations
@@ -92,20 +65,6 @@ const index = () => {
     const imageValidation = handleValidation("image");
     const descriptionValidation = handleValidation("description");
     const discountedPriceValidation = handleValidation("discountedPrice");
-
-    // Toastify Library
-    const notify = () => {
-        toast.success(`Car Successfully ${state ? "Edited" : "Added"}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-    };
 
     return (
         <div className="px-28 py-32">
@@ -303,16 +262,16 @@ const index = () => {
                         </div>
                         <div className="col-span-full">
                             <button className="w-full text-white bg-primary flex items-center justify-center gap-2 font-semibold text-xl px-10 py-5 rounded-lg hover:opacity-70 transition-all">
-                                {state ? "Edit" : "Add"}
+                                {carData ? "Edit" : "Add"}
                             </button>
                         </div>
                     </form>
                     <DevTool control={control} />
                 </div>
-                {imageUrl ? (
+                {imageFile ? (
                     <div className="w-full h-full relative">
                         <img
-                            src={imageUrl}
+                            src={imageFile}
                             alt="Car Image"
                             className="absolute inset-0 w-full h-full object-cover"
                         />
@@ -323,7 +282,6 @@ const index = () => {
                     </p>
                 )}
             </div>
-            <ToastContainer />
         </div>
     );
 };
