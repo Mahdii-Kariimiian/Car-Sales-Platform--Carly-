@@ -4,7 +4,7 @@ import SellerBuyer from "./components/SellerBuyer";
 import LatestCars from "./components/LatestCars";
 import ContactUs from "./components/Contact";
 
-const Index = () => {
+const index = () => {
     return (
         <div>
             <Hero />
@@ -16,4 +16,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default index;

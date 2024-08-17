@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "./axiosConfig";
+import { CarsInfo } from "../types";
 
 const useCRUD = (baseURL: string, defaultHeaders = {}) => {
     const [data, setData] = useState(null);
@@ -14,7 +15,7 @@ const useCRUD = (baseURL: string, defaultHeaders = {}) => {
         }
     }, []);
 
-    const sendRequest = async (method: string, url: string, payload = null) => {
+    const sendRequest = async (method: string, url: string, payload: object | null = null) => {
         setLoading(true);
 
         try {
@@ -60,9 +61,9 @@ const useCRUD = (baseURL: string, defaultHeaders = {}) => {
     };
 
     // CRUD methods (all use sendRequest for DRY code)
-    const create = (payload) => sendRequest("POST", "", payload);
+    const create = (payload:CarsInfo) => sendRequest("POST", "", payload);
     const read = () => sendRequest("GET", "");
-    const update = (id: number, payload) =>
+    const update = (id: number, payload:CarsInfo) =>
         sendRequest("PUT", `/${id}`, payload);
     const remove = (id: number) => sendRequest("DELETE", `/${id}`);
 
