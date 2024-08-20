@@ -8,14 +8,14 @@ import backIcon from "@/assets/Icons/back-icon.svg";
 import validationData from "./validation/ValidationData";
 //CSS
 import "./style.css";
-import { SetStateAction } from "react";
 
 interface Props {
     carData?: CarsInfo;
-    setCarData: React.Dispatch<SetStateAction<CarsInfo>>;
+    submitHandler: Function;
+    type: string;
 }
 
-const index: React.FC<Props> = ({ carData, setCarData }) => {
+const index: React.FC<Props> = ({ carData, submitHandler, type }) => {
     ////////// Methods //////////
     // React-router methods
     const navigate = useNavigate();
@@ -47,7 +47,7 @@ const index: React.FC<Props> = ({ carData, setCarData }) => {
         }
 
         console.log(fd);
-        setCarData(fd);
+        submitHandler(fd);
     };
 
     // Handle Validations

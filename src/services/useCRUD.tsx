@@ -2,7 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "./axiosConfig";
 import { CarsInfo } from "../types";
 
-const useCRUD = (baseURL: string, defaultHeaders = {}) => {
+const useCRUD = (
+    baseURL: string,
+    defaultHeaders = {
+        Headers: {
+            "Content-Type": "application/json",
+        },
+    }
+) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -15,7 +22,11 @@ const useCRUD = (baseURL: string, defaultHeaders = {}) => {
         }
     }, []);
 
-    const sendRequest = async (method: string, url: string, payload: object | null = null) => {
+    const sendRequest = async (
+        method: string,
+        url: string,
+        payload: object | null = null
+    ) => {
         setLoading(true);
 
         try {
@@ -40,7 +51,7 @@ const useCRUD = (baseURL: string, defaultHeaders = {}) => {
         }
     };
 
-    const login = async (credentials) => {
+    const login = async (credentials: object) => {
         try {
             const response = await sendRequest("POST", "/login", credentials);
             if (response.token) {
@@ -61,9 +72,9 @@ const useCRUD = (baseURL: string, defaultHeaders = {}) => {
     };
 
     // CRUD methods (all use sendRequest for DRY code)
-    const create = (payload:CarsInfo) => sendRequest("POST", "", payload);
+    const create = (payload: CarsInfo) => sendRequest("POST", "", payload);
     const read = () => sendRequest("GET", "");
-    const update = (id: number, payload:CarsInfo) =>
+    const update = (id: number, payload: CarsInfo) =>
         sendRequest("PUT", `/${id}`, payload);
     const remove = (id: number) => sendRequest("DELETE", `/${id}`);
 
